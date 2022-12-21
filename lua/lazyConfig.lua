@@ -1,6 +1,7 @@
 print('hello from lazyConfig')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+print('lazypath: ' .. lazypath)
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -14,7 +15,27 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 local pluginSpec = require('myplugins')
-print(vim.inspect(pluginSpec))
--- require'lazy'.setup(
---     pluginSpec
--- )
+-- print(vim.inspect(pluginSpec))
+require 'lazy'.setup(
+    pluginSpec,
+    {
+        install = {
+            colorscheme = { 'tokyonight', 'habamax' }
+        },
+        lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json",
+        performance = {
+            rtp = {
+                disabled_plugins = {
+                    "gzip",
+                    "matchit",
+                    "matchparen",
+                    "netrwPlugin",
+                    "tarPlugin",
+                    "tohtml",
+                    -- "tutor",
+                    "zipPlugin",
+                },
+            }
+        },
+    }
+)
