@@ -1,1 +1,2 @@
-print('hello from neovim lua')
+print('hello from init')
+require('lazyConfig')
