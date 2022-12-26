@@ -4,6 +4,10 @@ require('mason.settings').set({
     }
 })
 
+require 'neodev'.setup {
+    lspconfig = true
+}
+
 local lsp = require('lsp-zero')
 
 lsp.set_preferences({

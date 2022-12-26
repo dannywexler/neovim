@@ -9,9 +9,9 @@ local function p(name, url, extraOpts)
         config = function()
             local ok, plug = pcall(require, 'pluginSetup.' .. name)
             -- if not ok then
-                -- print('could not require ' .. name)
-                -- else
-                --     print('successfully required ' .. name)
+            -- print('could not require ' .. name)
+            -- else
+            --     print('successfully required ' .. name)
             -- end
         end
     }
@@ -29,7 +29,6 @@ p('cmp-luasnip', 'saadparwaiz1/cmp_luasnip')
 p('cmp-nvim-lsp', 'hrsh7th/cmp-nvim-lsp')
 p('cmp-nvim-lua', 'hrsh7th/cmp-nvim-lua')
 p('cmp-path', 'hrsh7th/cmp-path')
-p('import', 'miversen33/import.nvim')
 p('leap', 'ggandor/leap.nvim')
 p('lsp-zero', 'VonHeikemen/lsp-zero.nvim')
 p('lspconfig', 'neovim/nvim-lspconfig')

@@ -15,12 +15,12 @@ o.hlsearch = true
 o.ignorecase = true
 o.incsearch = true
 o.iskeyword:append('-')
-o.laststatus=3
+o.laststatus = 3
 o.list = false
 o.mouse = 'a'
 o.number = false
 o.scrolloff = 8
-o.sessionoptions:append('globals','tabpages')
+o.sessionoptions:append('globals', 'tabpages')
 o.shiftround = true
 o.shiftwidth = 4
 o.showmatch = true

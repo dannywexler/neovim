@@ -1,9 +1,6 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-  return
-end
+local tsconfigs = require 'nvim-treesitter.configs'
 
-configs.setup {
+tsconfigs.setup {
     additional_vim_regex_highlighting = false,
     autopairs = {
         enable = true,
@@ -63,4 +60,4 @@ configs.setup {
     }
 }
 
-require 'nvim-treesitter.install'.compilers = { "clang" , "gcc"}
+require 'nvim-treesitter.install'.compilers = { "clang", "gcc" }

@@ -1,13 +1,2 @@
 snippet ma Add Nest Mapping
 	{'$1', '$2'},
-
-snippet imp Import lua plugin
-	import({ '$1' }, function (p)
-		$2
-	end)
-snippet imps Import lua plugin
-	import({ '$1' }, function (p)
-		p.$1.setup {
-			$2
-		}
-	end)
