@@ -32,6 +32,18 @@ lsp.ensure_installed({
     'tsserver',
 })
 
+lsp.configure('sumneko_lua', {
+    diagnostics = {
+        globals = { 'import', 'vim', 'WINDOWS' },
+    },
+    workspace = {
+        library = {
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.stdpath("config") .. "/lua"] = true,
+        },
+    },
+})
+
 lsp.setup()
 
 vim.diagnostic.config {
