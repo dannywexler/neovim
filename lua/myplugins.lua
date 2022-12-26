@@ -20,6 +20,8 @@ local function p(name, url, extraOpts)
 end
 
 p('autopairs', 'windwp/nvim-autopairs')
+p('comment', 'numToStr/Comment.nvim')
+p('comment-context', 'JoosepAlviste/nvim-ts-context-commentstring')
 p('autosession', 'rmagatti/auto-session')
 p('autotag', 'windwp/nvim-ts-autotag')
 p('cmp', 'hrsh7th/nvim-cmp')

@@ -36,16 +36,40 @@ lsp.ensure_installed({
     'tsserver',
 })
 
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, 'lua/?.lua')
+table.insert(runtime_path, 'lua/?/init.lua')
+
 lsp.configure('sumneko_lua', {
-    diagnostics = {
-        globals = { 'import', 'vim', 'WINDOWS' },
-    },
-    workspace = {
-        library = {
-            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-            [vim.fn.stdpath("config") .. "/lua"] = true,
+    commands = {
+        Format = {
+            function()
+                require('stylua-nvim').format_file()
+            end,
         },
     },
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim', 'WINDOWS'}
+            },
+            runtime = {
+                path = runtime_path,
+                version = 'LuaJIT'
+            },
+            telemetry = {
+                enable = false
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file('', true),
+                checkThirdParty = false,
+                -- library = {
+                --     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                --     [vim.fn.stdpath("config") .. "/lua"] = true,
+                -- },
+            },
+        }
+    }
 })
 
 lsp.setup()

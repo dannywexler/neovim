@@ -111,7 +111,7 @@ nest.applyKeymaps {
             { 'A>', '<cmd>WinShift left<CR>' },
             -- { 'a>', ':DiffviewFileHistory %<CR>' },
             -- { 'A>', ':DiffviewFileHistory<CR>' },
-            { 'c>', 'Vgc^', options = { noremap = false } },
+            -- { 'c>', 'Vgc^', options = { noremap = false } },
             { 'd>', '<C-w>l' },
             { 'D>', '<cmd>WinShift right<CR>' },
             { 'e>', '<cmd>BufferPrev<CR>' },

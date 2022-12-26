@@ -1,5 +1,27 @@
 local tsconfigs = require 'nvim-treesitter.configs'
 
+local languages = {
+    'bash',
+    'c',
+    'cpp',
+    'css',
+    'help',
+    'html',
+    'java',
+    'javascript',
+    'jsdoc',
+    'json',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'python',
+    'regex',
+    'tsx',
+    'typescript',
+    'vim',
+    'yaml',
+}
+
 tsconfigs.setup {
     additional_vim_regex_highlighting = false,
     autopairs = {
@@ -12,27 +34,7 @@ tsconfigs.setup {
         enable = true,
         enable_autocmd = false,
     },
-    ensure_installed = {
-        'bash',
-        'c',
-        'cpp',
-        'css',
-        'help',
-        'html',
-        'java',
-        'javascript',
-        'jsdoc',
-        'json',
-        'lua',
-        'markdown',
-        'markdown_inline',
-        'python',
-        'regex',
-        'tsx',
-        'typescript',
-        'vim',
-        'yaml',
-    },
+    ensure_installed = languages,
     highlight = {
         enable = true, -- false will disable the whole extension
         disable = { "" }, -- list of language that will be disabled

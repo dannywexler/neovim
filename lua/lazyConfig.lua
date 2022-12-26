@@ -16,6 +16,10 @@ local pluginSpec = require('myplugins')
 require 'lazy'.setup(
     pluginSpec,
     {
+        concurrency = WINDOWS and 4 or nil,
+        git = {
+            timeout = WINDOWS and 360 or nil
+        },
         install = {
             colorscheme = { 'tokyonight', 'habamax' }
         },
@@ -34,5 +38,15 @@ require 'lazy'.setup(
                 },
             }
         },
+        ui = {
+            border = 'rounded',
+            size = {
+                height = 0.92,
+                width = 0.92
+            },
+            throttle = WINDOWS and 200 or 20
+        }
     }
 )
+
+-- nvim --headless "+Lazy! sync" +qa
