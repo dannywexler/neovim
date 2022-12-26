@@ -1,4 +1,4 @@
-print('hello from myplugins')
+-- print('hello from myplugins')
 
 local plugins = {}
 
@@ -14,6 +14,9 @@ local function p(name, url, extraOpts)
     table.insert(plugins, opts)
 end
 
+p('import', 'miversen33/import.nvim')
 p('tokyonight', 'folke/tokyonight.nvim')
+p('winshift', 'sindrets/winshift.nvim')
+
 
 return plugins

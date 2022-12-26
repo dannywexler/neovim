@@ -1,2 +1,2 @@
-print('hello from init')
+-- print('hello from init')
 require('lazyConfig')
