@@ -1,3 +1,3 @@
-require'import'.setup {
+require'import'.config {
     output_split_type = 'vertical'
 }
