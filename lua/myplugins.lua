@@ -74,6 +74,7 @@ Possible plugins to add:
     code action menu
     dial or equivalent
     pretty fold (or ufo fold)
+    noice
     sort
     symbols-outline
     various textobjects
