@@ -78,8 +78,8 @@ nest.applyKeymaps {
         { 'K', '20<Up>' },
         { 'q', {
             { 'e', ':tabclose<CR>' },
-            -- { 'f', ':bp | bd #<CR>' },
-            { 'f', ':BufferClose<CR>' },
+            { 'f', ':bp | bd #<CR>' },
+            -- { 'f', ':BufferClose<CR>' },
             { 'q', ':qa!<CR>' },
             { 'w', 'ZZ' },
         } },
