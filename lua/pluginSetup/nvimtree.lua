@@ -24,7 +24,7 @@ require'nvim-tree'.setup {
         debounce_delay = 100,
     },
     view = {
-        hide_root_folder = false,
+        hide_root_folder = true,
         mappings = {
             list = {
                 { key = 'i', action = 'cd' },

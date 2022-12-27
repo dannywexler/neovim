@@ -41,7 +41,7 @@ require 'bufferline'.setup {
                 -- end,
                 text = 'File Tree',
                 highlight = "Directory",
-                text_align = "left",
+                text_align = "center",
                 separator = true
             }
         },
