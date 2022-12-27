@@ -1,18 +1,18 @@
--- print('hello from myplugins')
-
 local plugins = {}
+
+local function getConfig(name)
+    local path = vim.fn.stdpath('config') .. '/lua/pluginSetup/' .. name .. '.lua'
+    if vim.fn.filereadable(path) == 1 then
+        require('pluginSetup.' .. name)
+    end
+end
 
 local function p(name, url, extraOpts)
     local opts = {
         url,
         name = name,
         config = function()
-            local ok, plug = pcall(require, 'pluginSetup.' .. name)
-            -- if not ok then
-            -- print('could not require ' .. name)
-            -- else
-            --     print('successfully required ' .. name)
-            -- end
+            getConfig(name)
         end
     }
     for k, v in pairs(extraOpts or {}) do opts[k] = v end
@@ -20,8 +20,6 @@ local function p(name, url, extraOpts)
 end
 
 p('autopairs', 'windwp/nvim-autopairs')
-p('comment', 'numToStr/Comment.nvim')
-p('comment-context', 'JoosepAlviste/nvim-ts-context-commentstring')
 p('autosession', 'rmagatti/auto-session')
 p('autotag', 'windwp/nvim-ts-autotag')
 p('cmp', 'hrsh7th/nvim-cmp')
@@ -31,6 +29,11 @@ p('cmp-luasnip', 'saadparwaiz1/cmp_luasnip')
 p('cmp-nvim-lsp', 'hrsh7th/cmp-nvim-lsp')
 p('cmp-nvim-lua', 'hrsh7th/cmp-nvim-lua')
 p('cmp-path', 'hrsh7th/cmp-path')
+p('comment', 'numToStr/Comment.nvim')
+p('comment-context', 'JoosepAlviste/nvim-ts-context-commentstring')
+p('diffview', 'sindrets/diffview.nvim')
+p('dressing', 'stevearc/dressing.nvim')
+p('fterm', 'numToStr/FTerm.nvim')
 p('leap', 'ggandor/leap.nvim')
 p('lsp-zero', 'VonHeikemen/lsp-zero.nvim')
 p('lspconfig', 'neovim/nvim-lspconfig')
@@ -43,6 +46,7 @@ p('plenary', 'nvim-lua/plenary.nvim')
 p('telescope', 'nvim-telescope/telescope.nvim')
 p('tokyonight', 'folke/tokyonight.nvim')
 p('treesitter', 'nvim-treesitter/nvim-treesitter')
+p('web-devicons', 'kyazdani42/nvim-web-devicons')
 p('winshift', 'sindrets/winshift.nvim')
 
 return plugins
