@@ -41,6 +41,9 @@ tsconfigs.setup {
     },
     ignore_install = { "" }, -- List of parsers to ignore installing
     indent = { enable = true, disable = { "yaml" } },
+    playground = {
+        enable = true
+    },
     rainbow = {
         enable = true,
         -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for

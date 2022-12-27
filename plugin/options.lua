@@ -1,6 +1,6 @@
 local o = vim.opt
 
--- o.signcolumn = 'auto'
+o.signcolumn = 'auto'
 o.autoindent = true
 o.background = 'dark'
 o.backup = false

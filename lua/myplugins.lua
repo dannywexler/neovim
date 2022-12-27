@@ -51,18 +51,30 @@ p('mason-lspconfig', 'williamboman/mason-lspconfig.nvim')
 p('neodev', 'folke/neodev.nvim')
 p('nest', 'LionC/nest.nvim')
 p('nvimtree', 'kyazdani42/nvim-tree.lua')
+p('persisted', 'olimorris/persisted.nvim')
 p('plenary', 'nvim-lua/plenary.nvim')
 p('scope', 'tiagovla/scope.nvim')
 p('scrollview', 'dstein64/nvim-scrollview')
 p('telescope', 'nvim-telescope/telescope.nvim')
 p('telescope-zf-native', 'natecraddock/telescope-zf-native.nvim')
 p('tokyonight', 'folke/tokyonight.nvim')
-p('treesitter', 'nvim-treesitter/nvim-treesitter')
+p('treesitter', 'nvim-treesitter/nvim-treesitter', { build = WINDOWS and ':TSUpdateSync' or ':TSUpdate' })
+p('treesitter-playground', 'nvim-treesitter/playground')
 p('treesitter-rainbow', 'p00f/nvim-ts-rainbow')
 p('treesitter-textobjects', 'nvim-treesitter/nvim-treesitter-textobjects')
 p('treesj', 'Wansmer/treesj')
 p('web-devicons', 'kyazdani42/nvim-web-devicons')
 p('winshift', 'sindrets/winshift.nvim')
-p('persisted', 'olimorris/persisted.nvim')
 
 return plugins
+
+--[[
+Possible plugins to add:
+    aerial
+    code action menu
+    dial or equivalent
+    pretty fold (or ufo fold)
+    sort
+    symbols-outline
+    various textobjects
+--]]

@@ -1,6 +1,6 @@
 local api = vim.api
 local aucmd = api.nvim_create_autocmd
-local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
+local myColorGroup = api.nvim_create_augroup('MyGroup', { clear = true })
 
 local function setHL(name, foreground, background, extraOpts)
     local opts = {}
@@ -14,7 +14,7 @@ local function linkHL(sourceName, destName)
 end
 
 aucmd('ColorScheme', {
-    group = myGroup,
+    group = myColorGroup,
     callback = function()
         setHL('@variable.builtin', '#1dab2e')
         setHL('Comment', '#b8bdd1')
