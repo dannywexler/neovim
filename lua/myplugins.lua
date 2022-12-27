@@ -1,8 +1,8 @@
 local plugins = {}
 
 local function getConfig(name)
-    if name == 'scope' then 
-        require'scope'.setup()
+    if name == 'scope' then
+        require 'scope'.setup()
         return
     end
     local path = vim.fn.stdpath('config') .. '/lua/pluginSetup/' .. name .. '.lua'
@@ -24,7 +24,6 @@ local function p(name, url, extraOpts)
 end
 
 p('autopairs', 'windwp/nvim-autopairs')
-p('autosession', 'rmagatti/auto-session')
 p('autotag', 'windwp/nvim-ts-autotag')
 p('bufferline', 'akinsho/bufferline.nvim')
 p('cmp', 'hrsh7th/nvim-cmp')
@@ -40,6 +39,7 @@ p('comment-context', 'JoosepAlviste/nvim-ts-context-commentstring')
 p('diffview', 'sindrets/diffview.nvim')
 p('dressing', 'stevearc/dressing.nvim')
 p('fterm', 'numToStr/FTerm.nvim')
+p('hlargs', 'm-demare/hlargs.nvim')
 p('indent-blankline', 'lukas-reineke/indent-blankline.nvim')
 p('leap', 'ggandor/leap.nvim')
 p('lsp-zero', 'VonHeikemen/lsp-zero.nvim')
@@ -63,5 +63,6 @@ p('treesitter-textobjects', 'nvim-treesitter/nvim-treesitter-textobjects')
 p('treesj', 'Wansmer/treesj')
 p('web-devicons', 'kyazdani42/nvim-web-devicons')
 p('winshift', 'sindrets/winshift.nvim')
+p('persisted', 'olimorris/persisted.nvim')
 
 return plugins

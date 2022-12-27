@@ -18,6 +18,7 @@ aucmd('ColorScheme', {
     callback = function()
         setHL('@variable.builtin', '#1dab2e')
         setHL('Comment', '#b8bdd1')
+        setHL('@parameter', '#C408C4')
         setHL('IndentBlanklineIndent1', '#E5C07B')
         setHL('IndentBlanklineIndent2', '#98C379')
         setHL('IndentBlanklineIndent3', '#61AFEF')
@@ -46,3 +47,40 @@ aucmd('ColorScheme', {
         linkHL('String', 'Character')
     end
 })
+
+local niceColors = {
+    blue = {
+        '#7aa2f7',
+        '#0061fe',
+        '#61afef'
+    },
+    green = {
+        '#00fa9a',
+        '#1abc9c',
+        '#35d27f'
+    },
+    orange = {
+        '#f14c28',
+        '#ef9062'
+    },
+    purple = {
+        '#5f43e9',
+        '#c678dd',
+        '#8997f5'
+    },
+    pinkple = {
+        '#f55385',
+        '#ff007c',
+        '#e535ab',
+        '#c408c4',
+        '#b93998',
+        '#eb75d6'
+    },
+    teal = {
+        '#3ac6be',
+        '#00ffcc'
+    },
+    yellow = {
+        '#EEF06D'
+    }
+}
