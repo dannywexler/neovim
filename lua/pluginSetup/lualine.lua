@@ -5,7 +5,7 @@ local function customFileName()
     if vim.bo.filetype == 'NvimTree' then
         return fn.fnamemodify(fn.getcwd(), ':~:s?$?')
     else
-        return fn.fnamemodify(vim.fn.expand('%'), ':t')
+        return fn.fnamemodify(fn.expand('%'), ':t')
     end
 end
 

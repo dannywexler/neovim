@@ -1,0 +1,48 @@
+local api = vim.api
+local aucmd = api.nvim_create_autocmd
+local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
+
+local function setHL(name, foreground, background, extraOpts)
+    local opts = {}
+    if foreground then opts.fg = foreground end
+    if background then opts.bg = background end
+    api.nvim_set_hl(0, name, opts)
+end
+
+local function linkHL(sourceName, destName)
+    api.nvim_set_hl(0, destName, { link = sourceName })
+end
+
+aucmd('ColorScheme', {
+    group = myGroup,
+    callback = function()
+        setHL('@variable.builtin', '#1dab2e')
+        setHL('Comment', '#b8bdd1')
+        setHL('IndentBlanklineIndent1', '#E5C07B')
+        setHL('IndentBlanklineIndent2', '#98C379')
+        setHL('IndentBlanklineIndent3', '#61AFEF')
+        setHL('IndentBlanklineIndent4', '#C678DD')
+        setHL('LeapBackdrop', '#b8bdd1')
+        setHL('LeapLabelPrimary', '#00fa9a', '#000000')
+        setHL('LeapLabelSecondary', '#1a1b26', '#7aa2f7')
+        setHL('Normal', '#ffffff', '#12131b')
+        setHL('NormalNC', '#ffffff', '#171822')
+        setHL('String', '#00fa9a')
+        setHL('WinBar', '#1a1b26', '#00ffcc')
+        setHL('WinBarNC', '#1a1b26', '#7aa2f7')
+        setHL('WinSeparator', '#7aa2f7')
+        setHL('rainbowcol1', '#c0caf5')
+        setHL('rainbowcol10', '#f3d400')
+        setHL('rainbowcol11', '#89e051')
+        setHL('rainbowcol2', '#bb9af7')
+        setHL('rainbowcol3', '#e0af68')
+        setHL('rainbowcol4', '#9ece6a')
+        setHL('rainbowcol5', '#8094b4')
+        setHL('rainbowcol6', '#a074c4')
+        setHL('rainbowcol7', '#e4b854')
+        setHL('rainbowcol8', '#8dc149')
+        setHL('rainbowcol9', '#e37933')
+
+        linkHL('String', 'Character')
+    end
+})

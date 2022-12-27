@@ -1,7 +1,12 @@
 -- local telescope = require'telescope'
 local telescope = require 'telescope'
 local actions = require 'telescope.actions'
-local custom_width = 140
+
+local fullWindowWidth = vim.fn.winwidth(0)
+local preferredWidth = 140
+
+local custom_width = math.min(fullWindowWidth - 4, preferredWidth)
+
 telescope.setup {
     defaults = {
         entry_prefix = "  ",
@@ -96,3 +101,5 @@ telescope.setup {
         }
     }
 }
+
+telescope.load_extension('zf-native')
