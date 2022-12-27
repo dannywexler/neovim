@@ -1,6 +1,10 @@
 local plugins = {}
 
 local function getConfig(name)
+    if name == 'scope' then 
+        require'scope'.setup()
+        return
+    end
     local path = vim.fn.stdpath('config') .. '/lua/pluginSetup/' .. name .. '.lua'
     if vim.fn.filereadable(path) == 1 then
         require('pluginSetup.' .. name)
@@ -22,6 +26,7 @@ end
 p('autopairs', 'windwp/nvim-autopairs')
 p('autosession', 'rmagatti/auto-session')
 p('autotag', 'windwp/nvim-ts-autotag')
+p('bufferline', 'akinsho/bufferline.nvim')
 p('cmp', 'hrsh7th/nvim-cmp')
 p('cmp-buffer', 'hrsh7th/cmp-buffer')
 p('cmp-cmdline', 'hrsh7th/cmp-cmdline')
@@ -43,6 +48,7 @@ p('mason-lspconfig', 'williamboman/mason-lspconfig.nvim')
 p('neodev', 'folke/neodev.nvim')
 p('nest', 'LionC/nest.nvim')
 p('plenary', 'nvim-lua/plenary.nvim')
+p('scope', 'tiagovla/scope.nvim')
 p('telescope', 'nvim-telescope/telescope.nvim')
 p('tokyonight', 'folke/tokyonight.nvim')
 p('treesitter', 'nvim-treesitter/nvim-treesitter')
