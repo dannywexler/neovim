@@ -66,6 +66,7 @@ lualine.setup {
         lualine_a = {
             {
                 customFileName,
+                color = 'WinBar',
                 padding = 0
             }
         },
@@ -79,6 +80,7 @@ lualine.setup {
         lualine_a = {
             {
                 customFileName,
+                color = 'WinBarNC',
                 padding = 0
             }
         },
