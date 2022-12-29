@@ -18,7 +18,7 @@ aucmd('ColorScheme', {
     callback = function()
         setHL('@variable.builtin', '#1dab2e')
         setHL('Comment', '#b8bdd1')
-        setHL('@parameter', '#C408C4')
+        -- setHL('@parameter', '#C408C4')
         setHL('IndentBlanklineIndent1', '#E5C07B')
         setHL('IndentBlanklineIndent2', '#98C379')
         setHL('IndentBlanklineIndent3', '#61AFEF')
@@ -26,6 +26,7 @@ aucmd('ColorScheme', {
         setHL('LeapBackdrop', '#b8bdd1')
         setHL('LeapLabelPrimary', '#00fa9a', '#000000')
         setHL('LeapLabelSecondary', '#1a1b26', '#7aa2f7')
+        setHL('MoreMsg', '#e535ab')
         setHL('Normal', '#ffffff', '#12131b')
         setHL('NormalNC', '#ffffff', '#171822')
         setHL('String', '#00fa9a')
@@ -43,6 +44,8 @@ aucmd('ColorScheme', {
         setHL('rainbowcol7', '#e4b854')
         setHL('rainbowcol8', '#8dc149')
         setHL('rainbowcol9', '#e37933')
+        -- setHL('UfoFoldedBg', '', '#240824')
+        setHL('UFOCustom', '#dd9afc')
 
         linkHL('String', 'Character')
     end

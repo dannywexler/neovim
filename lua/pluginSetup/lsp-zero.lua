@@ -30,7 +30,7 @@ lsp.ensure_installed({
     "bashls",
     "cssls",
     -- 'jdtls',
-    -- 'jsonls',
+    'jsonls',
     'pyright',
     'sumneko_lua',
     'tsserver',

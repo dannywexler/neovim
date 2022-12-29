@@ -174,7 +174,11 @@ nest.applyKeymaps {
 
         { '<leader>', {
             { 'e', ':NvimTreeToggle<CR>' },
-            { 'f', lsp.format },
+            { 'f', {
+                { 'e', 'za' },
+                { 'f', lsp.format },
+                { 'r', 'zA' },
+            } },
             -- h: replace word under cursor
             -- { 'o', ':AerialToggle<CR>' },
             { 'o', ':SymbolsOutline<CR>' },
@@ -195,9 +199,7 @@ nest.applyKeymaps {
     } },
 
     { mode = 'v', {
-        { 'g', {
-            { 's', ':sort<CR>' },
-        } },
+        { 's', ':sort<CR>' },
         -- { 'j', '<cmd>HopLineStartAC<cr>' },
         { 'j', function() leap_to_line(false) end },
         { 'J', '12<Down>' },
