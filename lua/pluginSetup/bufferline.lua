@@ -1,31 +1,54 @@
 require 'bufferline'.setup {
     highlights = {
-        buffer_selected = {
-            fg = '#7aa2f7',
+        background = { fg = '#b8bdd1'},
+        buffer_visible = {
+            fg = '#b8bdd1',
             -- fg = '#1a1b26',
             bold = true,
             italic = false
         },
-        tab_selected = {
+        buffer_selected = {
+            fg = '#00ffcc',
+            -- fg = '#1a1b26',
+            bold = true,
+            italic = false
+        },
+        modified_selected = {
+            fg = '#f14c28'
+        },
+        tab = {
             bg = '#7aa2f7',
-            fg = '#1a1b26',
+            fg = '#000000',
+            bold = true,
+            italic = false
+        },
+        tab_selected = {
+            bg = '#00ffcc',
+            fg = '#000000',
             bold = true,
             italic = false
         },
         pick = {
-            fg = '#00ffcc',
+            fg = '#f14c28',
             bold = true,
             italic = false,
         },
         pick_visible = {
-            fg = '#00ffcc',
+            fg = '#f14c28',
             bold = true,
             italic = false,
         },
         pick_selected = {
-            fg = '#00ffcc',
+            fg = '#f14c28',
             bold = true,
             italic = false,
+        },
+        separator_selected = {
+            fg = '#00ffcc'
+        },
+        indicator_selected = {
+            fg = '#00ffcc',
+            bg = '#00ffcc',
         },
     },
     options = {

@@ -30,9 +30,9 @@ aucmd('ColorScheme', {
         setHL('Normal', '#ffffff', '#12131b')
         setHL('NormalNC', '#ffffff', '#171822')
         setHL('String', '#00fa9a')
-        setHL('WinBar', '#1a1b26', '#00ffcc')
-        setHL('WinBarNC', '#1a1b26', '#7aa2f7')
-        setHL('WinSeparator', '#7aa2f7')
+        setHL('WinBar', '#000000', '#00ffcc')
+        setHL('WinBarNC', '#000000', '#7aa2f7')
+        setHL('WinSeparator', '#7aa2f7', '#000000')
         setHL('rainbowcol1', '#c0caf5')
         setHL('rainbowcol10', '#f3d400')
         setHL('rainbowcol11', '#89e051')
@@ -48,6 +48,9 @@ aucmd('ColorScheme', {
         setHL('UFOCustom', '#dd9afc')
 
         linkHL('String', 'Character')
+        linkHL('Normal', 'NvimTreeNormal')
+        linkHL('Normal', 'NvimTreeNormalNC')
+        linkHL('Normal', 'NvimTreeIndentMarker')
     end
 })
 

@@ -11,7 +11,7 @@ require'nvim-tree'.setup {
         icons = {
             git_placement = 'after'
         },
-        indent_width = 1,
+        indent_width = 2,
         indent_markers = {
             enable = true
         },
