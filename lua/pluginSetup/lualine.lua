@@ -5,7 +5,8 @@ local function customFileName(input)
     if vim.bo.filetype == 'NvimTree' then
         return fn.fnamemodify(fn.getcwd(), ':~:s?$?')
     elseif input:find('#toggleterm#') then
-        return 'Terminal'
+        local halfWidth = (vim.o.columns - 7) / 2
+        return string.rep(' ', halfWidth) .. 'TERMINAL' .. string.rep(' ', halfWidth)
     else
         return fn.fnamemodify(fn.expand('%'), ':t')
     end

@@ -33,11 +33,11 @@ require 'toggleterm'.setup {
     end,
     open_mapping = [[<A-t>]],
     shell = WINDOWS and 'powershell' or 'zsh',
-    size = vim.o.columns * 0.4,
+    size = vim.o.columns * 0.3,
     winbar = {
         enabled = true,
         name_formatter = function(term) --  term: Terminal
-            return 'TTerminal'
+            return 'TTerminal: ' .. term.name
         end
     },
 }

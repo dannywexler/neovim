@@ -68,6 +68,10 @@ local function startBuild()
     vim.cmd('TermExec cmd="sleep 10 && date" open=0')
 end
 
+local function watchTerm()
+    vim.cmd('2TermExec cmd="tsx watch %" direction=vertical')
+end
+
 nmap('<leader>h', ':%s@<c-r>=expand("<cword>")<cr>@@gc<Left><Left><Left>')
 
 nest.applyKeymaps {
@@ -207,6 +211,7 @@ nest.applyKeymaps {
             -- h: replace word under cursor
             -- { 'o', ':AerialToggle<CR>' },
             { 'o', ':SymbolsOutline<CR>' },
+            { 'w', watchTerm },
         } },
     } },
 
