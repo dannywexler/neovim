@@ -196,7 +196,6 @@ nest.applyKeymaps {
         { '<C-', {
             { 'j>', ':m .+1<CR>==' },
             { 'k>', ':m .-2<CR>==' },
-            { 'r>', ':hello' },
         } },
 
         { '<leader>', {
