@@ -1,5 +1,10 @@
 local leap = require 'leap'
 local nest = require 'nest'
+-- local tree = require 'tree-climber'
+-- local treeopts = {
+--     skip_comments = true,
+--     highlight = true,
+-- }
 
 local function nmap(left, right)
     vim.keymap.set('n', left, right)
@@ -72,10 +77,18 @@ nest.applyKeymaps {
             { 'r', telescope.lsp_references },
             { 's', lsp.signature_help },
         } },
+        -- { 'H', function () tree.goto_parent(treeopts) end},
+        { 'H', '<Plug>(IndentWisePreviousLesserIndent)', options = { noremap = false } },
         { 'j', function() leap.leap {} end },
-        { 'J', '20<Down>' },
+        -- { 'J', '20<Down>' },
+        -- { 'J', function () tree.goto_next(treeopts) end},
+        -- { 'J', '<Plug>(IndentWiseNextEqualIndent)', options = { noremap = false } },
         { 'k', function() leap.leap { backward = true } end },
-        { 'K', '20<Up>' },
+        -- { 'K', '20<Up>' },
+        -- { 'K', function () tree.goto_prev(treeopts) end},
+        -- { 'K', '<Plug>(IndentWisePreviousEqualIndent)', options = { noremap = false } },
+        -- { 'L', function () tree.goto_child(treeopts) end},
+        { 'L', '<Plug>(IndentWiseNextGreaterIndent)', options = { noremap = false } },
         { 'q', {
             { 'e', ':tabclose<CR>' },
             { 'f', ':bp | bd #<CR>' },
@@ -86,14 +99,19 @@ nest.applyKeymaps {
         { 's', '<NOP>' },
 
         { 's', {
-            { 'a', telescope.live_grep },
+            -- {'g', spectre.open_visual({select_word=true})},
+            { "'", "vi':Sort ui<CR>" },
+            { '"', 'vi":Sort ui<CR>' },
             { 'A', telescope.grep_string },
+            { 'a', telescope.live_grep },
             { 'd', telescope.find_files },
             { 'f', telescope.lsp_document_symbols },
-            -- {'g', spectre.open_visual({select_word=true})},
-            { 's', function()
-                leap.leap { target_windows = require('leap.util').get_enterable_windows() }
-            end }
+            -- { 'i', "vii:'<,'>Sort ui<CR>" },
+            { 'p', 'Vip:Sort ui<CR>' },
+            { 's', function() leap.leap { target_windows = require('leap.util').get_enterable_windows() } end },
+            { '{', 'vi{:Sort ui<CR>' },
+            { '[', 'vi[:Sort ui<CR>' },
+            { '|', 'vi|:Sort ui<CR>' },
         } },
         { 'U', '<C-r>' },
         { 'z', {
@@ -199,11 +217,9 @@ nest.applyKeymaps {
     } },
 
     { mode = 'v', {
-        { 's', ':sort<CR>' },
-        -- { 'j', '<cmd>HopLineStartAC<cr>' },
+        { 's', ':Sort ui<CR>' },
         { 'j', function() leap_to_line(false) end },
         { 'J', '12<Down>' },
-        -- { 'k', '<cmd>HopLineStartBC<cr>' },
         { 'k', function() leap_to_line(true) end },
         { 'K', '12<Up>' },
 
