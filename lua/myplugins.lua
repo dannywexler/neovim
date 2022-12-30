@@ -42,7 +42,7 @@ p('comment', 'numToStr/Comment.nvim')
 p('comment-context', 'JoosepAlviste/nvim-ts-context-commentstring')
 p('diffview', 'sindrets/diffview.nvim')
 p('dressing', 'stevearc/dressing.nvim')
-p('fterm', 'numToStr/FTerm.nvim')
+-- p('fterm', 'numToStr/FTerm.nvim')
 p('hlargs', 'm-demare/hlargs.nvim')
 p('indent-blankline', 'lukas-reineke/indent-blankline.nvim')
 p('indent-tools', 'arsham/indent-tools.nvim')
@@ -74,6 +74,7 @@ p('treesj', 'Wansmer/treesj')
 p('ufo', 'kevinhwang91/nvim-ufo')
 p('web-devicons', 'kyazdani42/nvim-web-devicons')
 p('winshift', 'sindrets/winshift.nvim')
+p('toggleterm', 'akinsho/toggleterm.nvim')
 
 return plugins
 

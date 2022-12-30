@@ -1,16 +1,61 @@
 local lualine = require 'lualine'
 local fn = vim.fn
 
-local function customFileName()
+local function customFileName(input)
     if vim.bo.filetype == 'NvimTree' then
         return fn.fnamemodify(fn.getcwd(), ':~:s?$?')
+    elseif input:find('#toggleterm#') then
+        return 'Terminal'
     else
         return fn.fnamemodify(fn.expand('%'), ':t')
     end
 end
 
+local function customFilePath(input)
+    local specialNames = { 'Diffview', 'NvimTree', '#toggleterm#' }
+    for _, specialName in ipairs(specialNames) do
+        if input:find(specialName) then
+            return ''
+        end
+    end
+    return input
+end
+
 local function getFolder()
     return fn.fnamemodify(fn.getcwd(), ':t')
+end
+
+local buildStatusColors = {
+    in_progress = '#ef9062',
+    finished = '#1abc9c',
+    error = '#f55385',
+}
+
+-- local spinners = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+-- local spinners = { '.     ', '..    ', '...   ', ' ...  ', '  ... ', '   ...', '    ..', '     .', '      ' }
+local spinners = {
+    '•     ',
+    '••    ',
+    '•••   ',
+    ' •••  ',
+    '  ••• ',
+    '   •••',
+    '    ••',
+    '     •',
+    '      ',
+}
+
+local function buildStatus()
+    if fn.getcwd():find('danny') == nil then return '' end
+    if Building == 'finished' then
+        return 'Build finished'
+    elseif Building == 'in_progress' then
+        return 'Building ' .. spinners[os.date('%S') % #spinners + 1]
+    elseif Building == 'error' then
+        return 'Build error'
+    else
+        return ''
+    end
 end
 
 lualine.setup {
@@ -35,12 +80,7 @@ lualine.setup {
         lualine_c = {
             {
                 'filename',
-                fmt = function(input)
-                    if input == 'NvimTree_1 [-]' then
-                        return ''
-                    end
-                    return input
-                end,
+                fmt = customFilePath,
                 path = 1,
                 shorting_target = 10
             },
@@ -48,6 +88,10 @@ lualine.setup {
         },
         lualine_x = {
             -- 'aerial'
+            {
+                buildStatus,
+                color = function () return { fg = buildStatusColors[Building] } end
+            },
         },
         lualine_y = {},
         -- lualine_z = {'location'}
@@ -65,7 +109,8 @@ lualine.setup {
     winbar = {
         lualine_a = {
             {
-                customFileName,
+                'filename',
+                fmt = customFileName,
                 color = 'WinBar',
                 padding = 0
             }
@@ -79,7 +124,8 @@ lualine.setup {
     inactive_winbar = {
         lualine_a = {
             {
-                customFileName,
+                'filename',
+                fmt = customFileName,
                 color = 'WinBarNC',
                 padding = 0
             }

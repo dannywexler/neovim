@@ -1,18 +1,32 @@
-local diffview = require'diffview'
-local fterm = require'FTerm'
+local diffview = require 'diffview'
+local actions = require 'diffview.actions'
+-- local fterm = require'FTerm'
+local Terminal = require 'toggleterm.terminal'.Terminal
 
-local actions = require'diffview.actions'
 
-local function scratchTerm(cmd)
-    fterm.scratch({
+local function togterm(cmd)
+    local tterm = Terminal:new({
         cmd = cmd,
-        dimensions = {
-            height = 0.6,
-            width = 0.7,
-            y = 0.2,
-        }
+        direction = 'float',
+        float_opts = {
+            border = 'curved',
+            height = math.floor(vim.o.columns * 0.6),
+            width = math.floor(vim.o.columns * 0.7),
+        },
     })
+    tterm:toggle()
 end
+
+-- local function scratchTerm(cmd)
+--     fterm.scratch({
+--         cmd = cmd,
+--         dimensions = {
+--             height = 0.6,
+--             width = 0.7,
+--             y = 0.2,
+--         }
+--     })
+-- end
 
 local function getCommitMsg()
     vim.ui.input({
@@ -21,7 +35,7 @@ local function getCommitMsg()
     },
         function(msg)
             if msg then
-                scratchTerm('git commit -m "' .. msg .. '"')
+                togterm('git commit -m "' .. msg .. '"')
             else
                 print('Commit canceled')
             end
@@ -40,14 +54,14 @@ diffview.setup({
             ['f'] = actions.select_entry,
             ['e'] = actions.goto_file_tab,
             ['h'] = actions.scroll_view(-0.2),
-            ['i'] = function() scratchTerm('git status') end,
+            ['i'] = function() togterm('git status') end,
             ['j'] = actions.select_next_entry,
             ['k'] = actions.select_prev_entry,
             ['l'] = actions.scroll_view(0.2),
-            ['p'] = function() scratchTerm('git push') end,
+            ['p'] = function() togterm('git push') end,
             ['r'] = actions.refresh_files,
             ['s'] = actions.toggle_stage_entry,
-            ['u'] = function() scratchTerm('git pull') end,
+            ['u'] = function() togterm('git pull') end,
             ['x'] = actions.restore_entry,
         },
         file_history_panel = {

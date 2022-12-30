@@ -46,11 +46,13 @@ aucmd('ColorScheme', {
         setHL('rainbowcol9', '#e37933')
         -- setHL('UfoFoldedBg', '', '#240824')
         setHL('UFOCustom', '#dd9afc')
+        setHL('ToggleTerm1WinBar', '#000000', '#00ffcc')
 
         linkHL('String', 'Character')
         linkHL('Normal', 'NvimTreeNormal')
         linkHL('Normal', 'NvimTreeNormalNC')
         linkHL('Normal', 'NvimTreeIndentMarker')
+        linkHL('WinBar', 'ToggleTerm1WinBar')
     end
 })
 

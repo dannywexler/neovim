@@ -64,6 +64,10 @@ local function leap_to_line(searchAbove)
     }
 end
 
+local function startBuild()
+    vim.cmd('TermExec cmd="sleep 10 && date" open=0')
+end
+
 nmap('<leader>h', ':%s@<c-r>=expand("<cword>")<cr>@@gc<Left><Left><Left>')
 
 nest.applyKeymaps {
@@ -156,7 +160,8 @@ nest.applyKeymaps {
             { 'S>', '<cmd>WinShift down<CR>' },
             { 'q>', '<C-w>k' },
             { 'Q>', '<cmd>WinShift up<CR>' },
-            { 't>', ':lua require("FTerm").toggle()<CR>' },
+            -- { 't>', ':lua require("FTerm").toggle()<CR>' },
+            { 't>', ':ToggleTerm<CR>' },
             { 'u>', '2<C-w>>' },
             { 'v>', ':vsp<CR>' },
             { 'V>', ':sp<CR>' },
@@ -191,6 +196,8 @@ nest.applyKeymaps {
         } },
 
         { '<leader>', {
+            -- { 'b', function() startBuild() end },
+            { 'b', startBuild },
             { 'e', ':NvimTreeToggle<CR>' },
             { 'f', {
                 { 'e', 'za' },
