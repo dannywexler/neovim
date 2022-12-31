@@ -10,8 +10,8 @@ local function togterm(cmd)
         direction = 'float',
         float_opts = {
             border = 'curved',
-            height = math.floor(vim.o.columns * 0.6),
-            width = math.floor(vim.o.columns * 0.7),
+            height = math.floor(vim.o.lines * 0.6),
+            width = math.floor(vim.o.columns * 0.6),
         },
     })
     tterm:toggle()

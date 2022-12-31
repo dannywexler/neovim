@@ -5,11 +5,11 @@ require 'session_manager'.setup {
         'NvimTree'
     },
     autosave_ignore_buftypes = {
-        'acwrite',
-        'nofile',
-        'nowrite',
+        -- 'acwrite',
+        -- 'nofile',
+        -- 'nowrite',
         'quickfix',
         'terminal',
-        'prompt',
+        -- 'prompt',
     },
 }

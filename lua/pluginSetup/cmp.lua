@@ -103,8 +103,8 @@ cmp.setup {
         }),
     },
     performance = {
-        debounce = WINDOWS and 400 or 50,
-        throttle = WINDOWS and 400 or 50,
+        debounce = WINDOWS and 200 or 50,
+        throttle = WINDOWS and 200 or 50,
     },
     snippet = {
         expand = function(args)

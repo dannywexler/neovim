@@ -65,7 +65,8 @@ local function leap_to_line(searchAbove)
 end
 
 local function startBuild()
-    vim.cmd('TermExec cmd="sleep 10 && date" open=0')
+    -- vim.cmd('TermExec cmd="sleep 10 && date" open=0')
+    vim.cmd('TermExec cmd="build" open=0')
 end
 
 local function watchTerm()
@@ -114,6 +115,8 @@ nest.applyKeymaps {
             { 'a', telescope.live_grep },
             { 'd', telescope.find_files },
             { 'f', telescope.lsp_document_symbols },
+            { 'h', telescope.highlights },
+            { 'H', telescope.help_tags },
             -- { 'i', "vii:'<,'>Sort ui<CR>" },
             { 'p', 'Vip:Sort ui<CR>' },
             { 's', function() leap.leap { target_windows = require('leap.util').get_enterable_windows() } end },

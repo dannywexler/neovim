@@ -1,36 +1,39 @@
 local lualine = require 'lualine'
 local fn = vim.fn
 
+local function isTerm()
+    return vim.bo.filetype == 'toggleterm'
+end
+
+local function notTerm()
+    return vim.bo.filetype ~= 'toggleterm'
+end
+
 local function customFileName(input)
-    if vim.bo.filetype == 'NvimTree' then
+    local filetype = vim.bo.filetype
+    if filetype == 'NvimTree' then
         return fn.fnamemodify(fn.getcwd(), ':~:s?$?')
-    elseif input:find('#toggleterm#') then
-        local halfWidth = (vim.o.columns - 7) / 2
-        return string.rep(' ', halfWidth) .. 'TERMINAL' .. string.rep(' ', halfWidth)
     else
         return fn.fnamemodify(fn.expand('%'), ':t')
     end
 end
 
 local function customFilePath(input)
-    local specialNames = { 'Diffview', 'NvimTree', '#toggleterm#' }
-    for _, specialName in ipairs(specialNames) do
-        if input:find(specialName) then
+    local ignoreNames = { 'Diffview', 'NvimTree'}
+    for _, ignoreName in ipairs(ignoreNames) do
+        if input:find(ignoreName) then
             return ''
         end
     end
+
+    if isTerm() then return '  TERMINAL' end
+
     return input
 end
 
 local function getFolder()
     return fn.fnamemodify(fn.getcwd(), ':t')
 end
-
-local buildStatusColors = {
-    in_progress = '#ef9062',
-    finished = '#1abc9c',
-    error = '#f55385',
-}
 
 -- local spinners = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
 -- local spinners = { '.     ', '..    ', '...   ', ' ...  ', '  ... ', '   ...', '    ..', '     .', '      ' }
@@ -47,16 +50,26 @@ local spinners = {
 }
 
 local function buildStatus()
-    if fn.getcwd():find('danny') == nil then return '' end
-    if Building == 'finished' then
+    if not WINDOWS or fn.getcwd():find('bit9prog') == nil then return '' end
+    if BuildStatus == 'finished' then
         return 'Build finished'
-    elseif Building == 'in_progress' then
+    elseif BuildStatus == 'in_progress' then
         return 'Building ' .. spinners[os.date('%S') % #spinners + 1]
-    elseif Building == 'error' then
-        return 'Build error'
     else
-        return ''
+        return BuildStatus
     end
+end
+
+local function buildStatusColor()
+    local fgColor = '#f55385'
+
+    if BuildStatus == 'finished' then
+        fgColor = '#1abc9c'
+    elseif BuildStatus == 'in_progress' then
+        fgColor = '#ef9062'
+    end
+
+    return { fg = fgColor, bg = '#000000' }
 end
 
 lualine.setup {
@@ -67,7 +80,7 @@ lualine.setup {
         component_separators = { left = '', right = '' },
         -- disabled_filetypes = {
         --     statusline = { 'NvimTree' },
-        --     winbar = { 'NvimTree' },
+            -- winbar = { 'toggleterm' },
         -- },
         globalstatus = false,
         icons_enabled = true,
@@ -76,7 +89,13 @@ lualine.setup {
         theme = 'auto',
     },
     sections = {
-        lualine_a = { getFolder },
+        lualine_a = {
+            getFolder,
+            {
+                buildStatus,
+                color = buildStatusColor
+            },
+        },
         lualine_b = { 'branch', 'diff' },
         lualine_c = {
             {
@@ -89,15 +108,16 @@ lualine.setup {
         },
         lualine_x = {
             -- 'aerial'
-            {
-                buildStatus,
-                color = function () return { fg = buildStatusColors[Building] } end
-            },
         },
         lualine_y = {},
         -- lualine_z = {'location'}
         -- lualine_z = { '%3.3c%5.5l/%5.5L' }
-        lualine_z = { [['%3.l/%L | %3.3c']] }
+        lualine_z = {
+            {
+                [['%3.l/%L | %3.3c']],
+                cond = notTerm,
+            },
+        }
     },
     inactive_sections = {
         lualine_a = { getFolder },
@@ -113,6 +133,7 @@ lualine.setup {
                 'filename',
                 fmt = customFileName,
                 color = 'WinBar',
+                cond = notTerm,
                 padding = 0
             }
         },

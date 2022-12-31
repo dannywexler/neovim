@@ -29,16 +29,38 @@ require 'lazy'.setup(
         lockfile = vim.fn.stdpath("data") .. "/lazy/lazy-lock.json",
         performance = {
             rtp = {
+                -- disabled_plugins = {
+                --     "gzip",
+                --     "matchit",
+                --     "matchparen",
+                --     "netrwPlugin",
+                --     "tarPlugin",
+                --     "tohtml",
+                --     -- "tutor",
+                --     "zipPlugin",
+                -- },
                 disabled_plugins = {
+                    "2html_plugin",
+                    "getscript",
+                    "getscriptPlugin",
                     "gzip",
+                    "logipat",
                     "matchit",
                     "matchparen",
+                    "netrw",
+                    "netrwFileHandlers",
                     "netrwPlugin",
+                    "netrwSettings",
+                    "rrhelper",
+                    "tar",
                     "tarPlugin",
                     "tohtml",
-                    -- "tutor",
+                    "vimball",
+                    "vimballPlugin",
+                    "zip",
                     "zipPlugin",
-                },
+                    -- "tutor",
+                }
             }
         },
         ui = {
