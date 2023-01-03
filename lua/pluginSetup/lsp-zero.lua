@@ -29,7 +29,7 @@ lsp.set_preferences({
 lsp.ensure_installed({
     "bashls",
     "cssls",
-    -- 'jdtls',
+    'jdtls',
     'jsonls',
     'pyright',
     'sumneko_lua',

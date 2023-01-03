@@ -37,4 +37,6 @@ o.splitright = true
 o.swapfile = false
 o.tabstop = 4
 o.updatetime = 1400
+o.undodir = vim.fn.stdpath('data') .. '/undodir'
+o.undofile = true
 o.writebackup = false

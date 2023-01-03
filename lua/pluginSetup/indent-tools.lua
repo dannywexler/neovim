@@ -1,7 +1,7 @@
 require 'indent-tools'.config {
     normal = {
-        up   = "K",
-        down = "J",
+        up   = "[i",
+        down = "]i",
     },
     textobj = {
         ai = "ai",

@@ -70,7 +70,7 @@ local function startBuild()
 end
 
 local function watchTerm()
-    vim.cmd('2TermExec cmd="tsx watch %" direction=vertical')
+    vim.cmd('3TermExec cmd="tsx watch %" direction=vertical')
 end
 
 nmap('<leader>h', ':%s@<c-r>=expand("<cword>")<cr>@@gc<Left><Left><Left>')
@@ -91,11 +91,11 @@ nest.applyKeymaps {
         { 'j', function() leap.leap {} end },
         -- { 'J', '20<Down>' },
         -- { 'J', function () tree.goto_next(treeopts) end},
-        -- { 'J', '<Plug>(IndentWiseNextEqualIndent)', options = { noremap = false } },
+        { 'J', '<Plug>(IndentWiseNextEqualIndent)', options = { noremap = false } },
         { 'k', function() leap.leap { backward = true } end },
         -- { 'K', '20<Up>' },
         -- { 'K', function () tree.goto_prev(treeopts) end},
-        -- { 'K', '<Plug>(IndentWisePreviousEqualIndent)', options = { noremap = false } },
+        { 'K', '<Plug>(IndentWisePreviousEqualIndent)', options = { noremap = false } },
         -- { 'L', function () tree.goto_child(treeopts) end},
         { 'L', '<Plug>(IndentWiseNextGreaterIndent)', options = { noremap = false } },
         { 'q', {

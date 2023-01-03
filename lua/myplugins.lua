@@ -76,6 +76,8 @@ p('treesj', 'Wansmer/treesj')
 p('ufo', 'kevinhwang91/nvim-ufo')
 p('web-devicons', 'kyazdani42/nvim-web-devicons')
 p('winshift', 'sindrets/winshift.nvim')
+p('nui', 'MunifTanjim/nui.nvim')
+p('noice', 'folke/noice.nvim')
 
 return plugins
 

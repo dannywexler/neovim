@@ -149,6 +149,7 @@ lualine.setup {
                 'filename',
                 fmt = customFileName,
                 color = 'WinBarNC',
+                cond = notTerm,
                 padding = 0
             }
         },
