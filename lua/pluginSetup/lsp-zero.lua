@@ -8,7 +8,8 @@ require 'neodev'.setup {
     lspconfig = true
 }
 
-local lsp = require('lsp-zero')
+local lsp = require 'lsp-zero'
+local navic = require 'nvim-navic'
 
 lsp.set_preferences({
     suggest_lsp_servers = true,
@@ -36,6 +37,12 @@ lsp.ensure_installed({
     'tsserver',
 })
 
+lsp.on_attach(function(client, bufnr)
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+    end
+end)
+
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
@@ -51,7 +58,7 @@ lsp.configure('sumneko_lua', {
     settings = {
         Lua = {
             diagnostics = {
-                globals = { 'vim', 'WINDOWS'}
+                globals = { 'vim', 'WINDOWS' }
             },
             runtime = {
                 path = runtime_path,
@@ -71,7 +78,7 @@ lsp.configure('sumneko_lua', {
         }
     }
 })
-
+lsp.nvim_workspace()
 lsp.setup()
 
 vim.diagnostic.config {

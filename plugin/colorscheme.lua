@@ -58,6 +58,7 @@ aucmd('ColorScheme', {
         linkHL('Normal', 'NvimTreeNormalNC')
         linkHL('Normal', 'NvimTreeIndentMarker')
         linkHL('WinBar', 'ToggleTerm1WinBar')
+        linkHL('WinBar', 'NavicText')
     end
 })
 

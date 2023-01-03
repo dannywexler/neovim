@@ -1,4 +1,5 @@
 local lualine = require 'lualine'
+local navic = require 'nvim-navic'
 local fn = vim.fn
 
 local function isTerm()
@@ -19,7 +20,7 @@ local function customFileName(input)
 end
 
 local function customFilePath(input)
-    local ignoreNames = { 'Diffview', 'NvimTree'}
+    local ignoreNames = { 'Diffview', 'NvimTree' }
     for _, ignoreName in ipairs(ignoreNames) do
         if input:find(ignoreName) then
             return ''
@@ -73,20 +74,24 @@ local function buildStatusColor()
 end
 
 lualine.setup {
-    extensions = {
-        'aerial'
-    },
+    -- extensions = {
+    --     'aerial'
+    -- },
     options = {
         component_separators = { left = '', right = '' },
         -- disabled_filetypes = {
         --     statusline = { 'NvimTree' },
-            -- winbar = { 'toggleterm' },
+        -- winbar = { 'toggleterm' },
         -- },
         globalstatus = false,
         icons_enabled = true,
         -- ignore_focus = { 'NvimTree' },
         section_separators = { left = '', right = '' },
         theme = 'auto',
+    },
+    refresh = {
+        statusline = 500,
+        winbar = 500
     },
     sections = {
         lualine_a = {
@@ -135,13 +140,61 @@ lualine.setup {
                 color = 'WinBar',
                 cond = notTerm,
                 padding = 0
+            },
+            {
+                -- function ()
+                --     local location = navic.get_location()
+                --     local locationLength = location:len()
+                --     if locationLength == 0 then return '' end
+                --
+                --     local filenameLength = vim.fn.expand('%:t'):len() + 4
+                --     -- print('filenameLength: ' .. tostring(filenameLength))
+                --     local availableSpace = vim.api.nvim_win_get_width(0) - filenameLength
+                --     -- print('availableSpace: ' .. tostring(availableSpace))
+                --     local gap = availableSpace - locationLength
+                --     print('gap: ' .. tostring(gap))
+                --     local trimmedLocation = location
+                --     if gap >= 0 then
+                --         trimmedLocation = string.rep(' ', gap) .. location
+                --     else
+                --         trimmedLocation = location:sub(1,availableSpace)
+                --     end
+                --
+                --     -- return '   ' .. trimmedLocation
+                --     return trimmedLocation
+                -- end,
+                -- function ()
+                --     local location = navic.get_location()
+                --     if location:len() == 0 then return '' end
+                --
+                --     return '   ' .. location
+                -- end,
+                function ()
+                    local location = navic.get_location()
+                    if location:len() == 0 then return '' end
+
+                    local filenameLength = vim.fn.expand('%:t'):len() + 4
+                    local availableSpace = vim.api.nvim_win_get_width(0) - filenameLength
+                    local trimmedLocation = location:sub(1,math.min(location:len(), availableSpace + 20))
+                    return '   ' .. trimmedLocation
+                end,
+                -- navic.get_location,
+                cond = navic.is_available,
+                color = 'WinBar'
             }
         },
         lualine_b = {},
         lualine_c = {},
-        lualine_x = {},
+        lualine_x = {
+        },
         lualine_y = {},
-        lualine_z = {}
+        lualine_z = {
+            -- {
+            --     navic.get_location,
+            --     cond = navic.is_available,
+            --     color = 'WinBar'
+            -- }
+        }
     },
     inactive_winbar = {
         lualine_a = {

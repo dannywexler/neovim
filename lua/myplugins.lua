@@ -25,6 +25,7 @@ end
 
 -- p('fterm', 'numToStr/FTerm.nvim')
 -- p('pretty-fold', 'anuvyklack/pretty-fold.nvim')
+-- p('searchbox', 'VonHeikemen/searchbox.nvim')
 -- p('treesitter-playground', 'nvim-treesitter/playground')
 p('autopairs', 'windwp/nvim-autopairs')
 p('autotag', 'windwp/nvim-ts-autotag')
@@ -56,8 +57,11 @@ p('lualine', 'nvim-lualine/lualine.nvim')
 p('luasnip', 'L3MON4D3/LuaSnip')
 p('mason', 'williamboman/mason.nvim')
 p('mason-lspconfig', 'williamboman/mason-lspconfig.nvim')
+p('navic', 'SmiteshP/nvim-navic')
 p('neodev', 'folke/neodev.nvim')
 p('nest', 'LionC/nest.nvim')
+p('noice', 'folke/noice.nvim')
+p('nui', 'MunifTanjim/nui.nvim')
 p('nvimtree', 'kyazdani42/nvim-tree.lua')
 p('plenary', 'nvim-lua/plenary.nvim')
 p('promise-async', 'kevinhwang91/promise-async')
@@ -76,8 +80,6 @@ p('treesj', 'Wansmer/treesj')
 p('ufo', 'kevinhwang91/nvim-ufo')
 p('web-devicons', 'kyazdani42/nvim-web-devicons')
 p('winshift', 'sindrets/winshift.nvim')
-p('nui', 'MunifTanjim/nui.nvim')
-p('noice', 'folke/noice.nvim')
 
 return plugins
 

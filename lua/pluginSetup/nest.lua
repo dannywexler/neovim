@@ -1,5 +1,6 @@
 local leap = require 'leap'
 local nest = require 'nest'
+-- local searchbox = require 'searchbox'
 -- local tree = require 'tree-climber'
 -- local treeopts = {
 --     skip_comments = true,
@@ -73,7 +74,13 @@ local function watchTerm()
     vim.cmd('3TermExec cmd="tsx watch %" direction=vertical')
 end
 
-nmap('<leader>h', ':%s@<c-r>=expand("<cword>")<cr>@@gc<Left><Left><Left>')
+-- local function searchReplace()
+--     searchbox.replace({
+--         default_value = vim.fn.expand('<cword>')
+--     })
+-- end
+
+nmap('<leader>r', ':%s@<c-r>=expand("<cword>")<cr>@@gc<Left><Left><Left>')
 
 nest.applyKeymaps {
     { mode = 'n', {
@@ -134,6 +141,7 @@ nest.applyKeymaps {
         { '<', 'V<<Esc>' },
         { '<Up>', 'gk' },
         { '<Down>', 'gj' },
+        -- { '/', searchbox.incsearch },
 
         { '<A-', {
             { 'a>', '<C-w>h' },
@@ -212,6 +220,7 @@ nest.applyKeymaps {
             } },
             -- h: replace word under cursor
             -- { 'o', ':AerialToggle<CR>' },
+            -- { 'r', searchReplace},
             { 'o', ':SymbolsOutline<CR>' },
             { 'w', watchTerm },
         } },

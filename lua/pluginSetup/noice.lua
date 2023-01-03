@@ -15,4 +15,31 @@ require("noice").setup({
         inc_rename = true, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = true, -- add a border to hover docs and signature help
     },
+    views = {
+        mini = {
+            relative = "editor",
+            align = "message-right",
+            timeout = 4000,
+            reverse = true,
+            focusable = false,
+            position = {
+                row = -2,
+                col = "100%",
+                -- col = 0,
+            },
+            size = "auto",
+            border = {
+                style = "single",
+            },
+            zindex = 60,
+            win_options = {
+                winblend = 0,
+                winhighlight = {
+                    Normal = "NoiceMini",
+                    IncSearch = "",
+                    Search = "",
+                },
+            },
+        },
+    }
 })
