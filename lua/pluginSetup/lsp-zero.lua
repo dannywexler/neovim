@@ -32,9 +32,11 @@ lsp.ensure_installed({
     "cssls",
     'jdtls',
     'jsonls',
+    'marksman',
     'pyright',
     'sumneko_lua',
     'tsserver',
+    'tailwindcss'
 })
 
 lsp.on_attach(function(client, bufnr)
@@ -46,6 +48,15 @@ end)
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
+
+lsp.configure('jsonls', {
+    settings = {
+        json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+        },
+    },
+})
 
 lsp.configure('sumneko_lua', {
     commands = {
