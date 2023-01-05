@@ -219,9 +219,9 @@ nest.applyKeymaps {
                 { 'r', 'zA' },
             } },
             -- h: replace word under cursor
-            -- { 'o', ':AerialToggle<CR>' },
+            { 'o', ':AerialToggle<CR>' },
             -- { 'r', searchReplace},
-            { 'o', ':SymbolsOutline<CR>' },
+            -- { 'o', ':SymbolsOutline<CR>' },
             { 'w', watchTerm },
         } },
     } },

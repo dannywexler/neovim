@@ -6,6 +6,15 @@ require("noice").setup({
             ["vim.lsp.util.stylize_markdown"] = true,
             ["cmp.entry.get_documentation"] = true,
         },
+        progress = {
+            -- throttle = WINDOWS and 2000 or 300
+            enabled = false
+        },
+        signature = {
+            auto_open = {
+                throttle = WINDOWS and 300 or 50
+            }
+        }
     },
     -- you can enable a preset for easier configuration
     presets = {
@@ -14,6 +23,20 @@ require("noice").setup({
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = true, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = true, -- add a border to hover docs and signature help
+    },
+    routes = {
+        {
+            filter = {
+                find = "splitkeep",
+            },
+            opts = { skip = true },
+        },
+        {
+            filter = {
+                event = "msg_show",
+            },
+            opts = { skip = true },
+        },
     },
     views = {
         mini = {

@@ -1,5 +1,6 @@
 local lualine = require 'lualine'
 local navic = require 'nvim-navic'
+local noice = require("noice").api.status
 local fn = vim.fn
 
 local function isTerm()
@@ -14,6 +15,8 @@ local function customFileName(input)
     local filetype = vim.bo.filetype
     if filetype == 'NvimTree' then
         return fn.fnamemodify(fn.getcwd(), ':~:s?$?')
+    elseif filetype == 'aerial' then
+        return 'OUTLINE'
     else
         return fn.fnamemodify(fn.expand('%'), ':t')
     end
@@ -113,6 +116,10 @@ lualine.setup {
         },
         lualine_x = {
             -- 'aerial'
+            {
+                noice.message.get_hl,
+                cond = noice.message.has
+            }
         },
         lualine_y = {},
         -- lualine_z = {'location'}
