@@ -98,3 +98,25 @@ local niceColors = {
         '#EEF06D'
     }
 }
+
+aucmd({'InsertEnter',}, {
+    group = myColorGroup,
+    pattern = '*.js',
+    callback = function ()
+        if vim.api.nvim_buf_line_count(0) > 5000 then
+            print('toggling highlight')
+            vim.cmd('TSBufDisable highlight')
+        end
+    end
+})
+
+aucmd({'InsertLeave'}, {
+    group = myColorGroup,
+    pattern = '*.js',
+    callback = function ()
+        if vim.api.nvim_buf_line_count(0) > 5000 then
+            print('toggling highlight')
+            vim.cmd('TSBufEnable highlight')
+        end
+    end
+})
