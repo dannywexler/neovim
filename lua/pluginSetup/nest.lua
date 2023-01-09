@@ -87,7 +87,12 @@ nest.applyKeymaps {
         { 'g', {
             { 'a', '<cmd>CodeActionMenu<CR>' },
             { 'd', lsp.definition },
-            { 'f', diag.open_float },
+            { 'e', function ()
+                diag.goto_prev({float = true})
+            end },
+            { 'f', function ()
+                diag.goto_next({float = true})
+            end },
             { 'h', lsp.hover },
             { 'n', lsp.rename },
             { 'r', telescope.lsp_references },
