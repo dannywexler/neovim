@@ -40,6 +40,11 @@ lsp.ensure_installed({
     'tailwindcss'
 })
 
+lsp.set_server_config({
+    single_file_support = true,
+    flags = { debounce_text_changes = 300},
+})
+
 lsp.on_attach(function(client, bufnr)
     if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
@@ -112,6 +117,7 @@ lsp.configure('sumneko_lua', {
         }
     }
 })
+
 lsp.nvim_workspace()
 lsp.setup()
 
