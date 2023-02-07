@@ -99,23 +99,24 @@ local niceColors = {
     }
 }
 
+local maxLines = 1000
 aucmd({'InsertEnter',}, {
     group = myColorGroup,
     pattern = '*.js',
     callback = function ()
-        if vim.api.nvim_buf_line_count(0) > 5000 then
-            print('toggling highlight')
+        if vim.api.nvim_buf_line_count(0) > maxLines then
+            -- print('toggling highlight')
             vim.cmd('TSBufDisable highlight')
         end
     end
 })
 
-aucmd({'InsertLeave'}, {
+aucmd({'CursorHold'}, {
     group = myColorGroup,
     pattern = '*.js',
     callback = function ()
-        if vim.api.nvim_buf_line_count(0) > 5000 then
-            print('toggling highlight')
+        if vim.api.nvim_buf_line_count(0) > maxLines then
+            -- print('toggling highlight')
             vim.cmd('TSBufEnable highlight')
         end
     end

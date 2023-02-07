@@ -6,6 +6,8 @@ o.backup = false
 o.clipboard = 'unnamedplus'
 o.compatible = false
 o.cursorline = true
+-- o.cursorcolumn = true
+-- o.cmdheight = 0
 o.expandtab = true
 o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 o.foldcolumn = '0'
@@ -21,6 +23,7 @@ o.incsearch = true
 o.iskeyword:append('-')
 o.laststatus = 3
 o.list = false
+-- o.listchars = [[tab:▏,multispace:▏   ]]
 o.mouse = 'a'
 o.number = false
 o.scrolloff = 8

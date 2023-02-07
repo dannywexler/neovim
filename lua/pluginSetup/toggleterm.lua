@@ -1,10 +1,11 @@
 BuildStatus = 'finished'
 
-local start_text = 'build'
+local start_text = 'MAVEN_OPTS'
 local success_text = 'All wars successfully redeployed'
 local error_messages = {
     'testerror',
     'Maven build error - no wars redeployed',
+    'BUILD FAILURE',
     'No wars found in current directory',
     'Could not transfer',
     'failed to deploy',
@@ -31,13 +32,16 @@ require 'toggleterm'.setup {
             -- print('output: ' .. output)
             if output:find(start_text) then
                 BuildStatus = 'in_progress'
+                return
             elseif output:find(success_text) then
                 BuildStatus = 'finished'
+                return
             end
 
             for _, error_message in ipairs(error_messages) do
                 if output:find(error_message) then
                     BuildStatus = error_message
+                    return
                 end
             end
         end

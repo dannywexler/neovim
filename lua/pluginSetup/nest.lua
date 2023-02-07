@@ -215,8 +215,8 @@ nest.applyKeymaps {
         } },
 
         { '<leader>', {
-            -- { 'b', function() startBuild() end },
-            { 'b', startBuild },
+            { 'b', function() startBuild() end },
+            -- { 'b', startBuild },
             { 'e', ':NvimTreeToggle<CR>' },
             { 'f', {
                 { 'e', 'za' },

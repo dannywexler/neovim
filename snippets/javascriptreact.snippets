@@ -1,0 +1,73 @@
+snippet af arrow function
+		$1 = ($2) => {
+			$0
+		}
+snippet afec arrow function export const
+		export const $1 = ($2) => {
+			$0
+		}
+snippet ca console assert
+		console.assert(hideDebug, '$0')
+snippet cas console assert stringify
+		console.assert(hideDebug, stringify({$0}))
+snippet cd console dir
+		console.dir(_.cloneDeep($0))
+snippet cl console log
+		console.log('$0')
+snippet clv console log variable
+		console.log({$0})
+snippet co comment block
+		/**
+		 * $0
+		 */
+snippet ec export const
+		export const 
+snippet edf export default function
+		export default function $1($2) {
+			$0
+			
+			return (
+				<div>
+					
+				</div>
+			)
+		}
+snippet ei else if
+		else if ($1) {
+			$0
+		}
+snippet el else
+		else {
+			$0
+		}
+snippet fun function
+		function $1($2) {
+			$0
+		}
+snippet if if
+		if ($1) {
+			$0
+		}
+snippet ife if else
+		if ($1) {
+			$2
+		}
+		else {
+			$0
+		}
+snippet np Return New Promise
+		return new Promise((resolve, reject) => {
+			$0
+		})
+snippet ss Set State update
+		this.setState(prevState => update(prevState, {
+			$0
+		}));
+snippet ssc Set State update with callback
+		this.setState(prevState => update(prevState, {
+			$0	
+		}), () => {
+			
+		});
+snippet ust Use State
+		const [$1, $2] = useState($3)

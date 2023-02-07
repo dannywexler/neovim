@@ -12,7 +12,7 @@ telescope.setup {
         entry_prefix = "  ",
         file_ignore_patterns = {
             -- ".git",
-            ".doc",
+            -- ".doc",
             "node_modules",
             "packer-compiled",
             ".pdf",

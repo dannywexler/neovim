@@ -1,6 +1,6 @@
 local lualine = require 'lualine'
 local navic = require 'nvim-navic'
-local noice = require("noice").api.status
+-- local noice = require("noice").api.status
 local fn = vim.fn
 
 local function isTerm()
@@ -36,7 +36,8 @@ local function customFilePath(input)
 end
 
 local function getFolder()
-    return fn.fnamemodify(fn.getcwd(), ':t')
+    -- return fn.fnamemodify(fn.getcwd(), ':t')
+    return fn.getcwd()
 end
 
 -- local spinners = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
@@ -116,10 +117,10 @@ lualine.setup {
         },
         lualine_x = {
             -- 'aerial'
-            {
-                noice.message.get_hl,
-                cond = noice.message.has
-            }
+            -- {
+            --     noice.message.get_hl,
+            --     cond = noice.message.has
+            -- }
         },
         lualine_y = {},
         -- lualine_z = {'location'}

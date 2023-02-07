@@ -38,6 +38,8 @@ local kind_icons = {
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
+local minCols = 50
+local maxCols = 50
 cmp.setup {
     -- completion = {
     --     keyword_length = 3
@@ -67,19 +69,28 @@ cmp.setup {
         -- end,
         format = lspkind.cmp_format({
             mode = 'symbol_text', -- show only symbol annotations
-            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            maxwidth = maxCols, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
             ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
             -- The function below will be called before any actual modifications from lspkind
             -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
             before = function(entry, vim_item)
                 vim_item.menu = ({
-                    luasnip = "[Snippet]",
-                    nvim_lsp = "[LSP]",
-                    nvim_lua = '[NVIM]',
-                    path = "[Path]",
-                    buffer = "[Buffer]",
+                    luasnip =  '[Snippet]',
+                    nvim_lsp = '[LSP]    ',
+                    nvim_lua = '[NVIM]   ',
+                    path =     '[Path]   ',
+                    buffer =   '[Buffer] ',
                 })[entry.source.name]
+                -- print(vim.inspect(vim_item))
+                local word = vim_item.abbr
+                -- print('word: ' .. word)
+                if word:len() < minCols then
+                    local leftover = minCols - string.len(word)
+                    -- print('leftover is ' .. leftover)
+                    word = word .. string.rep(' ', leftover)
+                    vim_item.abbr = word
+                end
                 return vim_item
             end
         })
@@ -122,8 +133,8 @@ cmp.setup {
         }),
     },
     performance = {
-        debounce = WINDOWS and 200 or 50,
-        throttle = WINDOWS and 200 or 50,
+        debounce = WINDOWS and 100 or 50,
+        throttle = WINDOWS and 100 or 50,
     },
     snippet = {
         expand = function(args)
@@ -143,14 +154,15 @@ cmp.setup {
         { name = "buffer",
             option = {
                 get_bufnrs = function()
-                    local buf = vim.api.nvim_get_current_buf()
-                    local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-                    if byte_size > 1024 * 100 then -- 100K max
-                        return {}
-                    end
+                    -- local buf = vim.api.nvim_get_current_buf()
+                    -- local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+                    -- if byte_size > 1024 * 100 then -- 100K max
+                    --     return {}
+                    -- end
 
                     local bufs = {}
                     for _, win in ipairs(vim.api.nvim_list_wins()) do
+                        -- vim.api.nvim_list_bufs
                         bufs[vim.api.nvim_win_get_buf(win)] = true
                     end
                     return vim.tbl_keys(bufs)
