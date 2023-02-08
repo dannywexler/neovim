@@ -1,6 +1,7 @@
 require'colorizer'.setup {
     user_default_options = {
         names = false,
-        mode = 'background'
+        mode = 'virtualtext',
+        virtualtext = '■■■■■■■'
     }
 }

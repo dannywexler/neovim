@@ -20,7 +20,9 @@ aucmd('ColorScheme', {
         -- setHL('@parameter', '#C408C4')
         -- setHL('UfoFoldedBg', '', '#240824')
         setHL('@variable.builtin', '#1dab2e')
+        setHL('CmpItemAbbr', '#ffffff')
         setHL('Comment', '#b8bdd1')
+        setHL('FloatBorder', '#ffffff')
         setHL('IndentBlanklineIndent1', '#E5C07B')
         setHL('IndentBlanklineIndent2', '#98C379')
         setHL('IndentBlanklineIndent3', '#61AFEF')
@@ -35,6 +37,8 @@ aucmd('ColorScheme', {
         setHL('MoreMsg', '#e535ab')
         setHL('Normal', '#ffffff', '#12131b')
         setHL('NormalNC', '#ffffff', '#171822')
+        setHL('Pmenu', '#ffffff')
+        setHL('PmenuSel', '#ffffff', '#004fc7')
         setHL('rainbowcol1', '#c0caf5')
         setHL('rainbowcol10', '#f3d400')
         setHL('rainbowcol11', '#89e051')
@@ -53,20 +57,25 @@ aucmd('ColorScheme', {
         setHL('WinBarNC', '#000000', '#7aa2f7')
         setHL('WinSeparator', '#7aa2f7', '#000000')
 
-        linkHL('String', 'Character')
+        linkHL('CmpItemAbbr', 'TelescopeNormal')
+        linkHL('Comment', 'CmpItemMenu')
+        linkHL('FloatBorder', 'TelescopeBorder')
+        linkHL('Normal', 'NvimTreeIndentMarker')
         linkHL('Normal', 'NvimTreeNormal')
         linkHL('Normal', 'NvimTreeNormalNC')
-        linkHL('Normal', 'NvimTreeIndentMarker')
-        linkHL('WinBar', 'ToggleTerm1WinBar')
+        linkHL('String', 'Character')
         linkHL('WinBar', 'NavicText')
+        linkHL('WinBar', 'ToggleTerm1WinBar')
     end
 })
 
 local niceColors = {
     blue = {
         '#7aa2f7',
+        '#61afef',
+        '#0091f8',
         '#0061fe',
-        '#61afef'
+        '#004fc7',
     },
     green = {
         '#00fa9a',
@@ -121,3 +130,18 @@ aucmd({'CursorHold'}, {
         end
     end
 })
+
+--[[
+-- Could just overwrite individual styles within tokyonight config
+-- Or could copy and paste the source from here
+-- https://github.com/folke/tokyonight.nvim/blob/main/extras/lua/tokyonight_night.lua
+-- and modify it directly
+-- Or at least use it as a base to get the raw list of highlight names
+-- Could have a setFG(color, table of highlight names), and similar setBG
+-- or could have one big Foregrounds = {
+--      highlightName = colorName
+-- }
+-- and also matching Backgrounds = {
+--      highlightName = colorName
+-- }
+--]]

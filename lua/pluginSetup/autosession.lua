@@ -9,5 +9,5 @@ require 'auto-session'.setup {
     auto_session_use_git_branch = true,
     bypass_session_save_file_types = nil,
     log_level = 'error',
-    pre_save_cmds = {'NvimTreeClose'}
+    pre_save_cmds = {'ColorizerDetachFromBuffer','NvimTreeClose'}
 }
