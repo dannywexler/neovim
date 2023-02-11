@@ -74,8 +74,12 @@ local niceColors = {
         '#7aa2f7',
         '#61afef',
         '#0091f8',
+        '#0e65f0',
+        '#0d5ddf',
+        '#0c58d3',
         '#0061fe',
         '#004fc7',
+        '#0944a1',
     },
     green = {
         '#00fa9a',
