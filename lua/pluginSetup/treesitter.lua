@@ -16,6 +16,8 @@ local languages = {
     'markdown_inline',
     'python',
     'regex',
+    'rust',
+    'svelte',
     'tsx',
     'typescript',
     'vim',

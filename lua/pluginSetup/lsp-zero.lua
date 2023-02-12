@@ -35,7 +35,9 @@ lsp.ensure_installed({
     'jsonls',
     'marksman',
     'pyright',
+    'rust_analyzer',
     'sumneko_lua',
+    'svelte',
     'tsserver',
     'tailwindcss'
 })
