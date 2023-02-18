@@ -22,6 +22,7 @@ aucmd('ColorScheme', {
         setHL('@variable.builtin', '#1dab2e')
         setHL('CmpItemAbbr', '#ffffff')
         setHL('Comment', '#b8bdd1')
+        setHL('CursorLineNr', '#000000', '#00ffcc')
         setHL('FloatBorder', '#ffffff')
         setHL('IndentBlanklineIndent1', '#E5C07B')
         setHL('IndentBlanklineIndent2', '#98C379')
@@ -59,6 +60,7 @@ aucmd('ColorScheme', {
 
         linkHL('CmpItemAbbr', 'TelescopeNormal')
         linkHL('Comment', 'CmpItemMenu')
+        linkHL('Comment', 'LineNr')
         linkHL('FloatBorder', 'TelescopeBorder')
         linkHL('Normal', 'NvimTreeIndentMarker')
         linkHL('Normal', 'NvimTreeNormal')
@@ -105,7 +107,8 @@ local niceColors = {
     },
     teal = {
         '#3ac6be',
-        '#00ffcc'
+        '#00ffcc',
+        '#2ac3de'
     },
     yellow = {
         '#EEF06D'

@@ -223,6 +223,7 @@ nest.applyKeymaps {
                 { 'f', lsp.format },
                 { 'r', 'zA' },
             } },
+            { 'm', ':TSJToggle<CR>' },
             -- h: replace word under cursor
             { 'o', ':AerialToggle<CR>' },
             -- { 'r', searchReplace},
