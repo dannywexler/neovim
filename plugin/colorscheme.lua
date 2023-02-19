@@ -119,7 +119,7 @@ local niceColors = {
     },
     teal = {
         '#00ffcc',
-        '#2ac3de'
+        '#2ac3de',
         '#3ac6be',
         '#77d3d1',
     },
