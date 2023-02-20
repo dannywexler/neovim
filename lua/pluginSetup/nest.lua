@@ -88,10 +88,13 @@ nest.applyKeymaps {
             { 'a', '<cmd>CodeActionMenu<CR>' },
             { 'd', lsp.definition },
             { 'e', function ()
-                diag.goto_prev({float = true})
+                -- diag.goto_prev({float = true})
+                require("lspsaga.diagnostic"):goto_prev()
             end },
             { 'f', function ()
-                diag.goto_next({float = true})
+                -- diag.goto_next({float = true})
+                -- require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
+                require("lspsaga.diagnostic"):goto_next()
             end },
             { 'h', lsp.hover },
             { 'n', lsp.rename },
