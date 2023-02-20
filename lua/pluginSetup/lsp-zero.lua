@@ -36,7 +36,7 @@ lsp.ensure_installed({
     'marksman',
     'pyright',
     'rust_analyzer',
-    'sumneko_lua',
+    'lua_ls',
     'svelte',
     'tsserver',
     'tailwindcss'
@@ -88,7 +88,7 @@ lsp.configure('jsonls', {
     },
 })
 
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
     commands = {
         Format = {
             function()
