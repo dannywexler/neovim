@@ -221,6 +221,7 @@ nest.applyKeymaps {
             { 'b', function() startBuild() end },
             -- { 'b', startBuild },
             { 'e', ':NvimTreeToggle<CR>' },
+            { 'E', ':NvimTreeFindFile<CR>' },
             { 'f', {
                 { 'e', 'za' },
                 { 'f', lsp.format },

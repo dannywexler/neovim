@@ -1,10 +1,15 @@
 require'nvim-tree'.setup {
+    auto_reload_on_write = not WINDOWS,
     disable_netrw = true,
     hijack_cursor = true,
+    filesystem_watchers = {
+        enable = false
+    },
     live_filter = {
         prefix = 'FILTER: ',
         always_show_folders = false
     },
+    reload_on_bufenter = false,
     renderer = {
         group_empty = true,
         -- highlight_opened_files = 'name',
@@ -20,10 +25,10 @@ require'nvim-tree'.setup {
     },
     sync_root_with_cwd = true,
     update_focused_file = {
-        enable = true,
-        debounce_delay = 100,
+        enable = false,
     },
     view = {
+        debounce_delay = 100,
         hide_root_folder = true,
         mappings = {
             list = {

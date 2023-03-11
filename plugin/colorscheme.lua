@@ -1,6 +1,6 @@
 local api = vim.api
 local aucmd = api.nvim_create_autocmd
-local myColorGroup = api.nvim_create_augroup('MyGroup', { clear = true })
+local myColorGroup = api.nvim_create_augroup('MyColorGroup', { clear = true })
 
 local function setHL(name, foreground, background, extraOpts)
     local opts = {}
@@ -16,7 +16,6 @@ end
 aucmd('ColorScheme', {
     group = myColorGroup,
     callback = function()
-
         -- setHL('@parameter', '#C408C4')
         -- setHL('UfoFoldedBg', '', '#240824')
         setHL('@variable.builtin', '#1dab2e')
@@ -38,6 +37,7 @@ aucmd('ColorScheme', {
         setHL('MoreMsg', '#e535ab')
         setHL('Normal', '#ffffff', '#12131b')
         setHL('NormalNC', '#ffffff', '#171822')
+        setHL('NormalFloat', '#ffffff')
         setHL('Pmenu', '#ffffff')
         setHL('PmenuSel', '#ffffff', '#004fc7')
         setHL('rainbowcol1', '#c0caf5')

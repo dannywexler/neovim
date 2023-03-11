@@ -1,7 +1,7 @@
 -- print('hello from autocmds')
 
-local api = vim.api
-local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
+-- local api = vim.api
+-- local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
 -- local aucmd = api.nvim_create_autocmd
 
 -- api.nvim_create_autocmd({ 'BufLeave', 'CursorHold' }, {
