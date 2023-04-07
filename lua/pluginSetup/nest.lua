@@ -85,16 +85,17 @@ nmap('<leader>r', ':%s@<c-r>=expand("<cword>")<cr>@@gc<Left><Left><Left>')
 nest.applyKeymaps {
     { mode = 'n', {
         { 'g', {
-            { 'a', '<cmd>CodeActionMenu<CR>' },
+            -- { 'a', '<cmd>CodeActionMenu<CR>' },
+            { 'a', '<cmd>Lspsaga code_action<CR>' },
             { 'd', lsp.definition },
             { 'e', function ()
-                -- diag.goto_prev({float = true})
-                require("lspsaga.diagnostic"):goto_prev()
+                diag.goto_prev({float = true})
+                -- require("lspsaga.diagnostic"):goto_prev()
             end },
             { 'f', function ()
-                -- diag.goto_next({float = true})
+                diag.goto_next({float = true})
                 -- require("lspsaga.diagnostic"):goto_next({ severity = vim.diagnostic.severity.ERROR })
-                require("lspsaga.diagnostic"):goto_next()
+                -- require("lspsaga.diagnostic"):goto_next()
             end },
             { 'h', lsp.hover },
             { 'n', lsp.rename },

@@ -147,7 +147,7 @@ lualine.setup {
                 fmt = customFileName,
                 color = 'WinBar',
                 cond = notTerm,
-                padding = 0
+                padding = 1
             },
             {
                 -- function ()
@@ -211,7 +211,7 @@ lualine.setup {
                 fmt = customFileName,
                 color = 'WinBarNC',
                 cond = notTerm,
-                padding = 0
+                padding = 1
             }
         },
         lualine_b = {},

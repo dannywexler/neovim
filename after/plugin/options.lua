@@ -18,7 +18,7 @@ o.foldmethod = 'indent'
 o.foldexpr = 'nvim_treesitter#foldexpr()'
 o.hidden = true
 o.hlsearch = true
-o.ignorecase = true
+o.ignorecase = false
 o.incsearch = true
 o.iskeyword:append('-')
 o.laststatus = 3
@@ -33,7 +33,7 @@ o.shiftwidth = 4
 o.showmatch = true
 o.showmode = false
 o.signcolumn = 'auto'
-o.smartcase = true
+o.smartcase = false
 o.softtabstop = 4
 o.splitbelow = true
 o.splitright = true

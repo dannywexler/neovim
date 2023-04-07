@@ -5,7 +5,6 @@ local languages = {
     'c',
     'cpp',
     'css',
-    'help',
     'html',
     'java',
     'javascript',

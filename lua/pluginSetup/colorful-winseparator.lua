@@ -11,6 +11,6 @@ require 'colorful-winsep'.setup {
         "TelescopePrompt",
         "mason",
         "CompetiTest",
-        "NvimTree",
+        -- "NvimTree",
     },
 }

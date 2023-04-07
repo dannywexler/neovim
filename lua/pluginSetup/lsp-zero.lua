@@ -14,7 +14,7 @@ local util = require 'lspconfig.util'
 
 lsp.set_preferences({
     suggest_lsp_servers = true,
-    setup_servers_on_start = false,
+    setup_servers_on_start = true,
     set_lsp_keymaps = false,
     configure_diagnostics = false,
     cmp_capabilities = true,
@@ -31,7 +31,7 @@ lsp.set_preferences({
 lsp.ensure_installed({
     "bashls",
     "cssls",
-    'jdtls',
+    -- 'jdtls',
     'jsonls',
     'marksman',
     'pyright',
@@ -39,7 +39,8 @@ lsp.ensure_installed({
     'lua_ls',
     'svelte',
     'tsserver',
-    'tailwindcss'
+    'yamlls'
+    -- 'tailwindcss'
 })
 
 lsp.set_server_config({
@@ -145,19 +146,21 @@ vim.diagnostic.config {
     -- },
     -- virtual_text = false,
     virtual_text = {
-        format = function(diagnostic)
-            -- if diagnostic.severity == vim.diagnostic.severity.ERROR then
-            -- return string.format("E: %s", diagnostic.message)
-            -- end
-            if diagnostic.severity == vim.diagnostic.severity.ERROR then
-                return 'ERROR'
-            elseif diagnostic.severity == vim.diagnostic.severity.HINT then
-                return 'HINT'
-            elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-                return 'WARN'
-            end
-            return diagnostic.message
-        end,
+        -- format = function(diagnostic)
+        --     -- if diagnostic.severity == vim.diagnostic.severity.ERROR then
+        --     -- return string.format("E: %s", diagnostic.message)
+        --     -- end
+        --     if diagnostic.severity == vim.diagnostic.severity.HINT then
+        --         return 'HINT'
+        --     elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+        --         return 'WARN'
+        --     elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+        --         return 'INFO'
+        --     elseif diagnostic.severity == vim.diagnostic.severity.ERROR then
+        --         return 'ERROR'
+        --     end
+        --     return diagnostic.message
+        -- end,
         source = false,
     },
 }
