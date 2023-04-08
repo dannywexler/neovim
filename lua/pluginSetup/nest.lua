@@ -85,8 +85,9 @@ nmap('<leader>r', ':%s@<c-r>=expand("<cword>")<cr>@@gc<Left><Left><Left>')
 nest.applyKeymaps {
     { mode = 'n', {
         { 'g', {
+            { 'a', lsp.code_action},
             -- { 'a', '<cmd>CodeActionMenu<CR>' },
-            { 'a', '<cmd>Lspsaga code_action<CR>' },
+            -- { 'a', '<cmd>Lspsaga code_action<CR>' },
             { 'd', lsp.definition },
             { 'e', function ()
                 diag.goto_prev({float = true})
@@ -118,7 +119,8 @@ nest.applyKeymaps {
             { 'e', ':tabclose<CR>' },
             { 'f', ':bp | bd #<CR>' },
             -- { 'f', ':BufferClose<CR>' },
-            { 'q', ':qa!<CR>' },
+            -- { 'q', ':qa!<CR>' },
+            { 'q', ':NvimTreeClose<CR>:qa!<CR>' },
             { 'w', 'ZZ' },
         } },
         { 's', '<NOP>' },

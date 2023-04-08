@@ -105,7 +105,8 @@ lualine.setup {
                 color = buildStatusColor
             },
         },
-        lualine_b = { 'branch', 'diff' },
+        -- lualine_b = { 'branch', 'diff' },
+        lualine_b = {},
         lualine_c = {
             {
                 'filename',

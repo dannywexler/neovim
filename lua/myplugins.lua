@@ -29,6 +29,7 @@ end
 -- p('pretty-fold', 'anuvyklack/pretty-fold.nvim')
 -- p('searchbox', 'VonHeikemen/searchbox.nvim')
 -- p('session-manager', 'Shatur/neovim-session-manager')
+-- p('code-action-menu', 'weilbith/nvim-code-action-menu')
 p('aerial', 'stevearc/aerial.nvim')
 p('autopairs', 'windwp/nvim-autopairs')
 p('autosession', 'rmagatti/auto-session')
