@@ -21,7 +21,8 @@ require'nvim-tree'.setup {
             enable = true
         },
         -- root_folder_label = ":~:s?$?/..?",
-        root_folder_label = ":~:s?$?",
+        -- root_folder_label = ":~:s?$?",
+        root_folder_label = false
     },
     sync_root_with_cwd = true,
     update_focused_file = {
@@ -29,7 +30,6 @@ require'nvim-tree'.setup {
     },
     view = {
         debounce_delay = 100,
-        hide_root_folder = true,
         mappings = {
             list = {
                 { key = 'i', action = 'cd' },

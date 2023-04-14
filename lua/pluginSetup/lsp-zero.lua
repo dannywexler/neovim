@@ -146,21 +146,21 @@ vim.diagnostic.config {
     -- },
     -- virtual_text = false,
     virtual_text = {
-        -- format = function(diagnostic)
-        --     -- if diagnostic.severity == vim.diagnostic.severity.ERROR then
-        --     -- return string.format("E: %s", diagnostic.message)
-        --     -- end
-        --     if diagnostic.severity == vim.diagnostic.severity.HINT then
-        --         return 'HINT'
-        --     elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-        --         return 'WARN'
-        --     elseif diagnostic.severity == vim.diagnostic.severity.INFO then
-        --         return 'INFO'
-        --     elseif diagnostic.severity == vim.diagnostic.severity.ERROR then
-        --         return 'ERROR'
-        --     end
-        --     return diagnostic.message
-        -- end,
+        format = function(diagnostic)
+            -- if diagnostic.severity == vim.diagnostic.severity.ERROR then
+            -- return string.format("E: %s", diagnostic.message)
+            -- end
+            if diagnostic.severity == vim.diagnostic.severity.HINT then
+                return 'HINT'
+            elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+                return 'WARN'
+            elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+                return 'INFO'
+            -- elseif diagnostic.severity == vim.diagnostic.severity.ERROR then
+            --     return 'ERROR'
+            end
+            return diagnostic.message
+        end,
         source = false,
     },
 }

@@ -94,8 +94,10 @@ lualine.setup {
         theme = 'auto',
     },
     refresh = {
-        statusline = 500,
-        winbar = 500
+        -- statusline = 500,
+        statusline = 100,
+        -- winbar = 500
+        winbar = 100
     },
     sections = {
         lualine_a = {
@@ -134,8 +136,10 @@ lualine.setup {
         }
     },
     inactive_sections = {
-        lualine_a = { getFolder },
-        lualine_b = { 'branch' },
+        -- lualine_a = { getFolder },
+        lualine_a = { },
+        -- lualine_b = { 'branch' },
+        lualine_b = { },
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
