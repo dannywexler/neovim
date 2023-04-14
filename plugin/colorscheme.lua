@@ -136,28 +136,28 @@ local niceColors = {
     }
 }
 
-local maxLines = 1000
-aucmd({'InsertEnter',}, {
-    group = myColorGroup,
-    pattern = '*.js',
-    callback = function ()
-        if vim.api.nvim_buf_line_count(0) > maxLines then
-            -- print('toggling highlight')
-            vim.cmd('TSBufDisable highlight')
-        end
-    end
-})
-
-aucmd({'CursorHold'}, {
-    group = myColorGroup,
-    pattern = '*.js',
-    callback = function ()
-        if vim.api.nvim_buf_line_count(0) > maxLines then
-            -- print('toggling highlight')
-            vim.cmd('TSBufEnable highlight')
-        end
-    end
-})
+-- local maxLines = 1000
+-- aucmd({'InsertEnter',}, {
+--     group = myColorGroup,
+--     pattern = '*.js',
+--     callback = function ()
+--         if vim.api.nvim_buf_line_count(0) > maxLines then
+--             -- print('toggling highlight')
+--             vim.cmd('TSBufDisable highlight')
+--         end
+--     end
+-- })
+--
+-- aucmd({'CursorHold'}, {
+--     group = myColorGroup,
+--     pattern = '*.js',
+--     callback = function ()
+--         if vim.api.nvim_buf_line_count(0) > maxLines then
+--             -- print('toggling highlight')
+--             vim.cmd('TSBufEnable highlight')
+--         end
+--     end
+-- })
 
 --[[
 -- Could just overwrite individual styles within tokyonight config
