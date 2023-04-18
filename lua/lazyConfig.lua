@@ -16,12 +16,12 @@ local pluginSpec = require('myplugins')
 require 'lazy'.setup(
     pluginSpec,
     {
-        concurrency = WINDOWS and 4 or nil,
+        concurrency = WINDOWS and 2 or nil,
         defaults = {
             lazy = false
         },
         git = {
-            timeout = WINDOWS and 360 or nil
+            timeout = nil
         },
         install = {
             colorscheme = { 'tokyonight', 'habamax' }

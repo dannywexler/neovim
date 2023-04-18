@@ -30,16 +30,16 @@ require'nvim-tree'.setup {
     },
     view = {
         debounce_delay = 100,
-        mappings = {
-            list = {
-                { key = 'i', action = 'cd' },
-                { key = 'n', action = 'expand_all' },
-                { key = 'N', action = 'collapse_all' },
-                { key = 'u', action = 'dir_up' },
-                { key = "<C-e>", action = "" },
-                { key = "?", action = "toggle_help" },
-            }
-        },
+        -- mappings = {
+        --     list = {
+        --         { key = 'i', action = 'cd' },
+        --         { key = 'n', action = 'expand_all' },
+        --         { key = 'N', action = 'collapse_all' },
+        --         { key = 'u', action = 'dir_up' },
+        --         { key = "<C-e>", action = "" },
+        --         { key = "?", action = "toggle_help" },
+        --     }
+        -- },
         signcolumn = 'no',
         width = 35
     },
