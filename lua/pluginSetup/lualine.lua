@@ -123,10 +123,10 @@ lualine.setup {
         theme = custom_tokyo,
     },
     refresh = {
-        statusline = 500,
-        -- statusline = 100,
-        winbar = 500
-        -- winbar = 100
+        -- statusline = 500,
+        statusline = 100,
+        -- winbar = 500
+        winbar = 100
     },
     sections = {
         lualine_a = {
@@ -161,13 +161,13 @@ lualine.setup {
             --     noice.message.get_hl,
             --     cond = noice.message.has
             -- }
-            -- {
-            --     'searchcount',
-            --     fmt = function(search)
-            --         if search:len() == 0 then return '' end
-            --         return 'Search Result ' .. search
-            --     end,
-            -- },
+            {
+                'searchcount',
+                fmt = function(search)
+                    if search:len() == 0 then return '' end
+                    return 'Search Result ' .. search
+                end,
+            },
         },
         lualine_y = {},
         -- lualine_z = {}

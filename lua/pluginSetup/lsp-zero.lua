@@ -161,6 +161,7 @@ vim.diagnostic.config {
             end
             return diagnostic.message
         end,
+        prefix = '●',
         source = false,
     },
 }

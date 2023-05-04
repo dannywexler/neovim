@@ -33,6 +33,9 @@ o.shiftround = true
 o.shiftwidth = 4
 o.showcmd = false
 o.showmatch = true
+o.shortmess:append('I')
+o.shortmess:append('S')
+o.shortmess:append('s')
 o.showmode = false
 o.signcolumn = 'auto'
 o.smartcase = false
