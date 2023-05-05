@@ -35,3 +35,4 @@ require'prettier'.setup {
         vue_indent_script_and_style = false,
     },
 }
+

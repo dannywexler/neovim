@@ -1,6 +1,12 @@
 require('mason.settings').set({
+    max_concurrent_installers = WINDOWS and 1 or 4,
     ui = {
-        border = 'rounded'
+        border = "rounded",
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+        },
     }
 })
 
@@ -45,7 +51,7 @@ lsp.ensure_installed({
 
 lsp.set_server_config({
     single_file_support = true,
-    flags = { debounce_text_changes = 300},
+    flags = { debounce_text_changes = 300 },
 })
 
 lsp.on_attach(function(client, bufnr)
@@ -60,14 +66,14 @@ table.insert(runtime_path, 'lua/?/init.lua')
 
 if WINDOWS then
     local root_files = {
-        'settings.gradle', -- Gradle (multi-project)
+        'settings.gradle',     -- Gradle (multi-project)
         'settings.gradle.kts', -- Gradle (multi-project)
-        'build.xml', -- Ant
-        'pom.xml', -- Maven
+        'build.xml',           -- Ant
+        'pom.xml',             -- Maven
     }
 
     local fallback_root_files = {
-        'build.gradle', -- Gradle
+        'build.gradle',     -- Gradle
         'build.gradle.kts', -- Gradle
     }
     lsp.configure('jdtls', {
@@ -156,8 +162,8 @@ vim.diagnostic.config {
                 return 'WARN'
             elseif diagnostic.severity == vim.diagnostic.severity.INFO then
                 return 'INFO'
-            -- elseif diagnostic.severity == vim.diagnostic.severity.ERROR then
-            --     return 'ERROR'
+                -- elseif diagnostic.severity == vim.diagnostic.severity.ERROR then
+                --     return 'ERROR'
             end
             return diagnostic.message
         end,
