@@ -133,6 +133,8 @@ nest.applyKeymaps {
             { 'A', telescope.grep_string },
             { 'a', telescope.live_grep },
             { 'd', telescope.find_files },
+            { 'e', '<cmd>Lspsaga show_buf_diagnostics<CR>' },
+            { 'E', '<cmd>Lspsaga show_workspace_diagnostics<CR>' },
             { 'f', telescope.lsp_document_symbols },
             { 'h', telescope.highlights },
             { 'H', telescope.help_tags },

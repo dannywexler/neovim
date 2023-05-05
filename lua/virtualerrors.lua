@@ -4,7 +4,7 @@ local aucmd = api.nvim_create_autocmd
 local virtErrorsNamespace = api.nvim_create_namespace('virtErrors')
 local space = ' '
 local warningIcon = ' '
-local maxDiagnostics = 100
+local maxDiagnostics = 800
 
 local highlight_groups = {
     [vim.diagnostic.severity.ERROR] = "DiagnosticVirtualTextError",
@@ -20,6 +20,12 @@ local function log(item)
         print(item)
     end
 end
+
+local function nonEmpty(item)
+    return not vim.tbl_isempty(item)
+end
+
+local owfMessage = "Property 'OWF' does not exist"
 
 local function getDiagnostics()
     local allDiagnostics = vim.diagnostic.get(0, {
@@ -44,44 +50,55 @@ local function getDiagnostics()
 
         local endColOfLastPiece = 0
         for index, diagnostic in ipairs(diagGroup) do
-            local paddingWidth = diagnostic.col - endColOfLastPiece
+            if not string.find(diagnostic.message, owfMessage) then
+                local paddingWidth = diagnostic.col - endColOfLastPiece
+                table.insert(firstLinePieces, {
+                    space:rep(paddingWidth),
+                    'CursorLine'
+                })
+                local diagnosticWidth = math.max(1, diagnostic.end_col - diagnostic.col)
+                table.insert(firstLinePieces, {
+                    string.rep(index, diagnosticWidth),
+                    highlight_groups[diagnostic.severity]
+                })
+                endColOfLastPiece = diagnostic.col + diagnosticWidth
+            end
+        end
+        -- if vim.tbl_count(firstLinePieces) > 0 then
+        if nonEmpty(firstLinePieces) then
             table.insert(firstLinePieces, {
-                space:rep(paddingWidth),
+                space:rep(vim.fn.winwidth(0) - endColOfLastPiece),
                 'CursorLine'
             })
-            local diagnosticWidth = math.max(1, diagnostic.end_col - diagnostic.col)
-            table.insert(firstLinePieces, {
-                string.rep(index, diagnosticWidth),
-                highlight_groups[diagnostic.severity]
-            })
-            endColOfLastPiece = diagnostic.col + diagnosticWidth
+            table.insert(virtLines, firstLinePieces)
         end
-        table.insert(firstLinePieces, {
-            space:rep(vim.fn.winwidth(0) - endColOfLastPiece),
-            'CursorLine'
-        })
 
-        table.insert(virtLines, firstLinePieces)
 
         for index, diagnostic in ipairs(diagGroup) do
-            local formattedMessage = '  ' .. index .. '. ' .. diagnostic.message
-            local remainingLength = math.max(1, vim.fn.winwidth(0) - #formattedMessage)
-            formattedMessage = formattedMessage .. space:rep(remainingLength)
-            table.insert(virtLines, {
-                {
-                    formattedMessage,
-                    highlight_groups[diagnostic.severity]
-                },
+            if not string.find(diagnostic.message, owfMessage) then
+                local formattedMessage = '  ' .. index .. '. ' .. diagnostic.message
+                local remainingLength = math.max(1, vim.fn.winwidth(0) - #formattedMessage)
+                formattedMessage = formattedMessage .. space:rep(remainingLength)
+                table.insert(virtLines, {
+                    {
+                        formattedMessage,
+                        highlight_groups[diagnostic.severity]
+                    },
+                })
+            end
+        end
+
+        -- if vim.tbl_count(virtLines) > 0 then
+        if nonEmpty(virtLines) then
+            api.nvim_buf_set_extmark(0, virtErrorsNamespace, lineNumber, 0, {
+                virt_lines = virtLines,
             })
         end
-        api.nvim_buf_set_extmark(0, virtErrorsNamespace, lineNumber, 0, {
-            virt_lines = virtLines,
-        })
     end
 end
 
 aucmd('CursorHold', {
-    pattern = { '*.lua', '*.ts' },
+    pattern = { '*.js', '*.lua', '*.ts' },
     group = virtErrorsGroup,
     callback = function()
         api.nvim_buf_clear_namespace(0, virtErrorsNamespace, 0, -1)
