@@ -106,6 +106,12 @@ local fileStatusSymbols = {
     newfile = '[New]',     -- Text to show for newly created file before first write
 }
 
+local function formatSearchResults()
+    local searchCount = vim.fn.searchcount({ maxcount = 0 })
+    local searchText = vim.fn.getreg('/')
+    return 'match ' .. searchCount.current .. ' of ' .. searchCount.total .. ' for ' .. searchText .. ' '
+end
+
 lualine.setup {
     -- extensions = {
     --     'aerial'
@@ -162,11 +168,7 @@ lualine.setup {
             --     cond = noice.message.has
             -- }
             {
-                'searchcount',
-                fmt = function(search)
-                    if search:len() == 0 then return '' end
-                    return 'Search Result ' .. search
-                end,
+                formatSearchResults
             },
         },
         lualine_y = {},

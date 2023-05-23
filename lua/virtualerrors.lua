@@ -98,10 +98,17 @@ local function getDiagnostics()
 end
 
 aucmd('CursorHold', {
-    pattern = { '*.js', '*.lua', '*.ts' },
+    pattern = { '*.json', '*.js', '*.lua', '*.rs', '*.ts', '*.tsx' },
     group = virtErrorsGroup,
     callback = function()
         api.nvim_buf_clear_namespace(0, virtErrorsNamespace, 0, -1)
         getDiagnostics()
     end
 })
+
+
+local mytable = {
+    ['#fab'] = 'hello',
+    [']'] = 'hello',
+    _12abc = 'thing'
+}
