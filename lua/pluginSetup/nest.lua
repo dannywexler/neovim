@@ -147,7 +147,10 @@ nest.applyKeymaps {
         } },
         { 'U', '<C-r>' },
         { 'z', {
-            { 'h', ':noh<CR>' },
+            { 'h', function ()
+                vim.fn.setreg('/', ' ')
+                vim.cmd('noh')
+            end },
         } },
 
         { '<Space>', '<NOP>' },

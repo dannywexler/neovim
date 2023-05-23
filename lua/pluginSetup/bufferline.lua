@@ -52,6 +52,7 @@ require 'bufferline'.setup {
         },
     },
     options = {
+        always_show_bufferline = false,
         enforce_regular_tabs = false,
         max_name_length = 40,
         max_prefix_length = 24,

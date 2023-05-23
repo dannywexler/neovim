@@ -107,9 +107,13 @@ local fileStatusSymbols = {
 }
 
 local function formatSearchResults()
-    local searchCount = vim.fn.searchcount({ maxcount = 0 })
-    local searchText = vim.fn.getreg('/')
-    return 'match ' .. searchCount.current .. ' of ' .. searchCount.total .. ' for ' .. searchText .. ' '
+    local searchText = fn.getreg('/')
+    if searchText == ' ' then
+        return ''
+    else
+        local searchCount = fn.searchcount({ maxcount = 0 })
+        return 'match ' .. searchCount.current .. ' of ' .. searchCount.total .. ' for ' .. searchText .. ' '
+    end
 end
 
 lualine.setup {
@@ -215,7 +219,7 @@ lualine.setup {
                 --     local locationLength = location:len()
                 --     if locationLength == 0 then return '' end
                 --
-                --     local filenameLength = vim.fn.expand('%:t'):len() + 4
+                --     local filenameLength = fn.expand('%:t'):len() + 4
                 --     -- print('filenameLength: ' .. tostring(filenameLength))
                 --     local availableSpace = vim.api.nvim_win_get_width(0) - filenameLength
                 --     -- print('availableSpace: ' .. tostring(availableSpace))
@@ -241,9 +245,9 @@ lualine.setup {
                     local location = navic.get_location()
                     if location:len() == 0 then return '' end
 
-                    local filenameLength = vim.fn.expand('%:t'):len() + 4
+                    local filenameLength = fn.expand('%:t'):len() + 8
                     local availableSpace = vim.api.nvim_win_get_width(0) - filenameLength
-                    local trimmedLocation = location:sub(1, math.min(location:len(), availableSpace + 20))
+                    local trimmedLocation = location:sub(1, math.min(location:len(), availableSpace))
                     return '   ' .. trimmedLocation
                 end,
                 -- navic.get_location,
