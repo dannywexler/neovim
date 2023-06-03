@@ -2,7 +2,7 @@ require 'tokyonight'.setup {
     on_colors = function (colors)
         colors.blue = '#0091f8'
         colors.blue0 = '#7aa2f7'
-        colors.blue1 = colors.blue1
+        colors.blue1 = colors.blue
         colors.blue2 = colors.blue1
         colors.blue3 = colors.blue1
         colors.blue4 = colors.blue1
@@ -32,7 +32,7 @@ require 'tokyonight'.setup {
     end,
     style = "night",
     styles = {
-        comments = { italic = false },
+        comments = { italic = true },
         keywords = { italic = false, bold = true },
         functions = { bold = true}
     },
