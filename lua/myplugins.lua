@@ -59,7 +59,7 @@ p('lsp-zero', 'VonHeikemen/lsp-zero.nvim')
 p('lspconfig', 'neovim/nvim-lspconfig')
 p('lspkind', 'onsails/lspkind.nvim')
 p('lspsaga', 'glepnir/lspsaga.nvim')
-p('lualine', 'nvim-lualine/lualine.nvim')
+-- p('lualine', 'nvim-lualine/lualine.nvim')
 p('luasnip', 'L3MON4D3/LuaSnip')
 p('mason', 'williamboman/mason.nvim')
 p('mason-lspconfig', 'williamboman/mason-lspconfig.nvim')
@@ -88,6 +88,7 @@ p('treesj', 'Wansmer/treesj', { cmd = 'TSJToggle' })
 p('ufo', 'kevinhwang91/nvim-ufo')
 p('web-devicons', 'kyazdani42/nvim-web-devicons')
 p('winshift', 'sindrets/winshift.nvim')
+p('windline', 'windwp/windline.nvim')
 
 table.insert(plugins, {
     'https://gitlab.com/yorickpeterse/nvim-dd.git',
