@@ -10,10 +10,10 @@ local state       = _G.WindLine.state
 local fn          = vim.fn
 
 local fileTypeMap = {
-    DiffviewFiles = 'DIFF',
+    DiffviewFiles = ' DIFF ',
     -- NvimTree = 'File Tree',
     TelescopePrompt = ' Telescope  ',
-    toggleterm = 'TERMINAL  ',
+    toggleterm = ' TERMINAL   ',
 }
 
 local myColors    = {

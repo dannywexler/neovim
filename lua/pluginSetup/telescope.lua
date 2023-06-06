@@ -68,14 +68,11 @@ telescope.setup {
                 if file == path then
                     return ' ' .. file
                 else
-                    local fileLen = string.len(file)
-                    local endIndex = fileLen * -1
+                    local endIndex = #file * -1
                     endIndex = endIndex - 2
-                    local parentPath = string.sub(path, 0, endIndex)
-                    local remainder = custom_width - fileLen - string.len(parentPath) - 10
-                    for i = 0, remainder, 1 do
-                        parentPath = " " .. parentPath
-                    end
+                    local parentPath = path:sub(0, endIndex)
+                    local remainder = custom_width - #file - #parentPath - 10
+                    parentPath = (" "):rep(remainder) .. parentPath
                     return string.format(" %s %s", file, parentPath)
                 end
             end,
