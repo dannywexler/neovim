@@ -33,18 +33,18 @@ tsconfigs.setup {
     highlight = {
         enable = true, -- false will disable the whole extension
         -- disable = { "" }, -- list of language that will be disabled
-        disable = function(lang, buf)
-            -- local max_filesize = 1024 * 100 -- 100 KB
-            -- -- local max_filesize = 1024 * 1000 -- 100 KB
-            -- local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            -- if ok and stats and stats.size > max_filesize then
-            --     return true
-            -- end
-            if vim.api.nvim_buf_line_count(buf) > 1000 then
-                return true
-            end
-            return false
-        end,
+        -- disable = function(lang, buf)
+        --     -- local max_filesize = 1024 * 100 -- 100 KB
+        --     -- -- local max_filesize = 1024 * 1000 -- 100 KB
+        --     -- local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        --     -- if ok and stats and stats.size > max_filesize then
+        --     --     return true
+        --     -- end
+        --     if vim.api.nvim_buf_line_count(buf) > 1000 then
+        --         return true
+        --     end
+        --     return false
+        -- end,
     },
     ignore_install = { "" }, -- List of parsers to ignore installing
     indent = { enable = true, disable = { 'yaml' } },

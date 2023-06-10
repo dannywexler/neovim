@@ -35,8 +35,12 @@ local hl_colors   = {
 local divider     = { builtin.divider, '' }
 local space_bg    = { ' ', 'background' }
 
+local function normalize(souceString)
+    return souceString:gsub('%\\', '/')
+end
+
 local function getFolder()
-    return ' ' .. fn.fnamemodify(fn.getcwd(), ':~:s?$?') .. ' '
+    return normalize(' ' .. fn.fnamemodify(fn.getcwd(), ':~:s?$?') .. ' ')
 end
 
 local function getHLMode()
@@ -54,8 +58,8 @@ local function formatFileName(bufnr)
     local fileTypeMatch = fileTypeMap[fileType]
     if fileTypeMatch then return fileTypeMatch end
 
-    local originalFileName = fn.bufname(bufnr)
-    local cwd = fn.getcwd()
+    local originalFileName = normalize(fn.bufname(bufnr))
+    local cwd = normalize(fn.getcwd())
     local fileName = originalFileName:gsub(cwd .. '/', '')
     if fileName == 'NvimTree_1' then
         return getFolder()
@@ -63,7 +67,7 @@ local function formatFileName(bufnr)
     return ' ' .. fileName .. ' '
 end
 
-local currentFileName = {
+local relativeFileName = {
     text = function(bufnr)
         local storedFileName = vim.b[bufnr].wl_file_name
         if storedFileName == nil then
@@ -74,6 +78,14 @@ local currentFileName = {
     end,
     hl = 'MiddleSection'
 }
+
+-- local function winbarFileName()
+--     local fileName = vim.fn.expand('%:t')
+--     if fileName == 'NvimTree_1' then
+--         return getFolder()
+--     end
+--     return ' ' .. fileName .. ' '
+-- end
 
 local lineAndCol = {
     text = function()
@@ -87,7 +99,7 @@ local default = {
     filetypes = { 'default' },
     active = {
         folder,
-        currentFileName,
+        relativeFileName,
         -- file_name,
         { builtin.cache_file_icon(), '' },
         divider,
@@ -117,16 +129,33 @@ local toggleterm = {
 }
 
 local winbar = {
+    text = function(bufnr)
+        local fileName = fn.fnamemodify(fn.bufname(bufnr), ':t')
+        if fileName == 'NvimTree_1' then
+            return getFolder()
+        end
+        return ' ' .. fileName .. ' '
+    end
+}
+
+local winbarComponent = {
     filetypes = { 'winbar' },
     active = {
         { ' ',                       '' },
         { builtin.cache_file_icon(), '' },
-        currentFileName
+        winbar
+        -- { ' ',                       '' },
+        -- -- { builtin.cache_file_name(), ''}
+        -- { winbarFileName,            '' }
+        -- -- currentFileName
     },
     inactive = {
         { ' ',                       '' },
         { builtin.cache_file_icon(), '' },
-        currentFileName
+        -- { ' ',                       '' },
+        -- { winbarFileName,            '' }
+        -- currentFileName
+        winbar
     }
 }
 
@@ -142,6 +171,6 @@ windline.setup {
         default,
         explorer,
         toggleterm,
-        winbar,
+        winbarComponent,
     }
 }

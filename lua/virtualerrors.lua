@@ -26,6 +26,7 @@ local function nonEmpty(item)
 end
 
 local owfMessage = "Property 'OWF' does not exist"
+local anyTypeMessage = "implicitly has an 'any' type"
 
 local function getDiagnostics()
     local allDiagnostics = vim.diagnostic.get(0, {
@@ -50,7 +51,7 @@ local function getDiagnostics()
 
         local endColOfLastPiece = 0
         for index, diagnostic in ipairs(diagGroup) do
-            if not string.find(diagnostic.message, owfMessage) then
+            if not string.find(diagnostic.message, owfMessage) and not string.find(diagnostic.message, anyTypeMessage) then
                 local paddingWidth = diagnostic.col - endColOfLastPiece
                 table.insert(firstLinePieces, {
                     space:rep(paddingWidth),
@@ -75,7 +76,7 @@ local function getDiagnostics()
 
 
         for index, diagnostic in ipairs(diagGroup) do
-            if not string.find(diagnostic.message, owfMessage) then
+            if not string.find(diagnostic.message, owfMessage) and not string.find(diagnostic.message, anyTypeMessage) then
                 local formattedMessage = '  ' .. index .. '. ' .. diagnostic.message
                 local remainingLength = math.max(1, vim.fn.winwidth(0) - #formattedMessage)
                 formattedMessage = formattedMessage .. space:rep(remainingLength)

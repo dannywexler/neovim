@@ -163,7 +163,10 @@ lualine.setup {
                 padding = { left = 0, right = 1 },
                 cond = regularFileType
             },
-            'diagnostics'
+            {
+                'diagnostics',
+                symbols = {error = 'E ', warn = 'W ', info = 'I ', hint = 'H '}
+            }
         },
         lualine_x = {
             -- 'aerial'
