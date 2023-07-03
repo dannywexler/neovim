@@ -3,7 +3,7 @@ local telescope = require 'telescope'
 local actions = require 'telescope.actions'
 
 local fullWindowWidth = vim.fn.winwidth(0)
-local preferredWidth = 140
+local preferredWidth = 180
 
 local custom_width = math.min(fullWindowWidth - 4, preferredWidth)
 

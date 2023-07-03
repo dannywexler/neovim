@@ -37,6 +37,8 @@ local function getDiagnostics()
     local lineDiagnosticsMap = {}
 
     for _, diagnostic in ipairs(allDiagnostics) do
+        -- should filter out the diagnostics here, instead
+        -- implicit any should be ignored only for js, but kept otherwise
         if lineDiagnosticsMap[diagnostic.lnum] == nil then
             lineDiagnosticsMap[diagnostic.lnum] = {}
         end
@@ -98,12 +100,14 @@ local function getDiagnostics()
     end
 end
 
-aucmd('CursorHold', {
+aucmd({ 'CursorHold', 'DiagnosticChanged' }, {
     pattern = { '*.json', '*.js', '*.lua', '*.rs', '*.ts', '*.tsx' },
     group = virtErrorsGroup,
     callback = function()
-        api.nvim_buf_clear_namespace(0, virtErrorsNamespace, 0, -1)
-        getDiagnostics()
+        if api.nvim_get_mode().mode == 'n' then
+            api.nvim_buf_clear_namespace(0, virtErrorsNamespace, 0, -1)
+            getDiagnostics()
+        end
     end
 })
 

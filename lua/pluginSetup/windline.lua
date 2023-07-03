@@ -134,6 +134,9 @@ local winbar = {
         if fileName == 'NvimTree_1' then
             return getFolder()
         end
+        if fileName:find('toggleterm') then
+            return ''
+        end
         return ' ' .. fileName .. ' '
     end
 }
