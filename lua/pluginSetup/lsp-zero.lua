@@ -37,7 +37,7 @@ lsp.set_preferences({
 lsp.ensure_installed({
     "bashls",
     "cssls",
-    -- 'jdtls',
+    'jdtls',
     'jsonls',
     'marksman',
     'pyright',
@@ -64,27 +64,6 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-if WINDOWS then
-    local root_files = {
-        'settings.gradle',     -- Gradle (multi-project)
-        'settings.gradle.kts', -- Gradle (multi-project)
-        'build.xml',           -- Ant
-        'pom.xml',             -- Maven
-    }
-
-    local fallback_root_files = {
-        'build.gradle',     -- Gradle
-        'build.gradle.kts', -- Gradle
-    }
-    lsp.configure('jdtls', {
-        root_dir = function(fname)
-            print('getting java root dir')
-            local primary = util.root_pattern(unpack(root_files))(fname)
-            local fallback = util.root_pattern(unpack(fallback_root_files))(fname)
-            return primary or fallback or vim.fn.getcwd()
-        end
-    })
-end
 
 lsp.configure('jsonls', {
     settings = {
