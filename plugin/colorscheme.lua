@@ -91,6 +91,7 @@ local niceColors = {
         '#0d5ddf',
         '#0e65f0',
         '#3178c6',
+        '#3b82f6',
         '#446ccf',
         '#4b78e6',
         '#61afef',
@@ -99,7 +100,9 @@ local niceColors = {
     green = {
         '#00fa9a',
         '#0e9e5a',
+        '#10b981',
         '#1abc9c',
+        '#2fb170',
         '#35d27f',
         '#41b883',
         '#4eefa2',
@@ -109,6 +112,7 @@ local niceColors = {
         '#e17b38',
         '#ef9062',
         '#f14c28',
+        '#f59e0b',
     },
     purple = {
         '#535bf2',
@@ -117,6 +121,7 @@ local niceColors = {
         '#646cff',
         '#8997f5',
         '#8d6bd9',
+        '#a17edc',
         '#c678dd',
     },
     pinkple = {
@@ -135,7 +140,8 @@ local niceColors = {
         '#77d3d1',
     },
     yellow = {
-        '#EEF06D'
+        '#eef06d',
+        '#fff89a',
     }
 }
 
