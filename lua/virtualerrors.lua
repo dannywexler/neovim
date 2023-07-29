@@ -25,8 +25,23 @@ local function nonEmpty(item)
     return not vim.tbl_isempty(item)
 end
 
-local owfMessage = "Property 'OWF' does not exist"
-local anyTypeMessage = "implicitly has an 'any' type"
+local messagesToIgnore = {
+    "Property 'OWF' does not exist",
+    "implicitly has an 'any' type",
+    "JSDOC types may be moved to TypeScript types",
+    "Unused functions"
+}
+
+local function shouldKeepDiagnostic(diagnostic)
+    for _, messageToIgnore in ipairs(messagesToIgnore) do
+        if diagnostic.message:find(messageToIgnore) then
+            -- print(messageToIgnore .. ' found in ' .. message)
+            return false
+        end
+    end
+    -- print('keeping message: ' .. message)
+    return true
+end
 
 local function getDiagnostics()
     local allDiagnostics = vim.diagnostic.get(0, {
@@ -37,12 +52,12 @@ local function getDiagnostics()
     local lineDiagnosticsMap = {}
 
     for _, diagnostic in ipairs(allDiagnostics) do
-        -- should filter out the diagnostics here, instead
-        -- implicit any should be ignored only for js, but kept otherwise
-        if lineDiagnosticsMap[diagnostic.lnum] == nil then
-            lineDiagnosticsMap[diagnostic.lnum] = {}
+        if shouldKeepDiagnostic(diagnostic) then
+            if lineDiagnosticsMap[diagnostic.lnum] == nil then
+                lineDiagnosticsMap[diagnostic.lnum] = {}
+            end
+            table.insert(lineDiagnosticsMap[diagnostic.lnum], diagnostic)
         end
-        table.insert(lineDiagnosticsMap[diagnostic.lnum], diagnostic)
     end
     -- log(lineDiagnosticsMap)
 
@@ -53,7 +68,6 @@ local function getDiagnostics()
 
         local endColOfLastPiece = 0
         for index, diagnostic in ipairs(diagGroup) do
-            if not string.find(diagnostic.message, owfMessage) and not string.find(diagnostic.message, anyTypeMessage) then
                 local paddingWidth = diagnostic.col - endColOfLastPiece
                 table.insert(firstLinePieces, {
                     space:rep(paddingWidth),
@@ -65,9 +79,7 @@ local function getDiagnostics()
                     highlight_groups[diagnostic.severity]
                 })
                 endColOfLastPiece = diagnostic.col + diagnosticWidth
-            end
         end
-        -- if vim.tbl_count(firstLinePieces) > 0 then
         if nonEmpty(firstLinePieces) then
             table.insert(firstLinePieces, {
                 space:rep(vim.fn.winwidth(0) - endColOfLastPiece),
@@ -78,7 +90,6 @@ local function getDiagnostics()
 
 
         for index, diagnostic in ipairs(diagGroup) do
-            if not string.find(diagnostic.message, owfMessage) and not string.find(diagnostic.message, anyTypeMessage) then
                 local formattedMessage = '  ' .. index .. '. ' .. diagnostic.message
                 local remainingLength = math.max(1, vim.fn.winwidth(0) - #formattedMessage)
                 formattedMessage = formattedMessage .. space:rep(remainingLength)
@@ -88,11 +99,9 @@ local function getDiagnostics()
                         highlight_groups[diagnostic.severity]
                     },
                 })
-            end
         end
 
-        -- if vim.tbl_count(virtLines) > 0 then
-        if nonEmpty(virtLines) then
+        if nonEmpty(virtLines) and lineNumber < vim.fn.line('$') then
             api.nvim_buf_set_extmark(0, virtErrorsNamespace, lineNumber, 0, {
                 virt_lines = virtLines,
             })
@@ -101,19 +110,12 @@ local function getDiagnostics()
 end
 
 aucmd({ 'CursorHold', 'DiagnosticChanged' }, {
-    pattern = { '*.json', '*.js', '*.lua', '*.rs', '*.ts', '*.tsx' },
+    pattern = { '*.java', '*.js', '*.json', '*.lua', '*.rs', '*.ts', '*.tsx' },
     group = virtErrorsGroup,
     callback = function()
-        if api.nvim_get_mode().mode == 'n' then
+        if vim.fn.mode() == 'n' then
             api.nvim_buf_clear_namespace(0, virtErrorsNamespace, 0, -1)
             getDiagnostics()
         end
     end
 })
-
-
-local mytable = {
-    ['#fab'] = 'hello',
-    [']'] = 'hello',
-    _12abc = 'thing'
-}
