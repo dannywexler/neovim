@@ -93,16 +93,16 @@ p('ufo', 'kevinhwang91/nvim-ufo')
 p('web-devicons', 'kyazdani42/nvim-web-devicons')
 p('winshift', 'sindrets/winshift.nvim')
 
-table.insert(plugins, {
-    'https://gitlab.com/yorickpeterse/nvim-dd.git',
-    name = 'defer-diagnostics',
-    url = 'https://gitlab.com/yorickpeterse/nvim-dd.git',
-    config = function()
-        require 'dd'.setup {
-            timeout = 800
-        }
-    end
-})
+-- table.insert(plugins, {
+--     'https://gitlab.com/yorickpeterse/nvim-dd.git',
+--     name = 'defer-diagnostics',
+--     url = 'https://gitlab.com/yorickpeterse/nvim-dd.git',
+--     config = function()
+--         require 'dd'.setup {
+--             timeout = 800
+--         }
+--     end
+-- })
 
 return plugins
 

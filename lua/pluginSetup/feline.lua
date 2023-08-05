@@ -163,7 +163,7 @@ end
 local CachedFuncs = cacheFuncs({
     getFolder = function() return normalize(fn.fnamemodify(fn.getcwd(), ':~')) end,
     getParentPath = function()
-        print("getting parentPath for buf:", fn.bufnr())
+        -- print("getting parentPath for buf:", fn.bufnr())
         return normalize(fn.fnamemodify(fn.getcwd(), ':~:h'))
     end,
     getCwd = function() return fn.fnamemodify(fn.getcwd(), ':t') end,
@@ -173,7 +173,7 @@ local CachedFuncs = cacheFuncs({
         return relativePath
     end,
     getFileName = function()
-        print("getting filename for buf:", fn.bufnr())
+        -- print("getting filename for buf:", fn.bufnr())
         return fileTypeMap[vim.bo.filetype] or fn.expand('%:t')
     end,
     getWinbarFileName = function()
@@ -349,7 +349,6 @@ local Comps = {
                 fg = Funcs.getFileIconColor(),
             }
         end,
-        -- right_sep = ' ',
         enabled = function() return #vim.bo.buftype == 0 end,
     },
     getFileName = {
