@@ -41,6 +41,7 @@ lsp.ensure_installed({
     'jsonls',
     'marksman',
     'pyright',
+    'nimls',
     'rust_analyzer',
     'lua_ls',
     'svelte',
