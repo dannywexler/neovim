@@ -16,8 +16,8 @@ end
 aucmd('ColorScheme', {
     group = myColorGroup,
     callback = function()
-        api.nvim_set_hl(0, 'IndentBlanklineContextStart', {sp = '#1abc9c', underline = true})
-        api.nvim_set_hl(0, 'IndentBlanklineContextSpaceChar', {sp = '#1abc9c', underline = true})
+        api.nvim_set_hl(0, 'IndentBlanklineContextStart', { sp = '#1abc9c', underline = true })
+        api.nvim_set_hl(0, 'IndentBlanklineContextSpaceChar', { sp = '#1abc9c', underline = true })
         -- setHL('@parameter', '#C408C4')
         -- setHL('UfoFoldedBg', '', '#240824')
         -- setHL('@variable.builtin', '#1dab2e')

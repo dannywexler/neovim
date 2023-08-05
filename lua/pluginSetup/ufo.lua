@@ -1,6 +1,6 @@
 local customVirtText = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
-    local suffix = ('     • • •   %d Folded Lines   • • • '):format(endLnum - lnum)
+    local suffix = ('    󰡍 • • • 󰡍  %d Folded Lines  󰡍 • • • 󰡍'):format(endLnum - lnum)
     local sufWidth = vim.fn.strdisplaywidth(suffix)
     local targetWidth = width - sufWidth
     local curWidth = 0
