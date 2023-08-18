@@ -44,3 +44,7 @@ o.updatetime = 1000
 -- -- o.undodir = vim.fn.stdpath('data') .. '/undodir'
 o.undofile = true
 o.writebackup = false
+o.number = false
+o.relativenumber = false
+o.linebreak = true
+o.showbreak = '󱞪 '

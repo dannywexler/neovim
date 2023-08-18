@@ -42,6 +42,7 @@ aucmd('ColorScheme', {
         setHL('lualine_c_normal', '#ffffff', '#1f2335')
         -- setHL('MoreMsg', '#e535ab')
         -- setHL('Normal', '#ffffff', '#12131b')
+        setHL('NonText', '#EEF06D')
         -- setHL('NormalNC', '#ffffff', '#171822')
         -- setHL('NormalFloat', '#ffffff')
         setHL('Pmenu', '#ffffff')
