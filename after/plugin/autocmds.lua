@@ -1,48 +1,40 @@
 -- print('hello from autocmds')
-
--- local api = vim.api
--- local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
--- local aucmd = api.nvim_create_autocmd
-
--- api.nvim_create_autocmd({ 'BufLeave', 'CursorHold' }, {
---     group = myGroup,
---     pattern = '*.*',
---     callback = function()
---         print('hello from CursorHold callback')
---     end
--- })
-
--- api.nvim_create_autocmd({ 'BufLeave', 'CursorHold' }, {
---     group = myGroup,
---     pattern = {'js', 'ts'},
---     command = '<Plug>(prettier-format)'
--- })
--- aucmd({ 'BufLeave', 'CursorHold' }, {
---     group = myGroup,
---     pattern = '*.*',
---     callback = function()
---         vim.cmd('silent update')
---         -- vim.diagnostic.open_float()
---     end
--- })
 --
--- aucmd('VimResized', {
---     group = myGroup,
---     callback = function()
---         vim.cmd('wincmd =')
---     end
--- })
---
-vim.cmd [[
+-- how to know when to save a file:
+-- if vim.bo.buflisted and vim.bo.buftype == ''
+-- or maybe just check  vim.bo.modified?
 
-augroup SaveFile
-autocmd!
-autocmd BufLeave,CursorHold *.* silent update
-augroup END
+local api = vim.api
+local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
+local aucmd = function(event, opts)
+    local defaultOpts = { group = myGroup }
+    local mergedOpts = vim.tbl_extend('force', defaultOpts, opts)
 
-augroup WindowResized
-autocmd!
-autocmd VimResized * wincmd =
-augroup END
+    api.nvim_create_autocmd(event, mergedOpts)
+end
 
-]]
+local filetypesToAutoFormat = { 'lua' }
+
+local function formatFile(buf, bufopt)
+    local ft = bufopt.ft
+    if not vim.tbl_contains(filetypesToAutoFormat, ft) then return end
+    local errorCount = vim.tbl_count(vim.diagnostic.get(buf, {
+        severity = vim.diagnostic.severity.ERROR
+    }))
+    if errorCount > 0 then return end
+    vim.lsp.buf.format({ bufnr = buf })
+end
+
+aucmd({ 'BufLeave', 'CursorHold' }, {
+    callback = function(event)
+        local bufopt = vim.bo[event.buf]
+        if #bufopt.buftype > 0 then return end
+        if not bufopt.modified then return end
+        formatFile(event.buf, bufopt)
+        vim.cmd('silent write')
+    end
+})
+
+aucmd('VimResized', {
+    command = 'wincmd ='
+})

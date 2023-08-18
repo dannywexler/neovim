@@ -152,7 +152,7 @@ nest.applyKeymaps {
             { "V", "v" },
             { 'z', {
                 { 'h', function()
-                    vim.fn.setreg('/', ' ')
+                    vim.fn.setreg('/', 'wxyz')
                     vim.cmd('noh')
                 end },
             } },
@@ -293,7 +293,6 @@ nest.applyKeymaps {
             --     { 'c>', 'gc^', options = { noremap = false } },
             -- } },
             { 'm',      'gc^',                             options = { noremap = false } },
-
             { '<C-', {
                 { 'j>', ":m '>+1<CR>gv=gv" },
                 { 'k>', ":m '<-2<CR>gv=gv" },
