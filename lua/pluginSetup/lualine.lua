@@ -165,7 +165,7 @@ lualine.setup {
             },
             {
                 'diagnostics',
-                symbols = {error = 'E ', warn = 'W ', info = 'I ', hint = 'H '}
+                -- symbols = {error = 'E ', warn = 'W ', info = 'I ', hint = 'H '}
             }
         },
         lualine_x = {

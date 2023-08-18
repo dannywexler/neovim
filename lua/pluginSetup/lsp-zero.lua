@@ -107,6 +107,14 @@ lsp.configure('lua_ls', {
     }
 })
 
+lsp.configure("tsserver", {
+    settings = {
+        implicitProjectConfiguration = {
+            checkJs = true
+        }
+    }
+})
+
 lsp.nvim_workspace()
 lsp.setup()
 
