@@ -38,22 +38,11 @@ local diagnosticColors = {
     warn = myColors.orange.bright
 }
 
-local vi_mode_colors = {
-    ['V-REPLACE'] = myColors.orange.medium,
-    BLOCK = myColors.orange.medium,
-    COMMAND = myColors.orange.medium,
-    ENTER = myColors.orange.medium,
-    INSERT = myColors.green.medium,
-    LINES = myColors.purple.medium,
-    MORE = myColors.orange.medium,
-    NONE = myColors.orange.medium,
-    NORMAL = myColors.blue.bright,
-    OP = myColors.orange.medium,
-    REPLACE = myColors.orange.medium,
-    SELECT = myColors.orange.medium,
-    SHELL = myColors.orange.medium,
-    TERM = myColors.orange.medium,
-    VISUAL = myColors.purple.medium,
+local vim_mode_colors = {
+    n = myColors.green.medium,
+    i = myColors.blue.bright,
+    v = myColors.purple.medium,
+    V = myColors.purple.medium,
 }
 
 local fileTypeMap = {
@@ -91,9 +80,8 @@ local winbarHighlights = {
 local Highlights = {
     vi_mode = function()
         return {
-            name = require('feline.providers.vi_mode').get_mode_highlight_name(),
             fg = "#000000",
-            bg = require('feline.providers.vi_mode').get_mode_color(),
+            bg = vim_mode_colors[vim.fn.mode()] or myColors.orange.medium,
             style = 'bold'
         }
     end,
