@@ -152,5 +152,41 @@ local moreDiags = { {
     }
 } }
 
-local function hello(someParam)
-end
+
+local exampleOverlappingerrorMessage = { {
+    bufnr = 10,
+    code = 2305,
+    col = 9,
+    end_col = 36,
+    end_lnum = 61,
+    lnum = 61,
+    message =
+    "Module '\"../store/MeteogramInput/RightClickOnMapPoint\"' has no exported member 'launchedFromRightClickOnMap'.",
+    namespace = 24,
+    severity = 1,
+    source = "typescript",
+    user_data = {
+        lsp = {
+            code = 2305
+        }
+    }
+}, {
+    _tags = {
+        unnecessary = true
+    },
+    bufnr = 10,
+    code = 6133,
+    col = 0,
+    end_col = 89,
+    end_lnum = 61,
+    lnum = 61,
+    message = "'launchedFromRightClickOnMap' is declared but its value is never read.",
+    namespace = 24,
+    severity = 4,
+    source = "typescript",
+    user_data = {
+        lsp = {
+            code = 6133
+        }
+    }
+} }

@@ -1,6 +1,7 @@
-require'scrollview'.setup {
-    current_only = false,
+require 'scrollview'.setup {
     auto_mouse = false,
     column = 1,
-    winblend = 60,
+    current_only = false,
+    signs_on_startup = {},
+    winblend = 40,
 }

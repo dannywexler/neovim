@@ -7,4 +7,3 @@ WINDOWS = vim.fn.has('win32') == 1
 -- end
 
 require('lazyConfig')
-require('virtualerrors')

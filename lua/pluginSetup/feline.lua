@@ -39,8 +39,8 @@ local diagnosticColors = {
 }
 
 local vim_mode_colors = {
-    n = myColors.green.medium,
-    i = myColors.blue.bright,
+    i = myColors.green.medium,
+    n = myColors.blue.bright,
     v = myColors.purple.medium,
     V = myColors.purple.medium,
 }
@@ -303,7 +303,8 @@ local Comps = {
             provider = {
                 name = 'getDiagnostics',
                 opts = { level = severity },
-                update = { 'DiagnosticChanged' }
+                -- update = { 'DiagnosticChanged' }
+                update = { 'CursorHold' }
             },
             hl = {
                 fg = diagnosticColors[severity],

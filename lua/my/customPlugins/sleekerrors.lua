@@ -1,12 +1,21 @@
-local api = vim.api
-local virtErrorsGroup = api.nvim_create_augroup('virtErrors', { clear = true })
-local aucmd = api.nvim_create_autocmd
-local virtErrorsNamespace = api.nvim_create_namespace('virtErrors')
-local space = ' '
-local warningIcon = ' '
-local maxDiagnostics = 800
+local M                          = {}
+local api                        = vim.api
+local fileTypesToShowDiagnostics = {
+    'java',
+    'javascript',
+    'json',
+    'lua',
+    'rust',
+    'typescript',
+}
 
-local highlight_groups = {
+local newDiagnostics             = {}
+local virtErrorsNamespace        = api.nvim_create_namespace('virtErrors')
+local space                      = ' '
+
+local maxDiagnostics             = 800
+
+local highlight_groups           = {
     [vim.diagnostic.severity.ERROR] = "DiagnosticVirtualTextError",
     [vim.diagnostic.severity.WARN] = "DiagnosticVirtualTextWarn",
     [vim.diagnostic.severity.INFO] = "DiagnosticVirtualTextInfo",
@@ -29,7 +38,7 @@ local messagesToIgnore = {
     "Property 'OWF' does not exist",
     "implicitly has an 'any' type",
     "JSDOC types may be moved to TypeScript types",
-    "Unused functions"
+    -- "Unused functions"
 }
 
 local function shouldKeepDiagnostic(diagnostic)
@@ -43,10 +52,14 @@ local function shouldKeepDiagnostic(diagnostic)
     return true
 end
 
-local function getDiagnostics()
-    local allDiagnostics = vim.diagnostic.get(0, {
+local function getDiagnostics(bufnr)
+    local buf = bufnr or 0
+    api.nvim_buf_clear_namespace(buf, virtErrorsNamespace, 0, -1)
+    -- local startTime = vim.loop.hrtime()
+    local allDiagnostics = vim.diagnostic.get(buf, {
         -- severity = vim.diagnostic.severity.ERROR
     })
+    -- print("setting", #allDiagnostics, "diagnostics for", vim.fn.bufname(buf))
     if vim.tbl_isempty(allDiagnostics) or vim.tbl_count(allDiagnostics) > maxDiagnostics then return end
 
     local lineDiagnosticsMap = {}
@@ -104,20 +117,47 @@ local function getDiagnostics()
         end
 
         if nonEmpty(virtLines) and lineNumber < vim.fn.line('$') then
-            api.nvim_buf_set_extmark(0, virtErrorsNamespace, lineNumber, 0, {
+            -- print("adding", #allDiagnostics, "diagnostics for", vim.fn.expand("%:t"))
+            api.nvim_buf_set_extmark(buf, virtErrorsNamespace, lineNumber, 0, {
                 virt_lines = virtLines,
             })
         end
     end
+    -- local totalTime = tostring((vim.loop.hrtime() - startTime) / 1000000)
+    -- print(("    SHOWING %s diagnostics for %s took: %s ms"):format(
+    --     vim.tbl_count(allDiagnostics),
+    --     vim.fn.bufname(buf),
+    --     totalTime
+    -- ))
+    newDiagnostics[buf] = false
 end
 
-aucmd({ 'CursorHold', 'DiagnosticChanged' }, {
-    pattern = { '*.java', '*.js', '*.json', '*.lua', '*.rs', '*.ts', '*.tsx' },
-    group = virtErrorsGroup,
-    callback = function()
-        if vim.fn.mode() == 'n' then
-            api.nvim_buf_clear_namespace(0, virtErrorsNamespace, 0, -1)
-            getDiagnostics()
+local function isDiagnosticFile(event)
+    return vim.tbl_contains(fileTypesToShowDiagnostics, vim.bo[event.buf].filetype)
+end
+
+M.onCursorHold = function(event)
+    -- if not isDiagnosticFile(event) then return end
+    -- print("CursorHold", vim.fn.bufname(event.buf))
+    for buf, needsUpdate in pairs(newDiagnostics) do
+        if needsUpdate then
+            -- print("  ", vim.fn.bufname(buf), "NEEDS to update diagnostics")
+            getDiagnostics(buf)
+        else
+            -- print("  ", vim.fn.bufname(buf), "up to date diagnostics")
         end
     end
-})
+end
+
+M.onDiagnosticChanged = function(event)
+    -- if not isDiagnosticFile(event) then return end
+    local buf = event.buf
+    -- print("DiagnosticChanged", vim.fn.bufname(buf))
+    if newDiagnostics[buf] == nil then
+        getDiagnostics(buf)
+    else
+        newDiagnostics[buf] = true
+    end
+end
+
+return M
