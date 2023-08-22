@@ -71,7 +71,8 @@ local function getDiagnostics()
             local paddingWidth = diagnostic.col - endColOfLastPiece
             table.insert(firstLinePieces, {
                 space:rep(paddingWidth),
-                'CursorLine'
+                -- 'CursorLine'
+                'Normal'
             })
             local diagnosticWidth = math.max(1, diagnostic.end_col - diagnostic.col)
             table.insert(firstLinePieces, {
@@ -83,7 +84,8 @@ local function getDiagnostics()
         if nonEmpty(firstLinePieces) then
             table.insert(firstLinePieces, {
                 space:rep(vim.fn.winwidth(0) - endColOfLastPiece),
-                'CursorLine'
+                -- 'CursorLine'
+                'Normal'
             })
             table.insert(virtLines, firstLinePieces)
         end

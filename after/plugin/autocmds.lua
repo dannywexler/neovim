@@ -28,6 +28,7 @@ end
 aucmd({ 'BufLeave', 'CursorHold' }, {
     callback = function(event)
         local bufopt = vim.bo[event.buf]
+        if not bufopt.modifiable then return end
         if #bufopt.buftype > 0 then return end
         if not bufopt.modified then return end
         formatFile(event.buf, bufopt)
@@ -37,4 +38,12 @@ aucmd({ 'BufLeave', 'CursorHold' }, {
 
 aucmd('VimResized', {
     command = 'wincmd ='
+})
+
+aucmd({ "BufEnter", "BufWinEnter", "VimEnter", "WinEnter" }, {
+    command = "setlocal cursorline"
+})
+
+aucmd("WinLeave", {
+    command = "setlocal nocursorline"
 })

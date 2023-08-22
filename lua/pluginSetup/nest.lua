@@ -161,9 +161,11 @@ nest.applyKeymaps {
             { '>',        'V><Esc>' },
             { '<',        'V<<Esc>' },
             { '<Up>',     'gk' },
-            { '<S-Up>',   '<C-u>' },
+            -- { '<S-Up>',   '<C-u>' },
+            { '<S-Up>',   '<cmd>lua require "neoscroll".scroll(-vim.wo.scroll, true, 150, "circular")<cr>' },
             { '<Down>',   'gj' },
-            { '<S-Down>', '<C-d>' },
+            -- { '<S-Down>', '<C-d>' },
+            { '<S-Down>', '<cmd>lua require "neoscroll".scroll(vim.wo.scroll, true, 150, "circular")<cr>' },
             -- { '/', searchbox.incsearch },
 
             { '<A-', {
@@ -334,6 +336,39 @@ m is possible
 could swap h and l for w and b
 that would potentially free up w, be and e
 how often to we actually use e anyways?
+`@%#`
 
+could use home/end as direct ctrl d/ctrl u scrolling
 
+then would need some other way to switch between open buffers
+
+if want to have the bufferPick, that would need to be added somewhere to nav layer
+
+All buffer related actions:
+switching left/right
+moving left/right
+selecting by index
+selecting by first letter picker
+
+Possible to have them all be on num layer by putting
+    left/right on i(`), o(@)
+    pick by name on %#
+    pick by numbers (already there)
+    shift is already available on j key, right near iop
+
+This way all window-related movement is on nav layer
+and all buffer-related movement is on num layer
+
+however, it might not be ideal to have the buffer and window nav be on different layers
+often want to move a window, then select a new buffer right after
+
+could use alt for window related, and ctrl for buffer related
+
+however, would be nice to have ctrl + arrow keys available for something, like maybe ctrl up/down for moving lines up/down instead of ctrl j/k for moving lines up/down
+
+could consider moveing the window resizing commands that are currently on alt + uiop potentially onto {somePrefix} + up/down/left/right
+
+moving between windows and moving windows around are super common actions, much more frequent that window resizing. based on that, maybe should move the window moving and switching to ctrl + up/down/left/right, since ctrl (+shift?) is easier to hit than alt (+shift?)
+
+would be nice to figure out tab related movement, but way lower priority
 --]]

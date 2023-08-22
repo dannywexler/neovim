@@ -414,7 +414,6 @@ feline.setup {
         fg = myColors.white,
         bg = myColors.grey.dark,
     },
-    vi_mode_colors = vi_mode_colors
 }
 
 -- WINBAR CONFIG BELOW HERE:
