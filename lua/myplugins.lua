@@ -94,8 +94,9 @@ p('ufo', 'kevinhwang91/nvim-ufo')
 p('web-devicons', 'kyazdani42/nvim-web-devicons')
 p('winshift', 'sindrets/winshift.nvim')
 p('sqlite', 'kkharji/sqlite.lua')
-p('smart-open', 'danielfalk/smart-open.nvim')
+-- p('smart-open', 'danielfalk/smart-open.nvim')
 p('fzf-native', 'nvim-telescope/telescope-fzf-native.nvim', { build = 'make' })
+p('telescope-all-recent', 'prochri/telescope-all-recent.nvim', { priority = 4 })
 
 -- table.insert(plugins, {
 --     'https://gitlab.com/yorickpeterse/nvim-dd.git',

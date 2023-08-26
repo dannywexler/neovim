@@ -35,6 +35,10 @@ local custom_center_picker = {
 
 telescope.setup {
     defaults = {
+        cache_picker = {
+            num_pickers = -1,
+            limit_entries = 5000,
+        },
         entry_prefix = "  ",
         file_ignore_patterns = {
             -- ".git",
@@ -125,5 +129,5 @@ if WINDOWS then
     vim.g.sqlite_clib_path = "C:/bit9prog/dev/SQLite/sqlite3.dll"
 end
 -- telescope.load_extension('zf-native')
-telescope.load_extension('smart_open')
+-- telescope.load_extension('smart_open')
 telescope.load_extension('fzf')
