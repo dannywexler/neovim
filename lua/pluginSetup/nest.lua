@@ -80,6 +80,13 @@ end
 --     })
 -- end
 
+local function smartOpen()
+    require "telescope".extensions.smart_open.smart_open {
+        cwd_only = true,
+        filename_first = true,
+    }
+end
+
 nmap('<leader>r', ':%s@<c-r>=expand("<cword>")<cr>@@gc<Left><Left><Left>')
 
 nest.applyKeymaps {
@@ -135,6 +142,7 @@ nest.applyKeymaps {
                 { 'A', telescope.grep_string },
                 { 'a', telescope.live_grep },
                 { 'd', telescope.find_files },
+                -- { 'd', smartOpen },
                 { 'e', '<cmd>Lspsaga show_buf_diagnostics<CR>' },
                 { 'E', '<cmd>Lspsaga show_workspace_diagnostics<CR>' },
                 { 'f', telescope.lsp_document_symbols },

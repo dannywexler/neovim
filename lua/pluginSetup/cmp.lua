@@ -40,6 +40,7 @@ local kind_icons = {
 
 local minCols = 50
 local maxCols = 50
+local maxItems = 20
 cmp.setup {
     -- completion = {
     --     keyword_length = 3
@@ -148,8 +149,8 @@ cmp.setup {
     -- }
     sources = {
         { name = "luasnip" },
-        { name = "nvim_lsp", max_item_count = 30 },
-        { name = "nvim_lua", max_item_count = 30 },
+        { name = "nvim_lsp", max_item_count = maxItems },
+        { name = "nvim_lua", max_item_count = maxItems },
         { name = "path" },
         { name = "buffer",
             option = {
@@ -171,9 +172,9 @@ cmp.setup {
                 indexing_interval = 100,
                 -- indexing_batch_size = 200,
                 indexing_batch_size = 2000,
-                keyword_length = 5
+                keyword_length = 3
             },
-            keyword_length = 5,
+            keyword_length = 3,
             max_item_count = 20,
         },
     },
@@ -193,12 +194,12 @@ cmp.setup.cmdline(':', {
         {
             name = 'path',
             keyword_length = 1,
-            max_item_count = 30,
+            max_item_count = maxItems,
         }
     }, {
         {
             name = 'cmdline',
-            max_item_count = 30,
+            max_item_count = maxItems,
             keyword_length = 1,
             option = {
                 ignore_cmds = { 'Man', '!' }
