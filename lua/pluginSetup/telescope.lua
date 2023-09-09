@@ -44,6 +44,7 @@ telescope.setup {
             -- ".git",
             -- ".doc",
             "node_modules",
+            "/dist",
             "packer-compiled",
             ".pdf",
             ".sql",
@@ -113,8 +114,8 @@ telescope.setup {
             fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
             override_file_sorter = true,    -- override the file sorter
-            -- case_mode = "smart_case"
-            case_mode = "respect_case"
+            case_mode = "smart_case"
+            -- case_mode = "respect_case"
         },
         smart_open = {
             show_scores = false,

@@ -1,5 +1,6 @@
 local leap = require 'leap'
 local nest = require 'nest'
+local sleekerrors = require("my.customPlugins.sleekerrors")
 -- local searchbox = require 'searchbox'
 -- local tree = require 'tree-climber'
 -- local treeopts = {
@@ -142,7 +143,7 @@ nest.applyKeymaps {
                 { 'A', telescope.grep_string },
                 { 'a', telescope.live_grep },
                 -- { 'd', telescope.find_files },
-                { 'd', function () require'telescope.builtin'.find_files() end },
+                { 'd', function() require 'telescope.builtin'.find_files() end },
                 -- { 'd', smartOpen },
                 { 'e', '<cmd>Lspsaga show_buf_diagnostics<CR>' },
                 { 'E', '<cmd>Lspsaga show_workspace_diagnostics<CR>' },
@@ -258,7 +259,10 @@ nest.applyKeymaps {
                 { 'E', ':NvimTreeFindFile<CR>' },
                 { 'f', {
                     { 'e', 'za' },
-                    { 'f', lsp.format },
+                    { 'f', function()
+                        lsp.format()
+                        sleekerrors.newDiagnostics[vim.fn.bufnr()] = true
+                    end },
                     { 'r', 'zA' },
                 } },
                 { 'm', ':TSJToggle<CR>' },

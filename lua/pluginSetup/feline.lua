@@ -155,6 +155,10 @@ local CachedFuncs = cacheFuncs({
         return normalize(fn.fnamemodify(fn.getcwd(), ':~:h'))
     end,
     getCwd = function() return fn.fnamemodify(fn.getcwd(), ':t') end,
+})
+
+
+local Funcs = {
     getFileRelativePath = function()
         local relativePath = normalize(fn.expand('%:.:h'))
         if relativePath == '.' then return '' end
@@ -177,10 +181,6 @@ local CachedFuncs = cacheFuncs({
         timeTaken('original getWinbarFileName', startTime)
         return fileName
     end,
-})
-
-
-local Funcs = {
     lineAndCol          = function()
         local currentLine = vim.fn.line('.')
         local totalLines = vim.fn.line('$')

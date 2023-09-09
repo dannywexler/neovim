@@ -9,13 +9,15 @@ local fileTypesToShowDiagnostics = {
     'typescript',
 }
 
-local newDiagnostics             = {}
-local virtErrorsNamespace        = api.nvim_create_namespace('virtErrors')
-local space                      = ' '
 
-local maxDiagnostics             = 800
+M.newDiagnostics          = {}
+local virtErrorsNamespace = api.nvim_create_namespace('virtErrors')
+local space               = ' '
+local indent              = "   "
 
-local highlight_groups           = {
+local maxDiagnostics      = 800
+
+local highlight_groups    = {
     [vim.diagnostic.severity.ERROR] = "DiagnosticVirtualTextError",
     [vim.diagnostic.severity.WARN] = "DiagnosticVirtualTextWarn",
     [vim.diagnostic.severity.INFO] = "DiagnosticVirtualTextInfo",
@@ -52,15 +54,25 @@ local function shouldKeepDiagnostic(diagnostic)
     return true
 end
 
-local function getDiagnostics(bufnr)
+M.getDiagnostics = function(bufnr)
     local buf = bufnr or 0
+    local needsUpdate = M.newDiagnostics[buf]
+    if needsUpdate == nil then needsUpdate = true end
+    if not needsUpdate then
+        -- print(_G.fileName(buf), "is already up to date")
+        return
+    end
     api.nvim_buf_clear_namespace(buf, virtErrorsNamespace, 0, -1)
-    -- local startTime = vim.loop.hrtime()
+    M.newDiagnostics[buf] = false
+    local startTime = vim.loop.hrtime()
     local allDiagnostics = vim.diagnostic.get(buf, {
         -- severity = vim.diagnostic.severity.ERROR
     })
-    -- print("setting", #allDiagnostics, "diagnostics for", vim.fn.bufname(buf))
-    if vim.tbl_isempty(allDiagnostics) or vim.tbl_count(allDiagnostics) > maxDiagnostics then return end
+    -- print("recieved", #allDiagnostics, "diagnostics for", _G.fileName(buf))
+    if vim.tbl_isempty(allDiagnostics) or vim.tbl_count(allDiagnostics) > maxDiagnostics then
+        -- print(_G.fileName(buf), "doesn't have any diagnostics")
+        return
+    end
 
     local lineDiagnosticsMap = {}
 
@@ -118,18 +130,27 @@ local function getDiagnostics(bufnr)
 
         if nonEmpty(virtLines) and lineNumber < vim.fn.line('$') then
             -- print("adding", #allDiagnostics, "diagnostics for", vim.fn.expand("%:t"))
+            -- print(_G.fileName(buf), indent, "Added", #virtLines - 1, "msgs to line", lineNumber)
             api.nvim_buf_set_extmark(buf, virtErrorsNamespace, lineNumber, 0, {
                 virt_lines = virtLines,
             })
         end
     end
     -- local totalTime = tostring((vim.loop.hrtime() - startTime) / 1000000)
-    -- print(("    SHOWING %s diagnostics for %s took: %s ms"):format(
+    -- print(indent, ("SHOWING %s diagnostics for %s took: %s ms"):format(
     --     vim.tbl_count(allDiagnostics),
-    --     vim.fn.bufname(buf),
+    --     _G.fileName(buf),
     --     totalTime
     -- ))
-    newDiagnostics[buf] = false
+    -- print(_G.fileName(buf), "SHOWING", #allDiagnostics, "diagnostics took", totalTime, "ms")
+end
+
+M.getAllDiagnostics = function()
+    for _, buf in ipairs(_G.allBufs()) do
+        -- print("Getting diagnostics for buf", buf, ": ", _G.fileName(buf))
+        -- print(vim.inspect(M.newDiagnostics))
+        M.getDiagnostics(buf)
+    end
 end
 
 local function isDiagnosticFile(event)
@@ -138,13 +159,23 @@ end
 
 M.onCursorHold = function(event)
     -- if not isDiagnosticFile(event) then return end
-    -- print("CursorHold", vim.fn.bufname(event.buf))
-    for buf, needsUpdate in pairs(newDiagnostics) do
+    print("CursorHold", _G.fileName(event.buf))
+    -- print(vim.inspect(M.newDiagnostics))
+    -- local allBufs = vim.fn.getbufinfo({ bufloaded = 1 })
+    -- local loadedBufs = vim.tbl_filter(function(bufEntry)
+    --     if bufEntry.loaded == 1 and bufEntry.listed == 1 then
+    --         return true
+    --     end
+    --     return false
+    -- end, allBufs)
+
+    for buf, needsUpdate in pairs(M.newDiagnostics) do
+        -- if vim.tbl_contains(loadedBufs, buf) and needsUpdate then
         if needsUpdate then
-            -- print("  ", vim.fn.bufname(buf), "NEEDS to update diagnostics")
-            getDiagnostics(buf)
+            print("  ", _G.fileName(buf), "NEEDS to update diagnostics")
+            M.getDiagnostics(buf)
         else
-            -- print("  ", vim.fn.bufname(buf), "up to date diagnostics")
+            print("  ", _G.fileName(buf), "up to date diagnostics")
         end
     end
 end
@@ -152,12 +183,37 @@ end
 M.onDiagnosticChanged = function(event)
     -- if not isDiagnosticFile(event) then return end
     local buf = event.buf
-    -- print("DiagnosticChanged", vim.fn.bufname(buf))
-    if newDiagnostics[buf] == nil then
-        getDiagnostics(buf)
-    else
-        newDiagnostics[buf] = true
+    -- local diagnosticsCount = #event.data.diagnostics
+    -- local mode = vim.fn.mode()
+    -- print("DiagnosticChanged in", mode, "mode:", _G.fileName(buf), "now has", diagnosticsCount, "diagnostics")
+    M.newDiagnostics[buf] = true
+    -- if mode == "n" then
+    --     M.getDiagnostics(buf)
+    -- end
+    -- if M.newDiagnostics[buf] == nil or mode == "n" then
+    --     M.getDiagnostics(buf)
+    -- else
+    --     M.newDiagnostics[buf] = true
+    -- end
+    -- print(vim.inspect(M.newDiagnostics))
+end
+
+_G.allBufs = function()
+    local all = vim.fn.getbufinfo({ bufloaded = 1, buflisted = 1 })
+    local bufs = {}
+    for _, buf in ipairs(all) do
+        if #buf.windows > 0 then
+            table.insert(bufs, buf.bufnr)
+        end
     end
+    return bufs
+end
+
+_G.fileName = function(buf)
+    buf = buf or 0
+    local full = vim.fn.bufname(buf)
+    local cleaned = vim.fn.fnamemodify(full, ":t")
+    return cleaned
 end
 
 return M

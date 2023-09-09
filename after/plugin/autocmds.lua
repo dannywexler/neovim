@@ -13,7 +13,6 @@ end
 local filetypesToAutoFormat = { 'lua' }
 
 local function formatFile(buf, bufopt)
-    print("Formatting", vim.fn.bufname(buf))
     local ft = bufopt.ft
     if not vim.tbl_contains(filetypesToAutoFormat, ft) then return end
     local errorCount = vim.tbl_count(vim.diagnostic.get(buf, {
@@ -21,6 +20,8 @@ local function formatFile(buf, bufopt)
     }))
     if errorCount > 0 then return end
     vim.lsp.buf.format({ bufnr = buf })
+    -- print("Formated", _G.fileName(buf))
+    -- sleekerrors.newDiagnostics[buf] = true
 end
 
 local function saveFile(event)
@@ -28,8 +29,10 @@ local function saveFile(event)
     if not bufopt.modifiable then return end
     if #bufopt.buftype > 0 then return end
     if not bufopt.modified then return end
-    -- formatFile(event.buf, bufopt)
+    formatFile(event.buf, bufopt)
     vim.cmd('silent write')
+    -- sleekerrors.onCursorHold(event)
+    -- sleekerrors.getDiagnostics(event.buf)
 end
 
 aucmd("BufLeave", {
@@ -39,7 +42,8 @@ aucmd("BufLeave", {
 aucmd('CursorHold', {
     callback = function(event)
         saveFile(event)
-        sleekerrors.onCursorHold(event)
+        -- sleekerrors.onCursorHold(event)
+        sleekerrors.getAllDiagnostics()
     end
 })
 
