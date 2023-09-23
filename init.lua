@@ -1,9 +1,16 @@
--- print('hello from init')
-WINDOWS = vim.fn.has('win32') == 1
--- if WINDOWS then
-    -- print('on WINDOWS')
--- else
-    -- print('on Linux')
--- end
+local api = vim.api
+local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
 
-require('lazyConfig')
+U = {}
+
+U.LINUX = vim.fn.has("win32") == 0
+
+U.aucmd = function(event, opts)
+    local defaultOpts = { group = myGroup }
+    local mergedOpts = U.merge(defaultOpts, opts)
+    api.nvim_create_autocmd(event, mergedOpts)
+end
+
+U.merge = function(...)
+    return vim.tbl_extend("force", ...)
+end
