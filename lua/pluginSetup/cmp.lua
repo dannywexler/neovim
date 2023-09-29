@@ -69,19 +69,19 @@ cmp.setup {
         --     return vim_item
         -- end,
         format = lspkind.cmp_format({
-            mode = 'symbol_text', -- show only symbol annotations
-            maxwidth = maxCols, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+            mode = 'symbol_text',  -- show only symbol annotations
+            maxwidth = maxCols,    -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
             ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
             -- The function below will be called before any actual modifications from lspkind
             -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
             before = function(entry, vim_item)
                 vim_item.menu = ({
-                    luasnip =  '[Snippet]',
+                    luasnip = '[Snippet]',
                     nvim_lsp = '[LSP]    ',
                     nvim_lua = '[NVIM]   ',
-                    path =     '[Path]   ',
-                    buffer =   '[Buffer] ',
+                    path = '[Path]   ',
+                    buffer = '[Buffer] ',
                 })[entry.source.name]
                 -- print(vim.inspect(vim_item))
                 local word = vim_item.abbr
@@ -108,7 +108,7 @@ cmp.setup {
         --   c = cmp.mapping.close(),
         -- },
         ["<CR>"] = cmp.mapping.confirm { select = true },
-        ["<M-l>"] = cmp.mapping(function(fallback)
+        ["<C-l>"] = cmp.mapping(function(fallback)
             if luasnip.expandable() then
                 luasnip.expand()
             elseif luasnip.expand_or_jumpable() then
@@ -122,7 +122,7 @@ cmp.setup {
             "i",
             "s",
         }),
-        ["<M-h>"] = cmp.mapping(function(fallback)
+        ["<H-h>"] = cmp.mapping(function(fallback)
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
@@ -152,7 +152,8 @@ cmp.setup {
         { name = "nvim_lsp", max_item_count = maxItems },
         { name = "nvim_lua", max_item_count = maxItems },
         { name = "path" },
-        { name = "buffer",
+        {
+            name = "buffer",
             option = {
                 get_bufnrs = function()
                     -- local buf = vim.api.nvim_get_current_buf()

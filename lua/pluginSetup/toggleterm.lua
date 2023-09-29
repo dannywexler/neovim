@@ -46,7 +46,7 @@ require 'toggleterm'.setup {
             end
         end
     end,
-    open_mapping = [[<A-t>]],
+    open_mapping = [[<C-t>]],
     shell = WINDOWS and 'powershell' or 'zsh',
     size = vim.o.columns * 0.3,
     winbar = {

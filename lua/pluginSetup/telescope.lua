@@ -44,7 +44,7 @@ telescope.setup {
             -- ".git",
             -- ".doc",
             "node_modules",
-            "/dist",
+            "dist",
             "packer-compiled",
             ".pdf",
             ".sql",

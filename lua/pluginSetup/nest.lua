@@ -196,7 +196,6 @@ nest.applyKeymaps {
                 { 'E>',       '<cmd>BufferLineMovePrev<CR>' },
                 -- { 'f>', '<cmd>BufferPick<CR>' },
                 { 'f>',       '<cmd>BufferLinePick<CR>' },
-                { 'g>',       ':DiffviewOpen<CR>' },
                 { 'i>',       '2<C-w><' },
                 { 'j>',       '2<Down>/function<CR>:noh<CR><Down>^zt' },
                 { 'k>',       '2<Up>?function<CR>:noh<CR><Down>^zt' },
@@ -217,10 +216,7 @@ nest.applyKeymaps {
                 -- { 'q>', '<C-w>k' },
                 -- { 'Q>', '<cmd>WinShift up<CR>' },
                 -- { 't>', ':lua require("FTerm").toggle()<CR>' },
-                { 't>',       ':ToggleTerm<CR>' },
                 { 'u>',       '2<C-w>>' },
-                { 'v>',       ':vsp<CR>' },
-                { 'V>',       ':sp<CR>' },
                 -- { 'w>', '<C-w>k' },
                 -- { 'W>', '<cmd>WinShift up<CR>' },
                 { 'Up>',      '<C-w>k' },
@@ -248,8 +244,11 @@ nest.applyKeymaps {
             } },
 
             { '<C-', {
+                { 'b>', ':sp<CR>' },
+                { 'g>', ':DiffviewOpen<CR>' },
                 { 'j>', ':m .+1<CR>==' },
                 { 'k>', ':m .-2<CR>==' },
+                { 'v>', ':vsp<CR>' },
             } },
 
             { '<leader>', {
