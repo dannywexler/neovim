@@ -1,6 +1,9 @@
 local api = vim.api
+vim.g.mapleader = ' '
 local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
 
+---Prints any item
+---@param ... unknown
 P = function(...)
     local args = { ... }
     local res = {}
@@ -29,9 +32,40 @@ U.req = function(path)
     return success and module or nil
 end
 
+---Adds item to table only if item not already in table
+---@param tbl table
+---@param item any
+U.uadd = function(tbl, item)
+    if vim.tbl_contains(tbl, item) then return end
+    table.insert(tbl, item)
+end
+
+---Splits a string into its characters
+---@param inputString string
+---@return table
+U.stringChars = function(inputString)
+    local charsTable = {}
+    for c in inputString:gmatch('%a') do
+        table.insert(charsTable, c)
+    end
+    return charsTable
+end
+
 V = {}
 
+---Checks if item is a function
+---@param item any
+---@return boolean
+V.isFunction = function(item) return type(item) == 'function' end
+
+---Checks if item is a string
+---@param item any
+---@return boolean
 V.isString = function(item) return type(item) == "string" end
+
+---Checks if item is a table
+---@param item any
+---@return boolean
 V.isTable = function(item) return type(item) == "table" end
 
 require("d.lazy.bootstrap")
