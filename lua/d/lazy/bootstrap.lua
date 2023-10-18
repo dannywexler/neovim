@@ -20,7 +20,7 @@ require 'lazy'.setup(
             notify = true,
         },
         defaults = {
-            lazy = false
+            lazy = true
         },
         git = {
             timeout = nil

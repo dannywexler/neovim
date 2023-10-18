@@ -11,10 +11,10 @@ local modifiers = {
 ---@param lhsString string
 ---@param rhs string
 local function setKeymap(mode, lhsString, rhs)
-    P("SETTINGKEYMAP mode:", mode, "lhsString:", lhsString, "and rhs:", rhs)
+    --P("SETTINGKEYMAP mode:", mode, "lhsString:", lhsString, "and rhs:", rhs)
     -- P('=================================================================')
-    P('')
-    P('')
+    --P('')
+    --P('')
     vim.keymap.set(mode, lhsString, rhs, {
         silent = true
     })
@@ -25,20 +25,20 @@ end
 ---@param rhs string | function
 local function formatKeymap(lhsTable, rhs)
     local mode = table.remove(lhsTable, 1)
-    P("FORMATKEYMAP mode:", mode, "lhs:", lhsTable, "and rhs:", rhs)
+    --P("FORMATKEYMAP mode:", mode, "lhs:", lhsTable, "and rhs:", rhs)
     local lhsString = ''
     local modsTable = {}
     local index = 1
     local item = lhsTable[index]
     while index <= #lhsTable do
-        P('got item:', item)
+        --P('got item:', item)
         if item == 'ldr' or item == 'leader' then
             lhsString = '<leader>'
         elseif #item > 1 then
             local mod = modifiers[lhsTable[index]] or item
-            P('got mod:', mod)
+            --P('got mod:', mod)
             if mod:match('%u') then
-                P('mod is uppercase')
+                --P('mod is uppercase')
                 U.uadd(modsTable, 's')
             end
             table.insert(modsTable, mod)

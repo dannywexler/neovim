@@ -1,5 +1,16 @@
 U.aucmd({ "BufLeave", "CursorHold" }, {
-    command = "silent update"
+    callback = function(event)
+        local bufopt = vim.bo[event.buf]
+
+        if not bufopt.modifiable
+            or #bufopt.buftype > 0
+            or not bufopt.modified
+            or #vim.fn.bufname(event.buf) == 0
+        then
+            return
+        end
+        vim.cmd('silent write')
+    end
 })
 
 U.aucmd('VimResized', {

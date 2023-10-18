@@ -29,7 +29,8 @@ end
 
 U.req = function(path)
     local success, module = pcall(require, path)
-    return success and module or nil
+    if success then return module end
+    print('ERROR: Could not load module:', path)
 end
 
 ---Adds item to table only if item not already in table
