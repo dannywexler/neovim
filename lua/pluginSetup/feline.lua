@@ -164,11 +164,11 @@ local Funcs = {
         if relativePath == '.' then return '' end
         return relativePath
     end,
-    getFileName = function()
+    getFileName         = function()
         -- print("getting filename for buf:", fn.bufnr())
         return fileTypeMap[vim.bo.filetype] or fn.expand('%:t')
     end,
-    getWinbarFileName = function()
+    getWinbarFileName   = function()
         local startTime = getTime()
         -- print('getting winbar filename for buf ' .. fn.bufnr() .. ' ' .. os.date('%S'))
         local fileName = fn.expand('%:t')
@@ -206,9 +206,8 @@ local Funcs = {
         return (' %s %s'):format(count, diagnosticIcons[level])
     end,
     getFileIcon         = function()
-        local icon = getIcon()
-        -- return (icon or '') .. ' '
-        return (icon or '')
+        local icon = getIcon() or ''
+        return icon .. ' '
     end,
     getFileIconColor    = function()
         local _, color = getIcon()

@@ -90,6 +90,11 @@ end
 
 nmap('<leader>r', ':%s@<c-r>=expand("<cword>")<cr>@@gc<Left><Left><Left>')
 
+local scroll = {
+    up = '<cmd>lua require "neoscroll".scroll(-vim.wo.scroll, true, 150, "circular")<cr>',
+    down = '<cmd>lua require "neoscroll".scroll(vim.wo.scroll, true, 150, "circular")<cr>'
+}
+
 nest.applyKeymaps {
     {
         mode = 'n',
@@ -114,6 +119,7 @@ nest.applyKeymaps {
                 { 'r', telescope.lsp_references },
                 { 's', lsp.signature_help },
             } },
+            { 'h', scroll.up },
             -- { 'H', function () tree.goto_parent(treeopts) end},
             { 'H', '<Plug>(IndentWisePreviousLesserIndent)',    options = { noremap = false } },
             { 'j', function() leap.leap {} end },
@@ -125,6 +131,7 @@ nest.applyKeymaps {
             -- { 'K', function () tree.goto_prev(treeopts) end},
             { 'K', '<Plug>(IndentWisePreviousEqualIndent)',     options = { noremap = false } },
             -- { 'L', function () tree.goto_child(treeopts) end},
+            { 'l', scroll.down },
             { 'L', '<Plug>(IndentWiseNextGreaterIndent)',       options = { noremap = false } },
             { 'q', {
                 { 'e', ':tabclose<CR>' },
@@ -172,10 +179,10 @@ nest.applyKeymaps {
             { '<',        'V<<Esc>' },
             { '<Up>',     'gk' },
             -- { '<S-Up>',   '<C-u>' },
-            { '<S-Up>',   '<cmd>lua require "neoscroll".scroll(-vim.wo.scroll, true, 150, "circular")<cr>' },
+            { '<S-Up>',   scroll.up },
             { '<Down>',   'gj' },
             -- { '<S-Down>', '<C-d>' },
-            { '<S-Down>', '<cmd>lua require "neoscroll".scroll(vim.wo.scroll, true, 150, "circular")<cr>' },
+            { '<S-Down>', scroll.down },
             -- { '/', searchbox.incsearch },
 
             { '<A-', {
@@ -196,9 +203,17 @@ nest.applyKeymaps {
                 { 'E>',       '<cmd>BufferLineMovePrev<CR>' },
                 -- { 'f>', '<cmd>BufferPick<CR>' },
                 { 'f>',       '<cmd>BufferLinePick<CR>' },
+                { 'h>',       '<C-w>h' },
+                { 'H>',       '<cmd>WinShift left<CR>' },
                 { 'i>',       '2<C-w><' },
-                { 'j>',       '2<Down>/function<CR>:noh<CR><Down>^zt' },
-                { 'k>',       '2<Up>?function<CR>:noh<CR><Down>^zt' },
+                -- { 'j>',       '2<Down>/function<CR>:noh<CR><Down>^zt' },
+                { 'j>',       '<C-w>j' },
+                { 'J>',       '<cmd>WinShift down<CR>' },
+                -- { 'k>',       '2<Up>?function<CR>:noh<CR><Down>^zt' },
+                { 'k>',       '<C-w>k' },
+                { 'K>',       '<cmd>WinShift up<CR>' },
+                { 'l>',       '<C-w>l' },
+                { 'L>',       '<cmd>WinShift right<CR>' },
                 { 'm>',       ':tabprevious<CR>' },
                 { 'M>',       ':-tabmove<CR>' },
                 { 'n>',       ':tabnext<CR>' },
@@ -283,9 +298,10 @@ nest.applyKeymaps {
             { '<C-', {
                 -- { 'i>', '<Backspace><Backspace><Backspace><Backspace><Backspace>' },
                 -- { 'o>', '&emsp;' },
-                { 'j>', '<Esc>:m .+1<CR>==gi' },
-                { 'k>', '<Esc>:m .-2<CR>==gi' },
-                { 'v>', '<Esc>p' },
+                { 'j>',     '<Esc>:m .+1<CR>==gi' },
+                { 'k>',     '<Esc>:m .-2<CR>==gi' },
+                { 'v>',     '<Esc>p' },
+                { 'Enter>', '<Esc>o' },
             } }
         }
     },
