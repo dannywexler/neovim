@@ -1,6 +1,7 @@
 local api = vim.api
 vim.g.mapleader = ' '
 local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
+print('hello from init.lua')
 
 ---Prints any item
 ---@param ... unknown
@@ -24,7 +25,14 @@ U.aucmd = function(event, opts)
 end
 
 U.merge = function(...)
-    return vim.tbl_extend("force", ...)
+    local args = { ... }
+    local res = {}
+    for _, item in ipairs(args) do
+        if V.isTable(item) then
+            res = vim.tbl_extend('force', res, item)
+        end
+    end
+    return res
 end
 
 U.req = function(path)
