@@ -37,6 +37,7 @@ return {
         'williamboman/mason-lspconfig.nvim',
         'folke/neodev.nvim',
         'folke/neoconf.nvim',
+        'hrsh7th/cmp-nvim-lsp',
     },
     ft = vim.tbl_keys(languages),
     config = function()
@@ -58,7 +59,9 @@ return {
         }
         require 'mason'.setup()
 
-        local default_lsp_settings = { capabilities = vim.lsp.protocol.make_client_capabilities() }
+        local capabilities                = vim.lsp.protocol.make_client_capabilities()
+        capabilities                      = require('cmp_nvim_lsp').default_capabilities(capabilities)
+        local default_lsp_settings        = { capabilities = capabilities }
         local all_language_server_configs = {}
 
         for language, config in vim.spairs(languages) do
