@@ -1,3 +1,14 @@
+local lsp_icons = require('d.icons').lsp
+local source_map = {
+    buffer = "BUF",
+    luasnip = "SNP",
+    nvim_lsp = "LSP",
+    path = "PAT",
+}
+local minCols = 50
+local maxCols = 50
+local maxRows = 10
+local maxItems = 20
 return {
     dependencies = {
         'hrsh7th/cmp-buffer',
@@ -10,6 +21,16 @@ return {
     config = function()
         local cmp = require 'cmp'
         cmp.setup {
+            formatting = {
+                format = function(entry, vim_item)
+                    vim_item.abbr = ('%-' .. minCols .. 's'):format(vim_item.abbr)
+                    -- Kind icons
+                    vim_item.kind = lsp_icons[vim_item.kind] .. vim_item.kind
+                    -- Source
+                    vim_item.menu = source_map[entry.source.name]
+                    return vim_item
+                end,
+            },
             mapping = cmp.mapping.preset.insert({
                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-d>'] = cmp.mapping.scroll_docs(4),
@@ -19,21 +40,34 @@ return {
                     select = true,
                 },
             }),
+            performance = {
+                max_view_entries = maxRows
+            },
             snippet = {
                 expand = function(args)
                     require 'luasnip'.lsp_expand(args.body)
                 end,
             },
             sources = {
-                { name = 'nvim_lsp' },
                 { name = 'luasnip' },
+                {
+                    name = 'nvim_lsp',
+                    -- max_item_count = 20,
+                },
+                { name = 'buffer' },
+                { name = 'path' },
             },
             window = {
                 completion = {
                     border = 'rounded',
-                    col_offset = -1
+                    col_offset = -1,
+                    scrollbar = true,
                 },
-                documentation = cmp.config.window.bordered(),
+                documentation = {
+                    border = 'rounded',
+                    max_width = maxCols,
+                    max_height = maxRows,
+                }
             },
         }
     end
