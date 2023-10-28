@@ -1,6 +1,5 @@
 local sleekerrors = require("my.customPlugins.sleekerrors")
 
-
 local api = vim.api
 local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
 local aucmd = function(event, opts)
@@ -31,25 +30,43 @@ local function saveFile(event)
     if not bufopt.modified then return end
     formatFile(event.buf, bufopt)
     vim.cmd('silent write')
+    -- sleekerrors.getAllDiagnostics()
     -- sleekerrors.onCursorHold(event)
     -- sleekerrors.getDiagnostics(event.buf)
+end
+
+local function allVisibleLines()
+    local allWindows = vim.tbl_filter(function(item)
+        return item.width > 1 and
+            vim.api.nvim_buf_is_loaded(item.bufnr)
+    end, vim.fn.getwininfo())
+    local condensed = vim.tbl_map(function(item)
+        return {
+            bufnr = item.bufnr,
+            botline = item.botline,
+            topline = item.topline,
+        }
+    end, allWindows)
+    print('condensed info:', vim.inspect(condensed))
 end
 
 aucmd("BufLeave", {
     callback = saveFile
 })
 
+
 aucmd('CursorHold', {
     callback = function(event)
         saveFile(event)
         -- sleekerrors.onCursorHold(event)
         sleekerrors.getAllDiagnostics()
+        -- allVisibleLines()
     end
 })
 
-aucmd("DiagnosticChanged", {
-    callback = sleekerrors.onDiagnosticChanged
-})
+-- aucmd("DiagnosticChanged", {
+--     callback = sleekerrors.onDiagnosticChanged
+-- })
 
 -- aucmd('LspAttach', {
 --     callback = function(event)

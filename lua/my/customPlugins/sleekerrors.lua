@@ -56,14 +56,14 @@ end
 
 M.getDiagnostics = function(bufnr)
     local buf = bufnr or 0
-    local needsUpdate = M.newDiagnostics[buf]
-    if needsUpdate == nil then needsUpdate = true end
-    if not needsUpdate then
-        -- print(_G.fileName(buf), "is already up to date")
-        return
-    end
+    -- local needsUpdate = M.newDiagnostics[buf]
+    -- if needsUpdate == nil then needsUpdate = true end
+    -- if not needsUpdate then
+    --     -- print(_G.fileName(buf), "is already up to date")
+    --     return
+    -- end
     api.nvim_buf_clear_namespace(buf, virtErrorsNamespace, 0, -1)
-    M.newDiagnostics[buf] = false
+    -- M.newDiagnostics[buf] = false
     local startTime = vim.loop.hrtime()
     local allDiagnostics = vim.diagnostic.get(buf, {
         -- severity = vim.diagnostic.severity.ERROR
@@ -128,7 +128,7 @@ M.getDiagnostics = function(bufnr)
             })
         end
 
-        if nonEmpty(virtLines) and lineNumber < vim.fn.line('$') then
+        if nonEmpty(virtLines) then
             -- print("adding", #allDiagnostics, "diagnostics for", vim.fn.expand("%:t"))
             -- print(_G.fileName(buf), indent, "Added", #virtLines - 1, "msgs to line", lineNumber)
             api.nvim_buf_set_extmark(buf, virtErrorsNamespace, lineNumber, 0, {
