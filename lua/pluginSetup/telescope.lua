@@ -7,6 +7,30 @@ local preferredWidth = 180
 
 local custom_width = math.min(fullWindowWidth - 4, preferredWidth)
 
+local pathCache = {}
+
+local function pathFormatter(_, path)
+    local formattedPath = pathCache[path]
+    if formattedPath then
+        -- print('Cached path:', path, 'as', formattedPath)
+        return formattedPath
+    end
+    local file = require("telescope.utils").path_tail(path)
+    if file == path then
+        formattedPath = ' ' .. file
+    else
+        local endIndex = #file * -1
+        endIndex = endIndex - 2
+        local parentPath = path:sub(0, endIndex)
+        local remainder = custom_width - #file - #parentPath - 10
+        parentPath = (" "):rep(remainder) .. parentPath
+        formattedPath = string.format(" %s %s", file, parentPath)
+    end
+    pathCache[path] = formattedPath
+    -- print('Formatted path:', path, 'as', formattedPath)
+    return formattedPath
+end
+
 local custom_center_picker = {
     borderchars = {
         { '─', '│', '─', '│', '╭', '╮', '┘', '└' },
@@ -15,19 +39,7 @@ local custom_center_picker = {
         preview = { '─', '│', '─', '│', '┌', '┐', "╯", "╰" },
     },
     layout_strategy = 'center',
-    path_display = function(opts, path)
-        local file = require("telescope.utils").path_tail(path)
-        if file == path then
-            return ' ' .. file
-        else
-            local endIndex = #file * -1
-            endIndex = endIndex - 2
-            local parentPath = path:sub(0, endIndex)
-            local remainder = custom_width - #file - #parentPath - 10
-            parentPath = (" "):rep(remainder) .. parentPath
-            return string.format(" %s %s", file, parentPath)
-        end
-    end,
+    path_display = pathFormatter,
     previewer = false,
     prompt_title = false,
     results_title = false,
@@ -77,7 +89,7 @@ telescope.setup {
             }
         },
         path_display = function(opts, path)
-            print(path, " -> recieved opts", opts)
+            print(path, " -> recieved opts", vim.inspect(opts))
             return path
         end,
         prompt_prefix = "    ",
@@ -101,6 +113,8 @@ telescope.setup {
         },
         lsp_document_symbols = {
             show_line = true,
+            symbol_width = 40,
+            symbol_type_width = 12,
             -- symbols = 'function'
         },
         lsp_references = {
