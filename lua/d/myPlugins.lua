@@ -1,6 +1,7 @@
 ---@type { [string]: LazySpec }
 return {
     cmp             = 'hrsh7th/nvim-cmp',
+    fidget          = 'j-hui/fidget.nvim',
     lspconfig       = 'neovim/nvim-lspconfig',
     onedark         = 'navarasu/onedark.nvim',
     session_manager = 'Shatur/neovim-session-manager',
