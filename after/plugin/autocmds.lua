@@ -10,6 +10,7 @@ U.aucmd({ "BufLeave", "CursorHold" }, {
             return
         end
         vim.cmd('silent write')
+        require('customPlugins.sleekerrors.sleekerrors_core').render_all_diagnostics()
     end
 })
 
