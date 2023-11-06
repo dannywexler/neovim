@@ -1,5 +1,6 @@
 ---@type { [string]: LazySpec }
 return {
+    better_escape   = 'max397574/better-escape.nvim',
     cmp             = 'hrsh7th/nvim-cmp',
     fidget          = 'j-hui/fidget.nvim',
     lspconfig       = 'neovim/nvim-lspconfig',

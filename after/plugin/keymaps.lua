@@ -2,6 +2,9 @@ local sleekeymap = require("customPlugins.sleekeymap")
 local kmset = sleekeymap.set
 local c = sleekeymap.cmd
 
+local vlsp = vim.lsp.buf
+local diag = vim.diagnostic
+
 local tele = setmetatable({}, {
     __index = function(_, name)
         return function()
@@ -11,6 +14,16 @@ local tele = setmetatable({}, {
 })
 
 local a = {
+    lsp = {
+        diagnostics = {
+            next = function()
+                diag.goto_next({ float = true })
+            end,
+            prev = function()
+                diag.goto_prev({ float = true })
+            end
+        }
+    },
     window = {
         select = {
             down = c 'wincmd j',
@@ -33,7 +46,12 @@ local a = {
 
 kmset {
     n = {
+        g = {
+            e = a.lsp.diagnostics.prev,
+            f = a.lsp.diagnostics.next,
+        },
         q = {
+            f = c 'bp | bd #',
             q = c 'qa!',
             r = c 'cq2',
             w = 'ZZ',

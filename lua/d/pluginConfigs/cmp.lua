@@ -13,6 +13,7 @@ return {
     dependencies = {
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-cmdline',
         'hrsh7th/cmp-path',
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
@@ -70,5 +71,32 @@ return {
                 }
             },
         }
+
+        cmp.setup.cmdline('/', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = 'buffer' }
+            }
+        })
+
+        cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                {
+                    name = 'path',
+                    -- keyword_length = 1,
+                    -- max_item_count = maxItems,
+                }
+            }, {
+                {
+                    name = 'cmdline',
+                    max_item_count = maxItems,
+                    -- keyword_length = 1,
+                    option = {
+                        ignore_cmds = { 'Man', '!' }
+                    }
+                }
+            })
+        })
     end
 }
