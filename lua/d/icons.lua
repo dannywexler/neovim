@@ -1,4 +1,17 @@
 return {
+    current = function()
+        local filename  = vim.fn.expand('%:t')
+        local extension = vim.fn.expand('%:e')
+        print('getting current icon for', filename)
+        local icon, color = require 'nvim-web-devicons'.get_icon_color(filename, extension)
+        icon = (icon or '') .. ' '
+        return icon, color
+    end,
+    bonus = {
+        left_half_dome = '',
+        right_half_dome = ''
+    },
+
     diagnostics = {
         error = " ",
         warn = " ",

@@ -2,6 +2,7 @@
 return {
     better_escape   = 'max397574/better-escape.nvim',
     cmp             = 'hrsh7th/nvim-cmp',
+    feline          = 'freddiehaddad/feline.nvim',
     fidget          = 'j-hui/fidget.nvim',
     lspconfig       = 'neovim/nvim-lspconfig',
     onedark         = 'navarasu/onedark.nvim',
