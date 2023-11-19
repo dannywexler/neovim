@@ -13,6 +13,8 @@ local tele = setmetatable({}, {
     end
 })
 
+local resize_amount = 4
+
 local a = {
     lsp = {
         diagnostics = {
@@ -25,6 +27,13 @@ local a = {
         }
     },
     window = {
+        resize = {
+            equalize = c 'wincmd =',
+            narrower = c(resize_amount .. 'wincmd <'),
+            shorter = c(resize_amount .. 'wincmd -'),
+            taller = c(resize_amount .. 'wincmd +'),
+            wider = c(resize_amount .. 'wincmd >'),
+        },
         select = {
             down = c 'wincmd j',
             left = c 'wincmd h',
@@ -62,18 +71,25 @@ kmset {
         alt = {
             h = a.window.select.left,
             H = a.window.shift.left,
+            i = a.window.resize.narrower,
             j = a.window.select.down,
             J = a.window.shift.down,
             k = a.window.select.up,
             K = a.window.shift.up,
             l = a.window.select.right,
             L = a.window.shift.right,
+            o = a.window.resize.taller,
+            p = a.window.resize.shorter,
+            u = a.window.resize.wider,
+            y = a.window.resize.equalize,
         },
         ctrl = {
             v = a.window.split.vertically,
             b = a.window.split.horizontally,
         },
         leader = {
+            e = c 'Neotree toggle',
+            E = c 'Neotree toggle reveal',
             r = [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]
         }
     }
