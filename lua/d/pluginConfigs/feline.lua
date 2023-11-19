@@ -110,10 +110,12 @@ return {
                 return fileName
             end,
             lineAndCol          = function()
+                local bars = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
                 local currentLine = vim.fn.line('.')
                 local totalLines = vim.fn.line('$')
                 local currentCol = vim.fn.col('.')
-                return (' %3s/%s | %3s '):format(currentLine, totalLines, currentCol)
+                local bar = bars[math.floor((currentLine - 1) / totalLines * #bars) + 1]
+                return ('%s%s %3s/%s | %3s '):format(bar, bar, currentLine, totalLines, currentCol)
                 -- return (' C: %3s  L: %3s/%s '):format(currentCol, currentLine, totalLines)
             end,
             -- getBuildStatus      = function()
