@@ -52,18 +52,27 @@ local fileTypeMap = {
     toggleterm = ' TERMINAL  ',
 }
 
+-- local spinners = {
+--     '•     ',
+--     '••    ',
+--     '•••   ',
+--     ' •••  ',
+--     '  ••• ',
+--     '   •••',
+--     '    ••',
+--     '     •',
+--     '      ',
+-- }
 local spinners = {
-    '•     ',
-    '••    ',
-    '•••   ',
-    ' •••  ',
-    '  ••• ',
-    '   •••',
-    '    ••',
-    '     •',
-    '      ',
+    '       ',
+    '      ',
+    '     ',
+    '     ',
+    '     ',
+    '      ',
+    '       ',
+    '        ',
 }
-
 local winbarHighlights = {
     active = {
         fg = myColors.black,
