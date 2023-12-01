@@ -175,8 +175,8 @@ nest.applyKeymaps {
             } },
 
             { '<Space>',  '<NOP>' },
-            { '>',        'V><Esc>' },
-            { '<',        'V<<Esc>' },
+            -- { '>',        'V><Esc>' },
+            -- { '<',        'V<<Esc>' },
             { '<Up>',     'gk' },
             -- { '<S-Up>',   '<C-u>' },
             { '<S-Up>',   scroll.up },
@@ -261,8 +261,10 @@ nest.applyKeymaps {
             { '<C-', {
                 { 'b>', ':sp<CR>' },
                 { 'g>', ':DiffviewOpen<CR>' },
+                { 'h>', 'V<<Esc>' },
                 { 'j>', ':m .+1<CR>==' },
                 { 'k>', ':m .-2<CR>==' },
+                { 'l>', 'V><Esc>' },
                 { 'v>', ':vsp<CR>' },
             } },
 
@@ -316,16 +318,18 @@ nest.applyKeymaps {
             { 'K',      '12<Up>' },
 
             { '<Space', '<Nop>' },
-            { '>',      '>gv' },
-            { '<',      '<gv' },
+            -- { '>',      '>gv' },
+            -- { '<',      '<gv' },
 
             -- { '<A-', {
             --     { 'c>', 'gc^', options = { noremap = false } },
             -- } },
             { 'm',      'gc^',                             options = { noremap = false } },
             { '<C-', {
+                { 'h>', '<gv' },
                 { 'j>', ":m '>+1<CR>gv=gv" },
                 { 'k>', ":m '<-2<CR>gv=gv" },
+                { 'l>', '>gv' },
             } }
         }
     },
