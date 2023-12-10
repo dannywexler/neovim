@@ -107,7 +107,15 @@ cmp.setup {
         --   i = cmp.mapping.abort(),
         --   c = cmp.mapping.close(),
         -- },
-        ["<CR>"] = cmp.mapping.confirm { select = true },
+        -- ["<CR>"] = cmp.mapping.confirm { select = true },
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                -- cmp.mapping.confirm { select = true }
+                cmp.confirm { select = true }
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
         ["<C-l>"] = cmp.mapping(function(fallback)
             if luasnip.expandable() then
                 luasnip.expand()
@@ -122,7 +130,7 @@ cmp.setup {
             "i",
             "s",
         }),
-        ["<H-h>"] = cmp.mapping(function(fallback)
+        ["<C-h>"] = cmp.mapping(function(fallback)
             if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
