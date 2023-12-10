@@ -28,7 +28,7 @@ o.linebreak = true
 o.mouse = 'a'
 o.more = false --When on, listings pause when the whole screen is filled.  You will get the |more-prompt|.  When this option is off there are no pauses, the listing continues until finished.
 -- o.number = false
--- o.pumheight = 15
+o.pumheight = 10
 o.scrolloff = 8
 -- -- o.sessionoptions:append('globals', 'tabpages')
 o.shiftround = true
