@@ -25,9 +25,14 @@ end
 
 local function saveFile(event)
     local bufopt = vim.bo[event.buf]
-    if not bufopt.modifiable then return end
-    if #bufopt.buftype > 0 then return end
-    if not bufopt.modified then return end
+
+    if not bufopt.modifiable
+        or not bufopt.modified
+        or #bufopt.buftype > 0
+        or #vim.fn.bufname(event.buf) == 0
+    then
+        return
+    end
     formatFile(event.buf, bufopt)
     vim.cmd('silent write')
     -- sleekerrors.getAllDiagnostics()

@@ -97,6 +97,13 @@ local niceColors = {
         '#4b78e6',
         '#61afef',
         '#7aa2f7',
+        '#0058d0',
+    },
+    grey = {
+        '#1d1d1d',
+        '#5c5c5c',
+        '#252526',
+        '#333333'
     },
     green = {
         '#00fa9a',
@@ -139,6 +146,8 @@ local niceColors = {
         '#2ac3de',
         '#3ac6be',
         '#77d3d1',
+        '#00e6c4',
+        '#086156',
     },
     yellow = {
         '#eef06d',
