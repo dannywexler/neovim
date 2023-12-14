@@ -1,72 +1,76 @@
 local sleekerrors = require("my.customPlugins.sleekerrors")
 
 local api = vim.api
-local myGroup = api.nvim_create_augroup('MyGroup', { clear = true })
+local myGroup = api.nvim_create_augroup("MyGroup", { clear = true })
 local aucmd = function(event, opts)
-    local defaultOpts = { group = myGroup }
-    local mergedOpts = vim.tbl_extend('force', defaultOpts, opts)
+	local defaultOpts = { group = myGroup }
+	local mergedOpts = vim.tbl_extend("force", defaultOpts, opts)
 
-    api.nvim_create_autocmd(event, mergedOpts)
+	api.nvim_create_autocmd(event, mergedOpts)
 end
 
-local filetypesToAutoFormat = { 'lua' }
+local filetypesToAutoFormat = { "lua" }
 
 local function formatFile(buf, bufopt)
-    local ft = bufopt.ft
-    if not vim.tbl_contains(filetypesToAutoFormat, ft) then return end
-    local errorCount = vim.tbl_count(vim.diagnostic.get(buf, {
-        severity = vim.diagnostic.severity.ERROR
-    }))
-    if errorCount > 0 then return end
-    vim.lsp.buf.format({ bufnr = buf })
-    -- print("Formated", _G.fileName(buf))
-    -- sleekerrors.newDiagnostics[buf] = true
+	local ft = bufopt.ft
+	if not vim.tbl_contains(filetypesToAutoFormat, ft) then
+		return
+	end
+	local errorCount = vim.tbl_count(vim.diagnostic.get(buf, {
+		severity = vim.diagnostic.severity.ERROR,
+	}))
+	if errorCount > 0 then
+		return
+	end
+	-- vim.lsp.buf.format({ bufnr = buf })
+	require("conform").format({ async = false, lsp_fallback = true })
+	-- print("Formatted", _G.fileName(buf))
+	-- sleekerrors.newDiagnostics[buf] = true
 end
 
 local function saveFile(event)
-    local bufopt = vim.bo[event.buf]
+	local bufopt = vim.bo[event.buf]
 
-    if not bufopt.modifiable
-        or not bufopt.modified
-        or #bufopt.buftype > 0
-        or #vim.fn.bufname(event.buf) == 0
-    then
-        return
-    end
-    formatFile(event.buf, bufopt)
-    vim.cmd('silent write')
-    -- sleekerrors.getAllDiagnostics()
-    -- sleekerrors.onCursorHold(event)
-    -- sleekerrors.getDiagnostics(event.buf)
+	if
+		not bufopt.modifiable
+		or not bufopt.modified
+		or #bufopt.buftype > 0
+		or #vim.fn.bufname(event.buf) == 0
+	then
+		return
+	end
+	formatFile(event.buf, bufopt)
+	vim.cmd("silent write")
+	-- sleekerrors.getAllDiagnostics()
+	-- sleekerrors.onCursorHold(event)
+	-- sleekerrors.getDiagnostics(event.buf)
 end
 
 local function allVisibleLines()
-    local allWindows = vim.tbl_filter(function(item)
-        return item.width > 1 and
-            vim.api.nvim_buf_is_loaded(item.bufnr)
-    end, vim.fn.getwininfo())
-    local condensed = vim.tbl_map(function(item)
-        return {
-            bufnr = item.bufnr,
-            botline = item.botline,
-            topline = item.topline,
-        }
-    end, allWindows)
-    print('condensed info:', vim.inspect(condensed))
+	local allWindows = vim.tbl_filter(function(item)
+		return item.width > 1 and vim.api.nvim_buf_is_loaded(item.bufnr)
+	end, vim.fn.getwininfo())
+	local condensed = vim.tbl_map(function(item)
+		return {
+			bufnr = item.bufnr,
+			botline = item.botline,
+			topline = item.topline,
+		}
+	end, allWindows)
+	print("condensed info:", vim.inspect(condensed))
 end
 
 aucmd("BufLeave", {
-    callback = saveFile
+	callback = saveFile,
 })
 
-
-aucmd('CursorHold', {
-    callback = function(event)
-        saveFile(event)
-        -- sleekerrors.onCursorHold(event)
-        sleekerrors.getAllDiagnostics()
-        -- allVisibleLines()
-    end
+aucmd("CursorHold", {
+	callback = function(event)
+		saveFile(event)
+		-- sleekerrors.onCursorHold(event)
+		sleekerrors.getAllDiagnostics()
+		-- allVisibleLines()
+	end,
 })
 
 -- aucmd("DiagnosticChanged", {
@@ -81,12 +85,12 @@ aucmd('CursorHold', {
 --     end
 -- })
 
-aucmd('VimResized', {
-    command = 'wincmd ='
+aucmd("VimResized", {
+	command = "wincmd =",
 })
 
 aucmd({ "BufEnter", "BufWinEnter", "VimEnter", "WinEnter" }, {
-    command = "setlocal cursorline"
+	command = "setlocal cursorline",
 })
 
 -- aucmd('User', {
@@ -106,5 +110,5 @@ aucmd({ "BufEnter", "BufWinEnter", "VimEnter", "WinEnter" }, {
 -- })
 
 aucmd("WinLeave", {
-    command = "setlocal nocursorline"
+	command = "setlocal nocursorline",
 })
