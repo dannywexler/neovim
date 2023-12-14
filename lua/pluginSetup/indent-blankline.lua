@@ -1,17 +1,12 @@
-local bar = '▏'
+local hooks = require("ibl.hooks")
+
+hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
+
+local bar = "▏"
 -- local bar = '▎'
-require'indent_blankline'.setup {
-    char = bar,
-    char_highlight_list = {
-        "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
-        "IndentBlanklineIndent3",
-        "IndentBlanklineIndent4",
-        "IndentBlanklineIndent5",
-        "IndentBlanklineIndent6",
-    },
-    context_char = bar,
-    show_current_context = true,
-    show_current_context_start = true,
-    show_first_indent_level = false,
-}
+require("ibl").setup({
+	debounce = 100,
+	indent = { char = bar },
+	scope = { show_end = true },
+	viewport_buffer = { min = 100, max = 600 },
+})
