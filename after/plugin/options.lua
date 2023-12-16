@@ -1,13 +1,13 @@
 local o = vim.opt
 
 local function cwd()
-    return vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
+	return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
 end
 
 o.autoindent = true
-o.background = 'dark'
+o.background = "dark"
 o.backup = false
-o.clipboard = 'unnamedplus'
+o.clipboard = "unnamedplus"
 o.cmdheight = 1
 o.copyindent = true
 -- o.compatible = false
@@ -25,7 +25,7 @@ o.foldenable = false
 -- o.iskeyword:append('-')
 o.laststatus = 3
 o.linebreak = true
-o.mouse = 'a'
+o.mouse = "a"
 o.more = false --When on, listings pause when the whole screen is filled.  You will get the |more-prompt|.  When this option is off there are no pauses, the listing continues until finished.
 -- o.number = false
 o.pumheight = 10
@@ -35,11 +35,11 @@ o.shiftround = true
 o.shiftwidth = 4
 o.showcmd = false
 -- o.showmatch = true
-o.shortmess:append('I')
-o.shortmess:append('S')
-o.shortmess:append('s')
+o.shortmess:append("I")
+o.shortmess:append("S")
+o.shortmess:append("s")
 o.showmode = false
-o.signcolumn = 'auto'
+o.signcolumn = "auto"
 -- o.smartcase = false
 -- o.softtabstop = 4
 -- o.softtabstop
@@ -48,7 +48,7 @@ o.splitright = true
 o.swapfile = false
 o.tabstop = 4
 o.title = true
-vim.o.titlestring = cwd() .. ' - NVIM'
+vim.o.titlestring = cwd() .. " - NVIM"
 o.updatetime = 1000
 -- o.updatetime = WINDOWS and 1000 or 600
 -- -- o.undodir = vim.fn.stdpath('data') .. '/undodir'
@@ -57,5 +57,5 @@ o.writebackup = false
 o.number = false
 o.relativenumber = false
 o.linebreak = true
-o.showbreak = '󱞪 '
+o.showbreak = "󱞪 "
 o.termguicolors = true

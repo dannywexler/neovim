@@ -1,4 +1,4 @@
-require 'nvim-navic'.setup {
-    -- highlight = true,
-    separator = '  ',
-}
+require("nvim-navic").setup({
+	-- highlight = true,
+	separator = "  ",
+})

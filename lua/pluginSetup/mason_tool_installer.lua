@@ -1,9 +1,8 @@
-require('mason-tool-installer').setup {
+require("mason-tool-installer").setup({
 
-    ensure_installed = {
-        'stylua',
-        'prettierd',
-
-    },
-    run_on_start = false,
-}
+	ensure_installed = {
+		"stylua",
+		"prettierd",
+	},
+	run_on_start = false,
+})
