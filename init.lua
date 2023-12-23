@@ -6,4 +6,5 @@ WINDOWS = vim.fn.has("win32") == 1
 -- print('on Linux')
 -- end
 
+vim.g.sleekerrors_hide = false
 require("lazyConfig")

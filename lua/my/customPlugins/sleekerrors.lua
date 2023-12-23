@@ -68,7 +68,11 @@ M.getDiagnostics = function(bufnr)
 		-- severity = vim.diagnostic.severity.ERROR
 	})
 	-- print("recieved", #allDiagnostics, "diagnostics for", _G.fileName(buf))
-	if vim.tbl_isempty(allDiagnostics) or vim.tbl_count(allDiagnostics) > maxDiagnostics then
+	if
+		vim.tbl_isempty(allDiagnostics)
+		or vim.tbl_count(allDiagnostics) > maxDiagnostics
+		or vim.g.sleekerrors_hide
+	then
 		-- print(_G.fileName(buf), "doesn't have any diagnostics")
 		return
 	end
@@ -100,7 +104,8 @@ M.getDiagnostics = function(bufnr)
 				-- 'CursorLine'
 				"Normal",
 			})
-			local diagnosticWidth = math.max(1, diagnostic.end_col - diagnostic.col)
+			local diagnosticWidth =
+				math.max(1, diagnostic.end_col - diagnostic.col)
 			table.insert(firstLinePieces, {
 				string.rep(index, diagnosticWidth),
 				highlight_groups[diagnostic.severity],
@@ -118,7 +123,8 @@ M.getDiagnostics = function(bufnr)
 
 		for index, diagnostic in ipairs(diagGroup) do
 			local formattedMessage = "  " .. index .. ". " .. diagnostic.message
-			local remainingLength = math.max(1, vim.fn.winwidth(0) - #formattedMessage)
+			local remainingLength =
+				math.max(1, vim.fn.winwidth(0) - #formattedMessage)
 			formattedMessage = formattedMessage .. space:rep(remainingLength)
 			table.insert(virtLines, {
 				{
@@ -154,7 +160,10 @@ M.getAllDiagnostics = function()
 end
 
 local function isDiagnosticFile(event)
-	return vim.tbl_contains(fileTypesToShowDiagnostics, vim.bo[event.buf].filetype)
+	return vim.tbl_contains(
+		fileTypesToShowDiagnostics,
+		vim.bo[event.buf].filetype
+	)
 end
 
 M.onCursorHold = function(event)

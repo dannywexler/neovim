@@ -1,5 +1,5 @@
 local abbreviations = {
-	a = "await",
+	-- a = "await",
 	aa = "&&",
 	c = "const",
 	e = "=",

@@ -5,7 +5,10 @@ local function getConfig(name)
 		require("scope").setup()
 		return
 	end
-	local path = vim.fn.stdpath("config") .. "/lua/pluginSetup/" .. name .. ".lua"
+	local path = vim.fn.stdpath("config")
+		.. "/lua/pluginSetup/"
+		.. name
+		.. ".lua"
 	if vim.fn.filereadable(path) == 1 then
 		require("pluginSetup." .. name)
 	end
@@ -25,7 +28,7 @@ local function p(name, url, extraOpts)
 	table.insert(plugins, opts)
 end
 
--- p('aerial', 'stevearc/aerial.nvim')
+p("aerial", "stevearc/aerial.nvim")
 -- p('autosession', 'rmagatti/auto-session')
 -- p('code-action-menu', 'weilbith/nvim-code-action-menu')
 -- p('colorful-winseparator', 'nvim-zh/colorful-winsep.nvim')
@@ -69,10 +72,18 @@ p("lspconfig", "neovim/nvim-lspconfig")
 p("lspkind", "onsails/lspkind.nvim")
 p("lspsaga", "glepnir/lspsaga.nvim")
 p("luasnip", "L3MON4D3/LuaSnip")
-p("markdown_preview", "iamcco/markdown-preview.nvim", { build = "cd app && npm install", ft = "markdown" })
+p(
+	"markdown_preview",
+	"iamcco/markdown-preview.nvim",
+	{ build = "cd app && npm install", ft = "markdown" }
+)
 p("mason", "williamboman/mason.nvim", { build = ":MasonUpdate" })
 p("mason-lspconfig", "williamboman/mason-lspconfig.nvim")
-p("mason_tool_installer", "WhoIsSethDaniel/mason-tool-installer.nvim", { build = ":MasonToolsUpdate" })
+p(
+	"mason_tool_installer",
+	"WhoIsSethDaniel/mason-tool-installer.nvim",
+	{ build = ":MasonToolsUpdate" }
+)
 p("navic", "SmiteshP/nvim-navic")
 p("neoconf", "folke/neoconf.nvim")
 p("neodev", "folke/neodev.nvim")
@@ -81,7 +92,11 @@ p("nest", "LionC/nest.nvim")
 p("nim", "alaviss/nim.nvim", { ft = "nim" })
 p("nui", "MunifTanjim/nui.nvim")
 p("nvim-jdtls", "mfussenegger/nvim-jdtls", { ft = "java" })
-p("nvimtree", "kyazdani42/nvim-tree.lua", { cmd = { "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeClose" } })
+p(
+	"nvimtree",
+	"kyazdani42/nvim-tree.lua",
+	{ cmd = { "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeClose" } }
+)
 p("plenary", "nvim-lua/plenary.nvim")
 p("promise-async", "kevinhwang91/promise-async")
 p("schemastore", "b0o/schemastore.nvim")
@@ -95,8 +110,16 @@ p("telescope-all-recent", "prochri/telescope-all-recent.nvim", { priority = 4 })
 p("telescope-zf-native", "natecraddock/telescope-zf-native.nvim")
 p("toggleterm", "akinsho/toggleterm.nvim")
 p("tokyonight", "folke/tokyonight.nvim")
-p("treesitter", "nvim-treesitter/nvim-treesitter", { build = WINDOWS and ":TSUpdateSync" or ":TSUpdate" })
-p("treesitter-playground", "nvim-treesitter/playground", { cmd = "TSPlaygroundToggle" })
+p(
+	"treesitter",
+	"nvim-treesitter/nvim-treesitter",
+	{ build = WINDOWS and ":TSUpdateSync" or ":TSUpdate" }
+)
+p(
+	"treesitter-playground",
+	"nvim-treesitter/playground",
+	{ cmd = "TSPlaygroundToggle" }
+)
 p("treesitter-textobjects", "nvim-treesitter/nvim-treesitter-textobjects")
 p("treesj", "Wansmer/treesj", { cmd = "TSJToggle" })
 p("ufo", "kevinhwang91/nvim-ufo")

@@ -132,7 +132,11 @@ nest.applyKeymaps({
 			},
 			{ "h", scroll.up },
 			-- { 'H', function () tree.goto_parent(treeopts) end},
-			{ "H", "<Plug>(IndentWisePreviousLesserIndent)", options = { noremap = false } },
+			{
+				"H",
+				"<Plug>(IndentWisePreviousLesserIndent)",
+				options = { noremap = false },
+			},
 			{
 				"j",
 				function()
@@ -141,7 +145,11 @@ nest.applyKeymaps({
 			},
 			-- { 'J', '20<Down>' },
 			-- { 'J', function () tree.goto_next(treeopts) end},
-			{ "J", "<Plug>(IndentWiseNextEqualIndent)", options = { noremap = false } },
+			{
+				"J",
+				"<Plug>(IndentWiseNextEqualIndent)",
+				options = { noremap = false },
+			},
 			{
 				"k",
 				function()
@@ -150,10 +158,18 @@ nest.applyKeymaps({
 			},
 			-- { 'K', '20<Up>' },
 			-- { 'K', function () tree.goto_prev(treeopts) end},
-			{ "K", "<Plug>(IndentWisePreviousEqualIndent)", options = { noremap = false } },
+			{
+				"K",
+				"<Plug>(IndentWisePreviousEqualIndent)",
+				options = { noremap = false },
+			},
 			-- { 'L', function () tree.goto_child(treeopts) end},
 			{ "l", scroll.down },
-			{ "L", "<Plug>(IndentWiseNextGreaterIndent)", options = { noremap = false } },
+			{
+				"L",
+				"<Plug>(IndentWiseNextGreaterIndent)",
+				options = { noremap = false },
+			},
 			{
 				"q",
 				{
@@ -193,7 +209,9 @@ nest.applyKeymaps({
 					{
 						"s",
 						function()
-							leap.leap({ target_windows = require("leap.util").get_enterable_windows() })
+							leap.leap({
+								target_windows = require("leap.util").get_enterable_windows(),
+							})
 						end,
 					},
 					{ "{", "vi{:Sort ui<CR>" },
@@ -337,7 +355,10 @@ nest.applyKeymaps({
 								"f",
 								function()
 									-- lsp.format()
-									require("conform").format({ async = true, lsp_fallback = true })
+									require("conform").format({
+										async = true,
+										lsp_fallback = true,
+									})
 									-- sleekerrors.newDiagnostics[vim.fn.bufnr()] = true
 								end,
 							},
@@ -349,6 +370,13 @@ nest.applyKeymaps({
 					{ "o", ":AerialToggle<CR>" },
 					-- { 'r', searchReplace},
 					-- { 'o', ':SymbolsOutline<CR>' },
+					{
+						"t",
+						function()
+							vim.g.sleekerrors_hide = not vim.g.sleekerrors_hide
+							sleekerrors.getAllDiagnostics()
+						end,
+					},
 					{ "w", watchTerm },
 				},
 			},
@@ -417,9 +445,12 @@ nest.applyKeymaps({
 	{
 		mode = "t",
 		{
-			{ "<A-", {
-				{ "t>", '<C-\\><C-n>:lua require("FTerm").toggle()<CR>' },
-			} },
+			{
+				"<A-",
+				{
+					{ "t>", '<C-\\><C-n>:lua require("FTerm").toggle()<CR>' },
+				},
+			},
 		},
 	},
 })
@@ -427,7 +458,11 @@ nest.applyKeymaps({
 -- result of vim.fn.winlayout()
 local winLayout = {
 	"row",
-	{ { "leaf", 1000 }, { "col", { { "leaf", 1002 }, { "leaf", 1018 } } }, { "leaf", 1013 } },
+	{
+		{ "leaf", 1000 },
+		{ "col", { { "leaf", 1002 }, { "leaf", 1018 } } },
+		{ "leaf", 1013 },
+	},
 }
 
 -- current win id (1002) can be retrieved with vim.fn.win_getid()
