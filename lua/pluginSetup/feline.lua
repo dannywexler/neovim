@@ -215,7 +215,8 @@ local Funcs = {
 		local level = opts.level
 		-- print('getting diagnostics for level:', level, 'for buf:', fn.bufnr())
 		local severity = vim.diagnostic.severity[level:upper()]
-		local count = vim.tbl_count(vim.diagnostic.get(0, { severity = severity }))
+		local count =
+			vim.tbl_count(vim.diagnostic.get(0, { severity = severity }))
 		if count == 0 then
 			return ""
 		end
@@ -234,12 +235,19 @@ local Funcs = {
 		if searchText == "wxyz" then
 			return ""
 		end
-		if vim.startswith(searchText, "\\<") and vim.endswith(searchText, "\\>") then
+		if
+			vim.startswith(searchText, "\\<")
+			and vim.endswith(searchText, "\\>")
+		then
 			searchText = searchText:sub(3, #searchText - 2)
 		end
 		local searchCount = fn.searchcount({ maxcount = 0 })
 		-- return ('%s match %2s of %s'):format(searchText, searchCount.current, searchCount.total)
-		return ("%s match %2s/%s"):format(searchText, searchCount.current, searchCount.total)
+		return ("%s match %2s/%s"):format(
+			searchText,
+			searchCount.current,
+			searchCount.total
+		)
 	end,
 	navic = function()
 		return "  " .. require("nvim-navic").get_location()
@@ -312,7 +320,9 @@ local Comps = {
 			}
 		end,
 		enabled = function()
-			return WINDOWS and fn.getcwd():find("bit9prog") and fn.getcwd():find("code")
+			return WINDOWS
+				and fn.getcwd():find("bit9prog")
+				and fn.getcwd():find("code")
 		end,
 	},
 	diagComp = function(severity)
@@ -339,14 +349,23 @@ local Comps = {
 	getParentPath = {
 		provider = { name = "getParentPath", update = { "VimEnter" } },
 		rounded = true,
+		hl = {
+			style = "bold",
+		},
 	},
 	getCwd = {
 		provider = { name = "getCwd", update = { "VimEnter" } },
 		rounded = true,
+		hl = {
+			style = "bold",
+		},
 	},
 	getFileRelativePath = {
 		provider = { name = "getFileRelativePath", update = { "BufEnter" } },
 		rounded = true,
+		hl = {
+			style = "bold",
+		},
 	},
 	getFileIcon = {
 		provider = { name = "getFileIcon", update = { "BufEnter" } },
@@ -452,7 +471,10 @@ local function winbarComps(tive)
 			},
 			Comps.gap(winbarHighlights[tive]),
 			{
-				provider = { name = "getWinbarFileName", update = { "BufEnter" } },
+				provider = {
+					name = "getWinbarFileName",
+					update = { "BufEnter" },
+				},
 				hl = winbarHighlights[tive],
 			},
 			Comps.gap(winbarHighlights[tive]),
