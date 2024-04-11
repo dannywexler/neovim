@@ -202,18 +202,26 @@ nest.applyKeymaps({
 					{ "e", "<cmd>Lspsaga show_buf_diagnostics<CR>" },
 					{ "E", "<cmd>Lspsaga show_workspace_diagnostics<CR>" },
 					{ "f", telescope.lsp_document_symbols },
-					{ "h", telescope.highlights },
-					{ "H", telescope.help_tags },
+					{ "h", "<C-w>k" },
+					{ "H", "<cmd>WinShift up<CR>" },
+					{ "j", "<C-w>l" },
+					{ "J", "<cmd>WinShift right<CR>" },
+					{ "k", "<C-w>h" },
+					{ "K", "<cmd>WinShift left<CR>" },
+					{ "l", "<C-w>j" },
+					{ "L", "<cmd>WinShift down<CR>" },
+					-- { "h", telescope.highlights },
+					-- { "H", telescope.help_tags },
 					-- { 'i', "vii:'<,'>Sort ui<CR>" },
 					{ "p", "Vip:Sort ui<CR>" },
-					{
-						"s",
-						function()
-							leap.leap({
-								target_windows = require("leap.util").get_enterable_windows(),
-							})
-						end,
-					},
+					-- {
+					-- 	"s",
+					-- 	function()
+					-- 		leap.leap({
+					-- 			target_windows = require("leap.util").get_enterable_windows(),
+					-- 		})
+					-- 	end,
+					-- },
 					{ "{", "vi{:Sort ui<CR>" },
 					{ "[", "vi[:Sort ui<CR>" },
 					{ "|", "vi|:Sort ui<CR>" },

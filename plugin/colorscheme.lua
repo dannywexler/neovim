@@ -78,6 +78,7 @@ aucmd("ColorScheme", {
 		setHL("WinBar", "#000000", "#00ffcc")
 		setHL("WinBarNC", "#000000", "#7aa2f7")
 		setHL("WinSeparator", "#7aa2f7")
+		setHL("SymbolUsages", "#000000", "#b8bdd1")
 
 		-- linkHL('Normal', '@variable')
 		-- linkHL('Normal', 'NvimTreeNormal')
