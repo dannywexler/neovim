@@ -127,7 +127,14 @@ nest.applyKeymaps({
 					{ "h", "<cmd>Lspsaga hover_doc ++quiet<CR>" },
 					{ "n", lsp.rename },
 					{ "r", telescope.lsp_references },
-					{ "s", lsp.signature_help },
+					{
+						"s",
+						function()
+							telescope.lsp_definitions({ jump_type = "vsplit" })
+							vim.wait(50)
+							vim.cmd.norm("zt")
+						end,
+					},
 				},
 			},
 			{ "h", scroll.up },

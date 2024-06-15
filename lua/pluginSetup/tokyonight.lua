@@ -33,7 +33,7 @@ require("tokyonight").setup({
 	style = "night",
 	styles = {
 		comments = { italic = true },
-		keywords = { italic = false, bold = true },
+		keywords = { italic = false, bold = false },
 		functions = { bold = true },
 	},
 	terminal_colors = false,

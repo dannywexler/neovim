@@ -2,13 +2,19 @@ local api = vim.api
 local aucmd = api.nvim_create_autocmd
 local myColorGroup = api.nvim_create_augroup("MyColorGroup", { clear = true })
 
-local function setHL(name, foreground, background, extraOpts)
+local function setHL(name, foreground, background, bold, italic)
 	local opts = {}
 	if foreground then
 		opts.fg = foreground
 	end
 	if background then
 		opts.bg = background
+	end
+	if bold then
+		opts.bold = true
+	end
+	if italic then
+		opts.italic = true
 	end
 	api.nvim_set_hl(0, name, opts)
 end
@@ -42,6 +48,8 @@ aucmd("ColorScheme", {
 		-- setHL('ToggleTerm1WinBar', '#000000', '#00ffcc')
 		-- setHL('UfoFoldedBg', '', '#240824')
 		-- setHL('WinSeparator', '#7aa2f7', '#000000')
+		setHL("@punctuation.delimiter", "#b8bdd1")
+		setHL("@type.builtin", "#00e5ff", nil, nil, true)
 		setHL("CmpItemAbbr", "#ffffff")
 		setHL("CmpItemAbbrMatch", "#00fa9a")
 		setHL("CursorLineNr", "#000000", "#00ffcc")
@@ -73,12 +81,13 @@ aucmd("ColorScheme", {
 		setHL("rainbowcol7", "#bb9af7")
 		setHL("rainbowcol8", "#35d27f")
 		setHL("rainbowcol9", "#2ac3de")
+		setHL("SymbolUsages", "#000000", "#b8bdd1")
+		setHL("Type", "#00e5ff")
 		setHL("UFOCustom", "#dd9afc")
 		setHL("Visual", "#ffffff", "#004fc7")
 		setHL("WinBar", "#000000", "#00ffcc")
 		setHL("WinBarNC", "#000000", "#7aa2f7")
 		setHL("WinSeparator", "#7aa2f7")
-		setHL("SymbolUsages", "#000000", "#b8bdd1")
 
 		-- linkHL('Normal', '@variable')
 		-- linkHL('Normal', 'NvimTreeNormal')
@@ -86,13 +95,21 @@ aucmd("ColorScheme", {
 		-- linkHL('String', 'Character')
 		-- linkHL('WinBar', 'NavicText')
 		-- linkHL('WinBar', 'ToggleTerm1WinBar')
+		linkHL("@keyword", "@operator")
+		linkHL("@keyword", "PreProc")
+		linkHL("@punctuation.delimiter", "@tag.delimiter")
+		linkHL("@type.builtin", "@variable.builtin")
 		linkHL("CmpItemAbbr", "TelescopeNormal")
 		linkHL("CmpItemAbbrMatch", "CmpItemAbbrMatchFuzzy")
 		linkHL("CmpItemAbbrMatch", "TelescopeMatching")
 		linkHL("Comment", "CmpItemMenu")
 		linkHL("Comment", "LineNr")
+		linkHL("Constant", "Special")
 		linkHL("CursorLine", "ScrollView")
+		linkHL("Delimiter", "@punctuation")
 		linkHL("FloatBorder", "TelescopeBorder")
+		linkHL("Function", "@constructor")
+		linkHL("NonText", "@punctuation.special")
 		linkHL("Normal", "NvimTreeIndentMarker")
 		linkHL("Visual", "PmenuSel")
 	end,
