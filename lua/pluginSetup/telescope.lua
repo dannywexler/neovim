@@ -86,6 +86,7 @@ telescope.setup({
 			i = {
 				["<ESC>"] = actions.close,
 				["jk"] = actions.close,
+				["<Tab>"] = actions.file_vsplit,
 			},
 		},
 		path_display = function(opts, path)

@@ -249,9 +249,9 @@ local Funcs = {
 			searchCount.total
 		)
 	end,
-	navic = function()
-		return "  " .. require("nvim-navic").get_location()
-	end,
+	-- navic = function()
+	-- 	return "  " .. require("nvim-navic").get_location()
+	-- end,
 	vimMode = function()
 		return vim.fn.mode():sub(1, 1):upper()
 	end,
@@ -384,13 +384,13 @@ local Comps = {
 			style = "bold",
 		},
 	},
-	navic = {
-		provider = "navic",
-		enabled = require("nvim-navic").is_available,
-		hl = {
-			bg = myColors.grey.dark,
-		},
-	},
+	-- navic = {
+	-- 	provider = "navic",
+	-- 	enabled = require("nvim-navic").is_available,
+	-- 	hl = {
+	-- 		bg = myColors.grey.dark,
+	-- 	},
+	-- },
 	searchResults = {
 		provider = "formatSearchResults",
 		rounded = true,
@@ -407,7 +407,7 @@ local activeLeft = {
 	Comps.getFileRelativePath,
 	Comps.getFileIcon,
 	Comps.getFileName,
-	Comps.navic,
+	-- Comps.navic,
 }
 
 local activeRight = {
@@ -506,7 +506,8 @@ local function winbarComps(tive)
 				provider = "lineAndCol",
 				hl = winbarHighlights[tive],
 				enabled = function()
-					return #vim.bo.buftype == 0
+					local buftype = vim.bo.buftype
+					return buftype == "help" or #vim.bo.buftype == 0
 				end,
 			},
 		},

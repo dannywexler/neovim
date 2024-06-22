@@ -28,7 +28,7 @@ local function p(name, url, extraOpts)
 	table.insert(plugins, opts)
 end
 
-p("aerial", "stevearc/aerial.nvim")
+p("aerial", "stevearc/aerial.nvim", { cmd = "AerialToggle" })
 -- p('autosession', 'rmagatti/auto-session')
 -- p('code-action-menu', 'weilbith/nvim-code-action-menu')
 -- p('colorful-winseparator', 'nvim-zh/colorful-winsep.nvim')
@@ -43,9 +43,19 @@ p("aerial", "stevearc/aerial.nvim")
 -- p('treesitter-rainbow', 'p00f/nvim-ts-rainbow')
 -- p('windline', 'windwp/windline.nvim')
 p("autopairs", "windwp/nvim-autopairs")
-p("autotag", "windwp/nvim-ts-autotag")
-p("better-escape", "max397574/better-escape.nvim")
-p("boole", "nat-418/boole.nvim")
+p("autotag", "windwp/nvim-ts-autotag", {
+	ft = {
+		"html",
+		"javascript",
+		"jsx",
+		"svelte",
+		"tsx",
+		"typescript",
+		"xml",
+	},
+})
+p("better-escape", "max397574/better-escape.nvim", { event = "InsertEnter" })
+p("boole", "nat-418/boole.nvim", { keys = { "<C-n>", "<C-m>" } })
 p("bufferline", "akinsho/bufferline.nvim")
 p("cmp", "hrsh7th/nvim-cmp")
 p("cmp-buffer", "hrsh7th/cmp-buffer")
@@ -57,14 +67,15 @@ p("cmp-path", "hrsh7th/cmp-path")
 p("colorizer", "NvChad/nvim-colorizer.lua")
 p("comment", "numToStr/Comment.nvim")
 p("comment-context", "JoosepAlviste/nvim-ts-context-commentstring")
-p("conform", "stevearc/conform.nvim")
+p("conform", "stevearc/conform.nvim", { lazy = true })
 p("diffview", "sindrets/diffview.nvim", { cmd = "DiffviewOpen" })
 p("dressing", "stevearc/dressing.nvim")
+p("earthly", "earthly/earthly.vim", { ft = "Earthfile" })
 p("feline", "freddiehaddad/feline.nvim")
 p("fzf-native", "nvim-telescope/telescope-fzf-native.nvim", { build = "make" })
 p("indent-blankline", "lukas-reineke/indent-blankline.nvim", { main = "ibl" })
-p("indent-tools", "arsham/indent-tools.nvim")
-p("indent-tools-helper", "arsham/arshlib.nvim")
+-- p("indent-tools", "arsham/indent-tools.nvim")
+-- p("indent-tools-helper", "arsham/arshlib.nvim")
 p("indentwise", "jeetsukumaran/vim-indentwise")
 p("leap", "ggandor/leap.nvim")
 p("lsp-signature", "ray-x/lsp_signature.nvim")
@@ -82,12 +93,13 @@ p("mason-lspconfig", "williamboman/mason-lspconfig.nvim")
 p(
 	"mason_tool_installer",
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
-	{ build = ":MasonToolsUpdate" }
+	{ build = ":MasonToolsUpdate", lazy = true }
 )
-p("navic", "SmiteshP/nvim-navic")
+-- p("navic", "SmiteshP/nvim-navic")
 p("neoconf", "folke/neoconf.nvim")
 p("neodev", "folke/neodev.nvim")
-p("neoscroll", "karb94/neoscroll.nvim")
+p("neoscroll", "karb94/neoscroll.nvim", { lazy = true })
+p("neowords", "backdround/neowords.nvim", { keys = { "b", "e", "w" } })
 p("nest", "LionC/nest.nvim")
 p("nim", "alaviss/nim.nvim", { ft = "nim" })
 p("nui", "MunifTanjim/nui.nvim")
@@ -98,12 +110,13 @@ p(
 	{ cmd = { "NvimTreeToggle", "NvimTreeFindFile", "NvimTreeClose" } }
 )
 p("plenary", "nvim-lua/plenary.nvim")
-p("promise-async", "kevinhwang91/promise-async")
+-- p("promise-async", "kevinhwang91/promise-async")
 p("schemastore", "b0o/schemastore.nvim")
 p("scope", "tiagovla/scope.nvim")
 p("scrollview", "dstein64/nvim-scrollview")
 p("session-manager", "Shatur/neovim-session-manager")
-p("sort", "sQVe/sort.nvim")
+p("smart_splits", "mrjones2014/smart-splits.nvim", { lazy = true })
+p("sort", "sQVe/sort.nvim", { cmd = "Sort" })
 p("sqlite", "kkharji/sqlite.lua")
 -- p("symbol_usage", "Wansmer/symbol-usage.nvim")
 p("telescope", "nvim-telescope/telescope.nvim")
@@ -123,9 +136,9 @@ p(
 )
 p("treesitter-textobjects", "nvim-treesitter/nvim-treesitter-textobjects")
 p("treesj", "Wansmer/treesj", { cmd = "TSJToggle" })
-p("ufo", "kevinhwang91/nvim-ufo")
+-- p("ufo", "kevinhwang91/nvim-ufo")
 p("web-devicons", "kyazdani42/nvim-web-devicons")
-p("winshift", "sindrets/winshift.nvim")
+-- p("winshift", "sindrets/winshift.nvim")
 
 -- table.insert(plugins, {
 --     'https://gitlab.com/yorickpeterse/nvim-dd.git',

@@ -1,6 +1,15 @@
 local leap = require("leap")
 local nest = require("nest")
 local sleekerrors = require("my.customPlugins.sleekerrors")
+local neowords = require("neowords")
+local pat = neowords.pattern_presets
+local nword = neowords.get_word_hops(
+	-- pat.snake_case,
+	-- pat.camel_case,
+	-- pat.upper_case,
+	pat.any_word,
+	pat.number
+)
 -- local searchbox = require 'searchbox'
 -- local tree = require 'tree-climber'
 -- local treeopts = {
@@ -101,6 +110,8 @@ nest.applyKeymaps({
 	{
 		mode = "n",
 		{
+			{ "b", nword.backward_start },
+			{ "e", nword.forward_end },
 			{
 				"g",
 				{
@@ -197,7 +208,6 @@ nest.applyKeymaps({
 					{ "'", "vi':Sort ui<CR>" },
 					{ '"', 'vi":Sort ui<CR>' },
 					{ "A", telescope.grep_string },
-					{ "a", telescope.live_grep },
 					-- { 'd', telescope.find_files },
 					{
 						"d",
@@ -205,21 +215,62 @@ nest.applyKeymaps({
 							require("telescope.builtin").find_files()
 						end,
 					},
-					-- { 'd', smartOpen },
 					{ "e", "<cmd>Lspsaga show_buf_diagnostics<CR>" },
 					{ "E", "<cmd>Lspsaga show_workspace_diagnostics<CR>" },
 					{ "f", telescope.lsp_document_symbols },
-					{ "h", "<C-w>k" },
-					{ "H", "<cmd>WinShift up<CR>" },
-					{ "j", "<C-w>l" },
-					{ "J", "<cmd>WinShift right<CR>" },
-					{ "k", "<C-w>h" },
-					{ "K", "<cmd>WinShift left<CR>" },
-					{ "l", "<C-w>j" },
-					{ "L", "<cmd>WinShift down<CR>" },
+					{
+						"h",
+						function()
+							require("smart-splits").move_cursor_up()
+						end,
+					},
+					{
+						"H",
+						function()
+							require("smart-splits").swap_buf_up()
+						end,
+					},
+					{ "i", "<C-i>" },
+					{
+						"j",
+						function()
+							require("smart-splits").move_cursor_right()
+						end,
+					},
+					{
+						"J",
+						function()
+							require("smart-splits").swap_buf_right()
+						end,
+					},
+					{
+						"k",
+						function()
+							require("smart-splits").move_cursor_left()
+						end,
+					},
+					{
+						"K",
+						function()
+							require("smart-splits").swap_buf_left()
+						end,
+					},
+					{
+						"l",
+						function()
+							require("smart-splits").move_cursor_down()
+						end,
+					},
+					{
+						"L",
+						function()
+							require("smart-splits").swap_buf_down()
+						end,
+					},
 					-- { "h", telescope.highlights },
 					-- { "H", telescope.help_tags },
 					-- { 'i', "vii:'<,'>Sort ui<CR>" },
+					{ "o", "<C-o>" },
 					{ "p", "Vip:Sort ui<CR>" },
 					-- {
 					-- 	"s",
@@ -229,6 +280,7 @@ nest.applyKeymaps({
 					-- 		})
 					-- 	end,
 					-- },
+					{ "w", telescope.live_grep },
 					{ "{", "vi{:Sort ui<CR>" },
 					{ "[", "vi[:Sort ui<CR>" },
 					{ "|", "vi|:Sort ui<CR>" },
@@ -237,6 +289,7 @@ nest.applyKeymaps({
 			{ "U", "<C-r>" },
 			{ "v", "V" },
 			{ "V", "v" },
+			{ "w", nword.forward_start },
 			{
 				"z",
 				{
@@ -392,6 +445,7 @@ nest.applyKeymaps({
 							sleekerrors.getAllDiagnostics()
 						end,
 					},
+					{ "v", ":vsp<CR>" },
 					{ "w", watchTerm },
 				},
 			},
