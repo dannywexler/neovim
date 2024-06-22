@@ -9,7 +9,7 @@ require("dressing").setup({
 			-- print('options: ')
 			-- print(options)
 			local kind = opts.kind or "nil"
-			-- print('input kind: ' .. kind)
+			-- print("input kind: " .. kind)
 			if kind == "codeaction" then
 				return {
 					width = 60,
@@ -27,5 +27,12 @@ require("dressing").setup({
 				}
 			end
 		end,
+	},
+	select = {
+		telescope = require("telescope.themes").get_dropdown({
+			layout_config = {
+				width = 100,
+			},
+		}),
 	},
 })
