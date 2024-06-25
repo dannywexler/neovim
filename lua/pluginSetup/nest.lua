@@ -207,7 +207,7 @@ nest.applyKeymaps({
 					-- {'g', spectre.open_visual({select_word=true})},
 					{ "'", "vi':Sort ui<CR>" },
 					{ '"', 'vi":Sort ui<CR>' },
-					{ "A", telescope.grep_string },
+					{ "a", telescope.live_grep },
 					-- { 'd', telescope.find_files },
 					{
 						"d",
@@ -280,7 +280,7 @@ nest.applyKeymaps({
 					-- 		})
 					-- 	end,
 					-- },
-					{ "w", telescope.live_grep },
+					{ "w", telescope.grep_string },
 					{ "{", "vi{:Sort ui<CR>" },
 					{ "[", "vi[:Sort ui<CR>" },
 					{ "|", "vi|:Sort ui<CR>" },
