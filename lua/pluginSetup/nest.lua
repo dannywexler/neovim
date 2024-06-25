@@ -99,6 +99,19 @@ local function smartOpen()
 	})
 end
 
+local function formatFile()
+	-- lsp.format()
+	require("conform").format({
+		async = true,
+		lsp_fallback = true,
+	})
+	-- sleekerrors.newDiagnostics[vim.fn.bufnr()] = true
+end
+
+local function gotoWindow(windowNumber)
+	return tostring(windowNumber) .. "<C-w>w"
+end
+
 nmap("<leader>r", ':%s@<c-r>=expand("<cword>")<cr>@@gc<Left><Left><Left>')
 
 local scroll = {
@@ -406,38 +419,20 @@ nest.applyKeymaps({
 			{
 				"<leader>",
 				{
-					{
-						"b",
-						function()
-							startBuild()
-						end,
-					},
-					-- { 'b', startBuild },
+					{ "a", gotoWindow(1) },
+					{ "b", startBuild },
+					{ "d", gotoWindow(3) },
 					{ "e", ":NvimTreeToggle<CR>" },
 					{ "E", ":NvimTreeFindFile<CR>" },
-					{
-						"f",
-						{
-							{ "e", "za" },
-							{
-								"f",
-								function()
-									-- lsp.format()
-									require("conform").format({
-										async = true,
-										lsp_fallback = true,
-									})
-									-- sleekerrors.newDiagnostics[vim.fn.bufnr()] = true
-								end,
-							},
-							{ "r", "zA" },
-						},
-					},
+					{ "f", gotoWindow(4) },
+					{ "g", gotoWindow(5) },
 					{ "m", ":TSJToggle<CR>" },
 					-- h: replace word under cursor
 					{ "o", ":AerialToggle<CR>" },
 					-- { 'r', searchReplace},
 					-- { 'o', ':SymbolsOutline<CR>' },
+					{ "p", formatFile },
+					{ "s", gotoWindow(2) },
 					{
 						"t",
 						function()
