@@ -1,6 +1,10 @@
 if WINDOWS then
 	local javaPath = "C:\\bit9prog\\dev\\Java19\\jdk-19.0.2\\bin\\java.exe"
 	local jdtlsPath = vim.fn.stdpath("data") .. "\\mason\\packages\\jdtls\\"
+	local equinoxLauncher = vim.fn.globpath(
+		jdtlsPath .. "plugins",
+		"org.eclipse.equinox.launcher_*.jar"
+	)
 
 	local config = {
 		cmd = {
@@ -17,11 +21,16 @@ if WINDOWS then
 			"--add-opens",
 			"java.base\\java.lang=ALL-UNNAMED",
 			"-jar",
-			jdtlsPath .. "plugins\\org.eclipse.equinox.launcher_1.6.500.v20230622-2056.jar",
+			equinoxLauncher,
 			"-configuration",
 			jdtlsPath .. "config_win",
 		},
-		root_dir = require("jdtls.setup").find_root({ "pom.xml", ".git", "mvnw", "gradlew" }),
+		root_dir = require("jdtls.setup").find_root({
+			"pom.xml",
+			".git",
+			"mvnw",
+			"gradlew",
+		}),
 		settings = {
 			java = {
 				home = "C:\\bit9prog\\dev\\Java19\\jdk-19.0.2",
