@@ -154,9 +154,13 @@ nest.applyKeymaps({
 					{
 						"s",
 						function()
-							telescope.lsp_definitions({ jump_type = "vsplit" })
+							vim.cmd.vsplit()
+							telescope.lsp_definitions()
 							vim.wait(50)
 							vim.cmd.norm("zt")
+							-- telescope.lsp_definitions({ jump_type = "vsplit" })
+							-- vim.wait(50)
+							-- vim.cmd.norm("zt")
 						end,
 					},
 				},
@@ -231,12 +235,12 @@ nest.applyKeymaps({
 					{ "e", "<cmd>Lspsaga show_buf_diagnostics<CR>" },
 					{ "E", "<cmd>Lspsaga show_workspace_diagnostics<CR>" },
 					{ "f", telescope.lsp_document_symbols },
-					{
-						"h",
-						function()
-							require("smart-splits").move_cursor_up()
-						end,
-					},
+					-- {
+					-- 	"h",
+					-- 	function()
+					-- 		require("smart-splits").move_cursor_up()
+					-- 	end,
+					-- },
 					{
 						"H",
 						function()
@@ -244,36 +248,36 @@ nest.applyKeymaps({
 						end,
 					},
 					{ "i", "<C-i>" },
-					{
-						"j",
-						function()
-							require("smart-splits").move_cursor_right()
-						end,
-					},
+					-- {
+					-- 	"j",
+					-- 	function()
+					-- 		require("smart-splits").move_cursor_right()
+					-- 	end,
+					-- },
 					{
 						"J",
 						function()
 							require("smart-splits").swap_buf_right()
 						end,
 					},
-					{
-						"k",
-						function()
-							require("smart-splits").move_cursor_left()
-						end,
-					},
+					-- {
+					-- 	"k",
+					-- 	function()
+					-- 		require("smart-splits").move_cursor_left()
+					-- 	end,
+					-- },
 					{
 						"K",
 						function()
 							require("smart-splits").swap_buf_left()
 						end,
 					},
-					{
-						"l",
-						function()
-							require("smart-splits").move_cursor_down()
-						end,
-					},
+					-- {
+					-- 	"l",
+					-- 	function()
+					-- 		require("smart-splits").move_cursor_down()
+					-- 	end,
+					-- },
 					{
 						"L",
 						function()

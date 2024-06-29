@@ -86,6 +86,14 @@ local winbarHighlights = {
 	},
 }
 
+local windowLetters = {
+	"A",
+	"S",
+	"D",
+	"F",
+	"G",
+}
+
 local Highlights = {
 	vi_mode = function()
 		return {
@@ -255,6 +263,9 @@ local Funcs = {
 	vimMode = function()
 		return vim.fn.mode():sub(1, 1):upper()
 	end,
+	windowLetter = function()
+		return "  " .. windowLetters[vim.api.nvim_win_get_number(0)] .. "  "
+	end,
 }
 
 local function sideifyAComp(compConfig, leftOrRight, toRound)
@@ -347,14 +358,20 @@ local Comps = {
 		}
 	end,
 	getParentPath = {
-		provider = { name = "getParentPath", update = { "VimEnter" } },
+		provider = {
+			name = "getParentPath",
+			update = { "VimEnter", "SessionLoadPost" },
+		},
 		rounded = true,
 		hl = {
 			style = "bold",
 		},
 	},
 	getCwd = {
-		provider = { name = "getCwd", update = { "VimEnter" } },
+		provider = {
+			name = "getCwd",
+			update = { "VimEnter", "SessionLoadPost" },
+		},
 		rounded = true,
 		hl = {
 			style = "bold",
@@ -398,6 +415,12 @@ local Comps = {
 	vimMode = {
 		provider = { name = "vimMode", update = { "ModeChanged" } },
 		rounded = true,
+	},
+	windowLetter = {
+		provider = {
+			name = "windowLetter",
+			update = { "WinEnter", "WinLeave" },
+		},
 	},
 }
 
@@ -500,6 +523,10 @@ local function winbarComps(tive)
 				enabled = require("feline.providers.lsp").diagnostics_exist,
 			},
 			Comps.gap(winbarHighlights[tive]),
+			{
+				provider = "windowLetter",
+				hl = winbarHighlights[tive],
+			},
 		},
 		{
 			{
