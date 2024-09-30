@@ -6,7 +6,8 @@ local abbreviations = {
 	er = "=>",
 	ew = "= await",
 	l = "let",
-	n = "null",
+	n = "number",
+	nl = "null",
 	ne = "!==",
 	oo = "||",
 	r = "return",
@@ -14,6 +15,7 @@ local abbreviations = {
 	u = "undefined",
 	w = "await",
 	y = "async",
+	yi = "yield",
 }
 
 for key, value in pairs(abbreviations) do

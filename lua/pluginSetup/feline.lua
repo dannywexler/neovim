@@ -264,7 +264,15 @@ local Funcs = {
 		return vim.fn.mode():sub(1, 1):upper()
 	end,
 	windowLetter = function()
-		return "  " .. windowLetters[vim.api.nvim_win_get_number(0)] .. "  "
+		local winNumber = vim.api.nvim_win_get_number(0)
+		if winNumber == nil then
+			return ""
+		end
+		local winLetter = windowLetters[winNumber]
+		if winLetter == nil then
+			return ""
+		end
+		return "  " .. winLetter .. "  "
 	end,
 }
 
