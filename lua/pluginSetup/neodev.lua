@@ -7,6 +7,7 @@ local pwshelledsvc = vim.fn.stdpath("data")
 
 ---@type lspconfig.options
 local servers = {
+	astro = {},
 	biome = {},
 	bashls = {},
 	cssls = {},
@@ -38,6 +39,7 @@ local servers = {
 		shell = "powershell.exe",
 		bundle_path = pwshelledsvc,
 	},
+	svelte = {},
 	tsserver = {
 		settings = {
 			implicitProjectConfiguration = {

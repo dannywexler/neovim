@@ -1,11 +1,13 @@
 local M = {}
 local api = vim.api
 local fileTypesToShowDiagnostics = {
+	"astro",
 	"java",
 	"javascript",
 	"json",
 	"lua",
 	"rust",
+	"svelte",
 	"typescript",
 }
 

@@ -4,6 +4,8 @@ snippet cl console log
 	console.log('$0')
 snippet clv console log variable
 	console.log(`$0: ${$0}`)
+snippet d div
+		<$1 $2>$3</$1>
 snippet ec export const
 	export const 
 snippet edf export default function
@@ -63,3 +65,17 @@ snippet uef useEffect Hook
 	useEffect(() => {
 		$1
 	}, [$2])
+snippet qd export default qwik component
+	import { component$ } from "@builder.io/qwik";
+
+	type Props = {
+		$1: $2
+	}
+
+	export default component$(({$1}: Props) => {
+		return (
+			<>
+				$0
+			</>
+		);
+	});

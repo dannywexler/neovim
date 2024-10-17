@@ -45,6 +45,7 @@ p("aerial", "stevearc/aerial.nvim", { cmd = "AerialToggle" })
 p("autopairs", "windwp/nvim-autopairs")
 p("autotag", "windwp/nvim-ts-autotag", {
 	ft = {
+		"astro",
 		"html",
 		"javascript",
 		"jsx",
