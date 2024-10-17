@@ -68,6 +68,15 @@ p("colorizer", "NvChad/nvim-colorizer.lua")
 p("comment", "numToStr/Comment.nvim")
 p("comment-context", "JoosepAlviste/nvim-ts-context-commentstring")
 p("conform", "stevearc/conform.nvim", { lazy = true })
+p(
+	"dap",
+	"mfussenegger/nvim-dap",
+	{
+		dependencies = {
+			{ "rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio" },
+		},
+	}
+)
 p("diffview", "sindrets/diffview.nvim", { cmd = "DiffviewOpen" })
 p("dressing", "stevearc/dressing.nvim")
 p("earthly", "earthly/earthly.vim", { ft = "Earthfile" })
@@ -77,6 +86,7 @@ p("indent-blankline", "lukas-reineke/indent-blankline.nvim", { main = "ibl" })
 -- p("indent-tools", "arsham/indent-tools.nvim")
 -- p("indent-tools-helper", "arsham/arshlib.nvim")
 p("indentwise", "jeetsukumaran/vim-indentwise")
+p("jdtls", "mfussenegger/nvim-jdtls", { ft = "java" })
 p("leap", "ggandor/leap.nvim")
 p("lsp-signature", "ray-x/lsp_signature.nvim")
 p("lspconfig", "neovim/nvim-lspconfig")
@@ -103,7 +113,6 @@ p("neowords", "backdround/neowords.nvim", { keys = { "b", "e", "w" } })
 p("nest", "LionC/nest.nvim")
 p("nim", "alaviss/nim.nvim", { ft = "nim" })
 p("nui", "MunifTanjim/nui.nvim")
-p("nvim-jdtls", "mfussenegger/nvim-jdtls", { ft = "java" })
 p(
 	"nvimtree",
 	"kyazdani42/nvim-tree.lua",

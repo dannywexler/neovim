@@ -37,7 +37,6 @@ end
 
 local messagesToIgnore = {
 	"Property 'OWF' does not exist",
-	"implicitly has an 'any' type",
 	"JSDOC types may be moved to TypeScript types",
 	-- "Unused functions"
 }

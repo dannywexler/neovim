@@ -2,11 +2,16 @@ local function merge(...)
 	return vim.tbl_extend("force", ...)
 end
 
+local pwshelledsvc = vim.fn.stdpath("data")
+	.. "/mason/packages/powershell-editor-services"
+
 ---@type lspconfig.options
 local servers = {
+	biome = {},
 	bashls = {},
 	cssls = {},
-	jdtls = {},
+	clangd = {},
+	-- jdtls = {},
 	jsonls = {
 		settings = {
 			json = {
@@ -29,6 +34,10 @@ local servers = {
 			},
 		},
 	},
+	powershell_es = {
+		shell = "powershell.exe",
+		bundle_path = pwshelledsvc,
+	},
 	tsserver = {
 		settings = {
 			implicitProjectConfiguration = {
@@ -39,7 +48,9 @@ local servers = {
 	yamlls = {},
 }
 
-require("neodev").setup()
+require("neodev").setup({
+	library = { plugins = { "nvim-dap-ui" }, types = true },
+})
 require("neoconf").setup({
 	plugins = {
 		-- configures lsp clients with settings in the following order:

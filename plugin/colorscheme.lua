@@ -99,6 +99,7 @@ aucmd("ColorScheme", {
 		linkHL("@keyword", "PreProc")
 		linkHL("@punctuation.delimiter", "@tag.delimiter")
 		linkHL("@type.builtin", "@variable.builtin")
+		linkHL("Type", "@lsp.typemod.type.defaultlibrary")
 		linkHL("CmpItemAbbr", "TelescopeNormal")
 		linkHL("CmpItemAbbrMatch", "CmpItemAbbrMatchFuzzy")
 		linkHL("CmpItemAbbrMatch", "TelescopeMatching")
@@ -177,6 +178,10 @@ local niceColors = {
 		"#f55385",
 		"#ff007c",
 	},
+	reddish = {
+		"#F7768E",
+		"#DB4B4B",
+	},
 	teal = {
 		"#00ffcc",
 		"#2ac3de",
@@ -187,7 +192,9 @@ local niceColors = {
 	},
 	yellow = {
 		"#eef06d",
+		"#e0af68",
 		"#fff89a",
+		"#ffed64",
 	},
 }
 
