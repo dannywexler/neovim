@@ -42,8 +42,20 @@ local messagesToIgnore = {
 	"JSDOC types may be moved to TypeScript types",
 	-- "Unused functions"
 }
+local diagnosticCodesToIgnore = {
+	"lint/correctness/noUnusedVariables",
+	"lint/correctness/noUnusedFunctionParameters",
+}
 
+---Filter which diagnostics to keep
+---@param diagnostic Diagnostic
+---@return boolean
 local function shouldKeepDiagnostic(diagnostic)
+	local shouldIgnoreCode =
+		vim.tbl_contains(diagnosticCodesToIgnore, diagnostic.code)
+	if shouldIgnoreCode then
+		return false
+	end
 	for _, messageToIgnore in ipairs(messagesToIgnore) do
 		if diagnostic.message:find(messageToIgnore) then
 			-- print(messageToIgnore .. ' found in ' .. message)
