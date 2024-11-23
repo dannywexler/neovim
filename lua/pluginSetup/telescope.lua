@@ -7,29 +7,44 @@ local preferredWidth = 180
 
 local custom_width = math.min(fullWindowWidth - 4, preferredWidth)
 
-local pathCache = {}
+local longest_file = 30
 
-local function pathFormatter(_, path)
-	local formattedPath = pathCache[path]
-	if formattedPath then
-		-- print('Cached path:', path, 'as', formattedPath)
-		return formattedPath
-	end
-	local file = require("telescope.utils").path_tail(path)
-	if file == path then
-		formattedPath = " " .. file
-	else
-		local endIndex = #file * -1
-		endIndex = endIndex - 2
-		local parentPath = path:sub(0, endIndex)
-		local remainder = custom_width - #file - #parentPath - 10
-		parentPath = (" "):rep(remainder) .. parentPath
-		formattedPath = string.format(" %s %s", file, parentPath)
-	end
-	pathCache[path] = formattedPath
-	-- print('Formatted path:', path, 'as', formattedPath)
-	return formattedPath
+-- local pathCache = {}
+--
+-- local function pathFormatter(_, path)
+-- 	local formattedPath = pathCache[path]
+-- 	if formattedPath then
+-- 		-- print('Cached path:', path, 'as', formattedPath)
+-- 		return formattedPath
+-- 	end
+-- 	local file = require("telescope.utils").path_tail(path)
+-- 	if file == path then
+-- 		formattedPath = " " .. file
+-- 	else
+-- 		local endIndex = #file * -1
+-- 		endIndex = endIndex - 2
+-- 		local parentPath = path:sub(0, endIndex)
+-- 		local remainder = custom_width - #file - #parentPath - 10
+-- 		parentPath = (" "):rep(remainder) .. parentPath
+-- 		formattedPath = string.format(" %s %s", file, parentPath)
+-- 	end
+-- 	pathCache[path] = formattedPath
+-- 	-- print('Formatted path:', path, 'as', formattedPath)
+-- 	return formattedPath
+-- end
+
+local function pathFormatter(_, fullpath)
+    local tail = vim.fn.fnamemodify(fullpath, ":t")
+    local fileLength = #tail
+    if (fileLength > longest_file) then
+        -- print(tail, "is", fileLength, "letters long")
+        longest_file = fileLength
+    end
+    local parent = vim.fn.fnamemodify(fullpath, ":h:gs?\\?/?")
+    if parent == "." then parent = "" end
+    return (" %-".. longest_file + 2 .. "s %s"):format(tail, parent)
 end
+
 
 local custom_center_picker = {
 	borderchars = {
