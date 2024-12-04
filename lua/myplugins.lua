@@ -65,19 +65,19 @@ p("cmp-luasnip", "saadparwaiz1/cmp_luasnip")
 p("cmp-nvim-lsp", "hrsh7th/cmp-nvim-lsp")
 p("cmp-nvim-lua", "hrsh7th/cmp-nvim-lua")
 p("cmp-path", "hrsh7th/cmp-path")
-p("colorizer", "NvChad/nvim-colorizer.lua")
+p(
+	"colorizer",
+	"NvChad/nvim-colorizer.lua",
+	{ ft = { "css", "html", "lua", "javascript" } }
+)
 p("comment", "numToStr/Comment.nvim")
 p("comment-context", "JoosepAlviste/nvim-ts-context-commentstring")
 p("conform", "stevearc/conform.nvim", { lazy = true })
-p(
-	"dap",
-	"mfussenegger/nvim-dap",
-	{
-		dependencies = {
-			{ "rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio" },
-		},
-	}
-)
+p("dap", "mfussenegger/nvim-dap", {
+	dependencies = {
+		{ "rcarriga/nvim-dap-ui", dependencies = "nvim-neotest/nvim-nio" },
+	},
+})
 p("diffview", "sindrets/diffview.nvim", { cmd = "DiffviewOpen" })
 p("dressing", "stevearc/dressing.nvim")
 p("earthly", "earthly/earthly.vim", { ft = "Earthfile" })
