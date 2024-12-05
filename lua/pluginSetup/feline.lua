@@ -21,6 +21,8 @@ local gitIcons = {
 	removed = " ",
 }
 
+local branch = nil
+
 local myColors = {
 	black = "#000000",
 	blue = { bright = "#7aa2f7" },
@@ -218,8 +220,11 @@ local Funcs = {
 	getFileName = function()
 		-- print("getting filename for buf:", fn.bufnr())
 		local ft = vim.bo.filetype
-		if ft == "DiffviewFiles" then
-			return ""
+        ---@diagnostic disable-next-line: undefined-field
+        local gsd = vim.b.gitsigns_status_dict
+        if gsd and gsd.head then branch = gsd.head end
+		if ft == "DiffviewFiles" and branch then
+			return gitIcons.head .. branch
 		end
 		return fileTypeMap[ft] or fn.expand("%:t")
 	end,
