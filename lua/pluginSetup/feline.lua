@@ -14,6 +14,13 @@ local diagnosticIcons = {
 	info = " ",
 }
 
+local gitIcons = {
+	head = "󰘬 ",
+	added = " ",
+	changed = " ",
+	removed = " ",
+}
+
 local myColors = {
 	black = "#000000",
 	blue = { bright = "#7aa2f7" },
@@ -45,7 +52,15 @@ local vim_mode_colors = {
 	V = myColors.purple.medium,
 }
 
+local gitColors = {
+	added = myColors.green.medium,
+	changed = myColors.orange.medium,
+	removed = myColors.red.medium,
+	head = myColors.white,
+}
+
 local fileTypeMap = {
+	aerial = "Outline 󰙅 ",
 	DiffviewFiles = " DIFF  ",
 	NvimTree = " File Tree 󰙅 ",
 	TelescopePrompt = " Telescope  ",
@@ -120,6 +135,20 @@ local function getIcon()
 	return require("nvim-web-devicons").get_icon_color(filename, extension)
 end
 
+local function gitChangesExist()
+	---@diagnostic disable-next-line: undefined-field
+	local gsd = vim.b.gitsigns_status_dict
+	if not gsd then
+		return false
+	end
+	for _, value in pairs(gsd) do
+		if type(value) == "number" and value > 0 then
+			return true
+		end
+	end
+	return false
+end
+
 local function getTime()
 	-- return os.clock()
 	return vim.loop.hrtime()
@@ -188,7 +217,11 @@ local Funcs = {
 	end,
 	getFileName = function()
 		-- print("getting filename for buf:", fn.bufnr())
-		return fileTypeMap[vim.bo.filetype] or fn.expand("%:t")
+		local ft = vim.bo.filetype
+		if ft == "DiffviewFiles" then
+			return ""
+		end
+		return fileTypeMap[ft] or fn.expand("%:t")
 	end,
 	getWinbarFileName = function()
 		local startTime = getTime()
@@ -196,6 +229,10 @@ local Funcs = {
 		local fileName = fn.expand("%:t")
 		if fileName == "NvimTree_1" then
 			return normalize(fn.fnamemodify(fn.getcwd(), ":~"))
+		end
+		local fileTypeOverride = fileTypeMap[vim.bo.filetype]
+		if fileTypeOverride then
+			return fileTypeOverride
 		end
 		-- if fileName:find('toggleterm') then
 		--     return 'TERMINAL  '
@@ -237,6 +274,19 @@ local Funcs = {
 	getFileIconColor = function()
 		local _, color = getIcon()
 		return color or myColors.white
+	end,
+	getGitInfo = function(_, opts)
+		local key = opts.key
+		---@diagnostic disable-next-line: undefined-field
+		local gsd = vim.b.gitsigns_status_dict
+		if not gsd then
+			return ""
+		end
+		local count = gsd[key]
+		if not count or count == 0 then
+			return ""
+		end
+		return tostring(count) .. " " .. gitIcons[key] .. " "
 	end,
 	formatSearchResults = function()
 		local searchText = fn.getreg("/")
@@ -359,6 +409,21 @@ local Comps = {
 			},
 		}
 	end,
+	gitComp = function(key)
+		return {
+			provider = {
+				name = "getGitInfo",
+				opts = { key = key },
+				update = { "BufEnter", "BufLeave", "BufWritePost", "VimEnter" },
+			},
+			hl = {
+				fg = gitColors[key],
+				bg = myColors.grey.dark,
+				style = "bold",
+			},
+			enabled = gitChangesExist,
+		}
+	end,
 	gap = function(hl)
 		return {
 			provider = " ",
@@ -409,6 +474,9 @@ local Comps = {
 			style = "bold",
 		},
 	},
+	gitBranch = {
+		provider = "git_branch",
+	},
 	-- navic = {
 	-- 	provider = "navic",
 	-- 	enabled = require("nvim-navic").is_available,
@@ -444,6 +512,9 @@ local activeLeft = {
 local activeRight = {
 	Comps.buildStatus,
 	Comps.searchResults,
+	{
+		provider = "git_branch",
+	},
 	Comps.vimMode,
 }
 
@@ -451,6 +522,9 @@ local inactiveLeft = {
 	Comps.getParentPath,
 	Comps.getCwd,
 	Comps.getFileName,
+	{
+		provider = "git_branch",
+	},
 }
 
 -- local testCompResult = colorifyAComp
@@ -487,7 +561,6 @@ feline.setup({
 })
 
 -- WINBAR CONFIG BELOW HERE:
-
 local function winbarComps(tive)
 	return {
 		{
@@ -529,6 +602,34 @@ local function winbarComps(tive)
 					bg = winbarColors[tive],
 				},
 				enabled = require("feline.providers.lsp").diagnostics_exist,
+			},
+			Comps.gap(winbarHighlights[tive]),
+			{
+				provider = "",
+				hl = {
+					fg = myColors.grey.dark,
+					bg = winbarColors[tive],
+				},
+				enabled = gitChangesExist,
+			},
+			{
+				provider = " ",
+				hl = {
+					fg = myColors.grey.dark,
+					bg = myColors.grey.dark,
+				},
+				enabled = gitChangesExist,
+			},
+			Comps.gitComp("added"),
+			Comps.gitComp("changed"),
+			Comps.gitComp("removed"),
+			{
+				provider = "",
+				hl = {
+					fg = myColors.grey.dark,
+					bg = winbarColors[tive],
+				},
+				enabled = gitChangesExist,
 			},
 			Comps.gap(winbarHighlights[tive]),
 			{
