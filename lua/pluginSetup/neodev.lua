@@ -12,7 +12,7 @@ local servers = {
 	bashls = {},
 	cssls = {},
 	clangd = {},
-	-- jdtls = {},
+	jdtls = {},
 	jsonls = {
 		settings = {
 			json = {
@@ -104,6 +104,9 @@ mason_lspconfig.setup({
 			-- print("setting up ", server_name)
 			local merged = merge(defaults, servers[server_name] or {})
 			require("lspconfig")[server_name].setup(merged)
+		end,
+		jdtls = function ()
+		    -- print("skipping mason_lspconfig handler setup")
 		end,
 	},
 })

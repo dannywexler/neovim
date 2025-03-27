@@ -23,7 +23,7 @@ local function formatFile(buf, bufopt)
 		return
 	end
 	-- vim.lsp.buf.format({ bufnr = buf })
-	require("conform").format({ async = false, lsp_fallback = true })
+	require("conform").format({ async = true, lsp_fallback = false })
 	-- print("Formatted", _G.fileName(buf))
 	-- sleekerrors.newDiagnostics[buf] = true
 end

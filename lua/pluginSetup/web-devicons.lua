@@ -6,7 +6,7 @@ require("nvim-web-devicons").setup({
 			cterm_color = "197",
 		},
 		snippets = {
-			icon = " ",
+			icon = "",
 			color = "#fff",
 		},
 	},

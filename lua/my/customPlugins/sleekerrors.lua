@@ -43,8 +43,9 @@ local messagesToIgnore = {
 	-- "Unused functions"
 }
 local diagnosticCodesToIgnore = {
-	"lint/correctness/noUnusedVariables",
 	"lint/correctness/noUnusedFunctionParameters",
+	"lint/correctness/noUnusedImports",
+	"lint/correctness/noUnusedVariables",
 }
 
 ---Filter which diagnostics to keep

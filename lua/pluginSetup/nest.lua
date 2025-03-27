@@ -225,6 +225,7 @@ nest.applyKeymaps({
 					{ "'", "vi':Sort ui<CR>" },
 					{ '"', 'vi":Sort ui<CR>' },
 					{ "a", telescope.live_grep },
+					{ "b", telescope.buffers },
 					-- { 'd', telescope.find_files },
 					{
 						"d",
