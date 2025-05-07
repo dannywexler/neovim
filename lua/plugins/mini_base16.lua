@@ -20,5 +20,6 @@ return {
             base0E = c.purple,
             base0F = c.grey.light,
         }
-    }
+    },
+    priority = 1000,
 }

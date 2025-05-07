@@ -14,6 +14,9 @@ vim.opt.runtimepath:prepend(lazypath)
 vim.g.mapleader = " "
 
 require("lazy").setup({
+    change_detection = {
+        notify = false,
+    },
     concurrency = 1,
     defaults = {
         lazy = false,
