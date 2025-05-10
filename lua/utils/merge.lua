@@ -3,7 +3,9 @@
 ---@return table
 function MERGE(...)
     local res = {}
-    for _, item in ipairs({...}) do
+    local n = select("#", ...)
+    for i = 1, n do
+        local item = select(i, ...)
         if type(item) == "table" then
             res = vim.tbl_extend("force", res, item)
         end

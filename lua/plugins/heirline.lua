@@ -8,6 +8,10 @@ local function normalize(sourceString)
     return fmodify(sourceString, ":gs?\\?/?")
 end
 
+local function isNormalFile()
+    return #vim.bo.buftype == 0 and vim.bo.filetype ~= "snacks_picker_preview"
+end
+
 ---@class Highlight
 ---@field fg? string
 ---@field bg? string
@@ -169,6 +173,7 @@ return PLUG("rebelot/heirline.nvim", {
             }),
             bubble({
                 provider = function()
+                    if not isNormalFile() then return end
                     local relativePath = normalize(expand("%:.:h"))
                     if relativePath == "." then
                         -- LOG("RelativePath got . so returning nil")
@@ -180,7 +185,10 @@ return PLUG("rebelot/heirline.nvim", {
                 update = { "ModeChanged", "BufEnter" },
             }),
             bubble({
-                provider = function() return expand("%:t") end,
+                provider = function()
+                    if not isNormalFile() then return end
+                    return expand("%:t")
+                end,
                 update = { "ModeChanged", "BufEnter" }
             }),
             { provider = function() return "%=" end, hl = { fg = sl_bg, bg = sl_bg } },
@@ -220,13 +228,24 @@ return PLUG("rebelot/heirline.nvim", {
                     local totalLinesWidth = #tostring(totalLines)
                     local index = math.floor((currentLine - 1) / totalLines * #scrollbar) + 1
                     local progress = (scrollbar[index]):rep(2)
-                    return ("%s %" .. totalLinesWidth .. "s/%s | %3s "):format(progress, currentLine, totalLines, currentCol)
+                    return ("%s %" .. totalLinesWidth .. "s/%s | %3s "):format(progress, currentLine, totalLines,
+                        currentCol)
                 end
             }
         )
         require("heirline").setup({
             statusline = statusline,
             winbar = winbar,
+            opts = {
+                disable_winbar_cb = function(args)
+                    local buf = args.buf
+                    if buf == 1 then return true end
+                    return conditions.buffer_matches({
+                        buftype = { "nofile" },
+                        filetype = { "snacks_picker_preview" },
+                    }, buf)
+                end,
+            }
         })
     end
 })
