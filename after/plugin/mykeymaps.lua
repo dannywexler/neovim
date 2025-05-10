@@ -4,6 +4,10 @@ local set = km.set
 local h = km.helpers
 local c = km.cmd
 
+local function gotoWindow(windowNumber)
+    return tostring(windowNumber) .. "<C-w>w"
+end
+
 ---@enum (key) SnackPicker
 local all_snack_pickers = {
     buffers = {},
@@ -22,8 +26,9 @@ end
 set({
     n = {
         q = {
-            r = c("cq2"),
             q = c("qa!"),
+            r = c("cq2"),
+            w = "ZZ",
         },
         s = {
             a = snack("grep"),
@@ -32,9 +37,14 @@ set({
             w = snack("grep_word"),
         },
         leader = {
+            a = gotoWindow(1),
             b = h.win.split.horizontal,
             c = snack("git_status"),
+            d = gotoWindow(3),
             e = function() require("snacks").explorer.open() end,
+            f = gotoWindow(4),
+            g = gotoWindow(5),
+            s = gotoWindow(2),
             v = h.win.split.vertical,
             w = function() require("snacks").explorer.reveal() end,
         }

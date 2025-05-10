@@ -12,6 +12,19 @@ local function isNormalFile()
     return #vim.bo.buftype == 0 and vim.bo.filetype ~= "snacks_picker_preview"
 end
 
+local windowLetters = { "A", "S", "D", "F", "G" }
+local function windowLetter()
+    local winNumber = vim.api.nvim_win_get_number(0)
+    if winNumber == nil then
+        return
+    end
+    local winLetter = windowLetters[winNumber]
+    if winLetter == nil then
+        return
+    end
+    return "  " .. winLetter .. "  "
+end
+
 ---@class Highlight
 ---@field fg? string
 ---@field bg? string
@@ -216,7 +229,11 @@ return PLUG("rebelot/heirline.nvim", {
             winbar_parent,
             {
                 provider = function() return expand("%:t") end,
-                update = { "BufEnter" }
+                update = { "BufEnter", "WinEnter" }
+            },
+            {
+                provider = windowLetter,
+                update = { "BufEnter", "WinEnter" }
             },
             { provider = function() return "%=" end, },
             {
