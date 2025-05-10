@@ -1,5 +1,6 @@
 {
   "auto_session": { "branch": "main", "commit": "00334ee24b9a05001ad50221c8daffbeedaa0842" },
+  "heirline": { "branch": "master", "commit": "74529ce6a47f3f8dc7546c221c187a2dd025ffee" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "mini.base16": { "branch": "main", "commit": "2eb2d2b889a8c861d1a66ec651bd0edb417d5c7f" }
 }

@@ -1,7 +1,7 @@
 
 ---@param ... table The tables to merge
 ---@return table
-return function(...)
+function MERGE(...)
     local res = {}
     for _, item in ipairs({...}) do
         if type(item) == "table" then

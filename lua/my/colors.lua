@@ -1,4 +1,5 @@
 return {
+	black = "#000000",
     blue = {
         light = "#7aa2f7",
         medium = "#0091f8",

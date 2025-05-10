@@ -1,4 +1,4 @@
-local c = require("mycolors")
+local c = require("my.colors")
 return {
     "echasnovski/mini.base16",
     opts = {

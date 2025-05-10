@@ -1,3 +1,3 @@
-return require("utils.plugin")("rmagatti/auto-session", {
+return PLUG("rmagatti/auto-session", {
     priority = 2000,
 })
