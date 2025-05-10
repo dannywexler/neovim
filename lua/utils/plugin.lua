@@ -48,7 +48,6 @@ end
 ---Normalizes pluginName
 ---@param pluginURL string
 local function normalize(pluginURL)
-    -- print('normalizing: ' .. pluginURL)
     local user = removeAll(pluginURL, { '/(.*)$' })
     local repo = removeAll(pluginURL, { '^(.*)/' })
 
