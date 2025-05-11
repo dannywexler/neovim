@@ -50,7 +50,7 @@ return PLUG("nvim-neo-tree/neo-tree.nvim", {
         sort_case_insensitive = false,     -- used when sorting files and directories in the tree
         sort_function = nil,               -- uses a custom function for sorting files and directories in the tree
         use_default_mappings = true,
-        use_popups_for_input = true,       -- If false, inputs will use vim.ui.input() instead of custom floats.
+        use_popups_for_input = false,      -- If false, inputs will use vim.ui.input() instead of custom floats.
 
         sources = {
             "filesystem",

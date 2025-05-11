@@ -1,9 +1,6 @@
 return PLUG("folke/snacks.nvim", {
-    lazy = true,
     opts = {
-        explorer = {
-            replace_netrw = true
-        },
+        input = {},
         picker = {
             formatters = {
                 file = {
@@ -27,6 +24,14 @@ return PLUG("folke/snacks.nvim", {
                         ["<Tab>"] = { "edit_vsplit", mode = { "i", "n" } },
                     }
                 }
+            }
+        },
+        styles = {
+            input = {
+                keys = {
+                    i_esc = { "<esc>", { "cmp_close", "cancel" }, mode = "i", expr = true },
+                },
+                relative = "cursor",
             }
         }
     }

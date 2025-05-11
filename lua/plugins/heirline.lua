@@ -53,7 +53,7 @@ local vim_mode_colors = {
     V = myColors.blue.medium,
 }
 
-local sl_bg = myColors.grey.medium
+local sl_bg = myColors.grey.dim
 
 local wb_active_bg = myColors.green.light
 local wb_other_bg = myColors.blue.light

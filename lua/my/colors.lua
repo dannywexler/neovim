@@ -9,7 +9,8 @@ return {
     grey = {
         light = "#b8bdd1",
         medium = "#565c64",
-        dark = "#282c34",
+        dim = "#292e42",
+        dark = "#12131b",
     },
     green = {
         light = "#00fa9a",
