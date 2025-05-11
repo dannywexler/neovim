@@ -15,6 +15,8 @@ local all_snack_pickers = {
     git_status = {},
     grep = {},
     grep_word = {},
+    help = {},
+    highlights = {},
 }
 
 ---@param picker SnackPicker
@@ -34,6 +36,10 @@ set({
             a = snack("grep"),
             b = snack("buffers"),
             d = snack("files"),
+            h = {
+                f = snack("help"),
+                l = snack("highlights"),
+            },
             w = snack("grep_word"),
         },
         leader = {
@@ -41,12 +47,12 @@ set({
             b = h.win.split.horizontal,
             c = snack("git_status"),
             d = gotoWindow(3),
-            e = function() require("snacks").explorer.open() end,
+            e = c("Neotree"),
             f = gotoWindow(4),
             g = gotoWindow(5),
             s = gotoWindow(2),
             v = h.win.split.vertical,
-            w = function() require("snacks").explorer.reveal() end,
+            w = c("Neotree reveal"),
         }
     }
 })

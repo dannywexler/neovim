@@ -62,11 +62,10 @@ require("lazy").setup({
         duration = 2 * 1000, -- in ms
     },
     ui = {
-        backdrop = 0,
         border = "rounded",
         size = {
-            height = 0.92,
-            width = 0.92,
+            height = 0.95,
+            width = 0.99,
         },
         throttle = WINDOWS and 200 or 20,
         title = "Lazy",

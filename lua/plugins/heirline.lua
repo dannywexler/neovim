@@ -228,7 +228,13 @@ return PLUG("rebelot/heirline.nvim", {
             "winbar",
             winbar_parent,
             {
-                provider = function() return expand("%:t") end,
+                provider = function()
+                    local name = expand("%:t")
+                    local ft = vim.bo.filetype
+                    if (ft == "neo-tree") then return "󰙅 File Tree " end
+                    -- LOG("Winbar name:", name, "ft:", ft)
+                    return name
+                end,
                 update = { "BufEnter", "WinEnter" }
             },
             {
@@ -238,6 +244,8 @@ return PLUG("rebelot/heirline.nvim", {
             { provider = function() return "%=" end, },
             {
                 provider = function()
+                    local ft = vim.bo.filetype
+                    if (ft == "neo-tree") then return end
                     local cursor = vim.api.nvim_win_get_cursor(0)
                     local currentLine = cursor[1]
                     local currentCol = cursor[2]
@@ -257,9 +265,12 @@ return PLUG("rebelot/heirline.nvim", {
                 disable_winbar_cb = function(args)
                     local buf = args.buf
                     if buf == 1 then return true end
+                    -- local bt = vim.bo[buf].buftype
+                    -- local ft = vim.bo[buf].filetype
+                    -- LOG("HEIRLINE:", vim.api.nvim_buf_get_name(buf), "buftype:", bt, "filetype:", ft)
                     return conditions.buffer_matches({
-                        buftype = { "nofile" },
-                        filetype = { "snacks_picker_preview" },
+                        -- buftype = { "nofile" },
+                        filetype = { "lazy", "lazy_backdrop", "neo-tree-popup", "snacks_picker_preview" },
                     }, buf)
                 end,
             }

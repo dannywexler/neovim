@@ -10,7 +10,7 @@
 ---@field init fun(plugin: table)? Init functions are always executed during startup. Mostly useful for setting vim.g.* configuration used by Vim plugins startup
 ---@field lazy boolean? When true, the plugin will only be loaded when needed. Lazy-loaded plugins are automatically loaded when their Lua modules are required, or when one of the lazy-loading handlers triggers
 ---@field main string? Can specify the main module in case it can not be determined automatically.
----@field opts (table | fun(opts:table):table?)? Opts should be a table (will be merged with parent specs), return a table (replaces parent specs) or should change a table.
+---@field opts (boolean | table | fun(opts:table):table?)? Opts should be a table (will be merged with parent specs), return a table (replaces parent specs) or should change a table.
 ---@field priority? number Only useful for start plugins (lazy=false) to force loading certain plugins first. Default priority is 50. It's recommended to set this to a high number for colorschemes.
 ---@field version (string | boolean)? Version to use from the repository. Full Semver ranges are supported
 
@@ -64,7 +64,7 @@ end
 ---@return LazySpec
 function PLUG(pluginURL, spec)
     return MERGE(
-        { opts = {} },
+        { opts = spec and spec.opts == false and nil or {} },
         spec,
         {
             name = normalize(pluginURL),

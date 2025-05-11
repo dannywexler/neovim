@@ -15,6 +15,11 @@ return PLUG("folke/snacks.nvim", {
                 history_bonus = true,
             },
             prompt = "  ",
+            sources = {
+                files = {
+                    hidden = true,
+                }
+            },
             win = {
                 input = {
                     keys = {
