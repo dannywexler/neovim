@@ -1,1 +1,1 @@
-return PLUG("MunifTanjim/nui.nvim", { lazy = true, opts = false })
+return PLUG("MunifTanjim/nui.nvim", { lazy = true, config = false })

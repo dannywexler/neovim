@@ -27,12 +27,19 @@ return PLUG("saghen/blink.cmp", {
         },
         keymap = { preset = "super-tab" },
         sources = {
+            default = { "lazydev", "lsp", "path", "snippets", "buffer" },
             providers = {
                 buffer = {
                     name = "BUF",
                     min_keyword_length = 3,
                     max_items = 6
-                }
+                },
+                lazydev = {
+                    name = "LZY",
+                    module = "lazydev.integrations.blink",
+                    -- make lazydev completions top priority (see `:h blink.cmp`)
+                    score_offset = 100,
+                },
             }
         }
     }

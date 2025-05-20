@@ -1,6 +1,5 @@
 local c = require("my.colors")
-return {
-    "echasnovski/mini.base16",
+return PLUG("echasnovski/mini.base16", {
     opts = {
         palette = {
             base00 = c.grey.dark,
@@ -21,5 +20,6 @@ return {
             base0F = c.grey.light,
         }
     },
+    main = "mini.base16",
     priority = 1000,
-}
+})
