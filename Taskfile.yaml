@@ -1,0 +1,77 @@
+version: "3"
+
+tasks:
+  bootstrap:
+    cmds:
+      - task: clean_paths_linux
+      - task: clean_paths_windows
+      - task: clone_lazy
+      - task: install_plugins
+      - task: install_treesitter
+      - task: install_tools
+
+  clean_paths_linux:
+    platforms: [linux]
+    cmds:
+      - rm -rf ~/.cache/nvim
+      - rm -rf ~/.local/share/nvim
+      - rm -rf ~/.local/state/nvim
+
+  clean_paths_windows:
+    platforms: [windows]
+    cmds:
+      - rm {{.TMP}}/nvim -r -f -ErrorAction SilentlyContinue
+      - rm {{.LOCALAPPDATA}}/nvim-data -r -f -ErrorAction SilentlyContinue
+
+  clone_lazy:
+    cmds:
+      - cmd: git clone --filter=blob:none --single-branch https://github.com/folke/lazy.nvim ~/.local/share/nvim/lazy/lazy.nvim
+        platforms: [linux]
+      - cmd: git clone --filter=blob:none --single-branch https://github.com/folke/lazy.nvim {{.LOCALAPPDATA}}/nvim-data/lazy/lazy.nvim
+        platforms: [windows]
+
+  install_all:
+    cmds:
+      - task: install_plugins
+      - task: install_treesitter
+      - task: install_tools
+
+  install_plugins:
+    cmds:
+      - task: nvim_cmd
+        vars: { CMD: "Lazy! install" }
+
+  install_treesitter:
+    cmds:
+      - task: nvim_cmd
+        vars: { CMD: "TSUpdateSync" }
+
+  install_tools:
+    cmds:
+      - task: nvim_cmd
+        vars: { CMD: "MasonToolsInstallSync" }
+
+  update_all:
+    cmds:
+      - task: update_plugins
+      - task: update_treesitter
+      - task: update_tools
+
+  update_plugins:
+    cmds:
+      - task: nvim_cmd
+        vars: { CMD: "Lazy! sync" }
+
+  update_treesitter:
+    cmds:
+      - task: nvim_cmd
+        vars: { CMD: "TSUpdateSync" }
+
+  update_tools:
+    cmds:
+      - task: nvim_cmd
+        vars: { CMD: "MasonToolsUpdateSync" }
+
+  nvim_cmd:
+    cmds:
+      - nvim --headless -c '{{.CMD}}' -c 'echo "\n"' -c 'qa'
