@@ -1,4 +1,10 @@
 return require("sleeklang").setup({
+    json = {
+        lsp = {
+            jsonls = {}
+        },
+        plugins = { PLUG("schemastore") }
+    },
     lua = {
         lsp = {
             lua_ls = {
@@ -7,7 +13,7 @@ return require("sleeklang").setup({
                         diagnostics = {
                             globals = { "vim", "WINDOWS", "P", "U", "V", "LOG", "PLUG", "MERGE" },
                             -- neededFileStatus = {
-                                -- ["no-unknown"] = "Any!"
+                            -- ["no-unknown"] = "Any!"
                             -- }
                         },
                         telemetry = { enable = false },
@@ -17,5 +23,11 @@ return require("sleeklang").setup({
             },
         },
         plugins = { PLUG("folke/lazydev.nvim") }
+    },
+    yaml = {
+        lsp = {
+            yamlls = {}
+        },
+        plugins = { PLUG("schemastore") }
     }
 })

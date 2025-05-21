@@ -4,12 +4,10 @@
 ---@field lsp? table | function
 ---@field plugins? PluginSpec[]
 
-local all_treesitter_filetypes = {
-    "lua",
-}
+local all_treesitter_filetypes = require("sleeklang.treesitter_filetypes")
 
 return {
-    ---@param config table<string, sleeklang.LanguageOptions>
+    ---@param config table<sleeklang.FileType, sleeklang.LanguageOptions>
     ---@return LazySpec[]
     setup = function(config)
         local lazy_specs = {}
@@ -52,6 +50,7 @@ return {
         end
 
         table.insert(lazy_specs, PLUG("nvim-treesitter/nvim-treesitter", {
+            main = "nvim-treesitter.configs",
             opts = {
                 additional_vim_regex_highlighting = false,
                 ensure_installed = enabled_treesitter_filetypes,
@@ -61,6 +60,7 @@ return {
                 indent = {
                     enabled = true,
                 },
+                sync_install = true,
             }
         }))
 
