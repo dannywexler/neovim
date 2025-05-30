@@ -42,6 +42,7 @@ set({
         m = "gcc",
         n = "nzz",
         N = "Nzz",
+        p = "P",
         q = {
             q = c("qa!"),
             r = c("cq2"),
@@ -76,16 +77,21 @@ set({
             r = ":%s@<C-r><C-w>@@gc<Left><Left><Left>",
             s = gotoWindow(2),
             v = h.win.split.vertical,
+            y = '"+y"',
             w = c("Neotree reveal"),
         }
     },
     v = {
         m = "gc",
+        p = "P",
         control = {
             h = h.visual.line.shift.h,
             j = h.visual.line.shift.j,
             k = h.visual.line.shift.k,
             l = h.visual.line.shift.l,
+        },
+        leader = {
+            y = '"+y"',
         }
     }
 })

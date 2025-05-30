@@ -15,6 +15,7 @@ vim.g.mapleader = " "
 
 require("lazy").setup({
     change_detection = {
+        enabled = false,
         notify = false,
     },
     concurrency = 1,
@@ -53,6 +54,9 @@ require("lazy").setup({
                 "zipPlugin",
             },
         },
+    },
+    rocks = {
+        enabled = false
     },
     spec = {
         { import = "plugins" },

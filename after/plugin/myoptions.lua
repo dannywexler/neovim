@@ -9,8 +9,7 @@ end
 -- o.foldlevelstart = 99
 -- o.foldmethod = 'indent'
 -- o.iskeyword:append('-')
--- o.sessionoptions:append('globals', 'tabpages')
-o.clipboard = "unnamedplus"
+o.sessionoptions:append('globals', 'tabpages', 'localoptions')
 o.cmdheight = 1
 o.copyindent = true
 o.cursorline = true

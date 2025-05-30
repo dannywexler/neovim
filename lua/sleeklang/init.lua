@@ -55,6 +55,7 @@ return {
 
         table.insert(lazy_specs, PLUG("nvim-treesitter/nvim-treesitter", {
             main = "nvim-treesitter.configs",
+            ft = enabled_treesitter_filetypes,
             opts = {
                 additional_vim_regex_highlighting = false,
                 ensure_installed = enabled_treesitter_filetypes,
