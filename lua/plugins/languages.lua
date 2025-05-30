@@ -1,11 +1,35 @@
-return require("sleeklang").setup({
-    json = {
-        lsp = {
-            jsonls = {}
-        },
-        plugins = { PLUG("schemastore") }
+vim.diagnostic.config({
+    virtual_lines = {
+        enabled = true
     },
+    signs = false,
+})
+
+return require("sleeklang").setup({
+    bash = { lsp = { bashls = {} } },
+    c = {},
+    comment = {},
+    cpp = {},
+    css = { lsp = { cssls = {} } },
+    csv = {},
+    dockerfile = {},
+    editorconfig = {},
+    git_config = {
+        extra_filetypes = {
+            "git_rebase",
+            "gitattributes",
+            "gitcommit",
+            "gitignore",
+        },
+    },
+    groovy = {},
+    html = { lsp = { html = {} } },
+    ini = {},
+    java = { extra_filetypes = { "javadoc" } },
+    jsdoc = {},
+    json = { extra_filetypes = { "jsonc" }, lsp = { jsonls = {} } },
     lua = {
+        extra_filetypes = { "luadoc" },
         lsp = {
             lua_ls = {
                 settings = {
@@ -24,10 +48,34 @@ return require("sleeklang").setup({
         },
         plugins = { PLUG("folke/lazydev.nvim") }
     },
-    yaml = {
+    markdown = { extra_filetypes = { "markdown_inline" }, lsp = { marksman = {} } },
+    powershell = {
+        enabled = WINDOWS,
         lsp = {
-            yamlls = {}
+            powershell_es = {
+                shell = "powershell.exe",
+                bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+            },
         },
-        plugins = { PLUG("schemastore") }
-    }
+    },
+    properties = {},
+    python = {},
+    regex = {},
+    rust = {},
+    sql = {},
+    svelte = { lsp = { svelte = {} } },
+    toml = { lsp = { taplo = {} } },
+    typescript = {
+        extra_filetypes = {
+            "javascript",
+            "javascriptreact",
+            "jsx",
+            "tsx",
+            "typescriptreact"
+        },
+        plugins = { require("my.typescript_tools") }
+    },
+    vim = { extra_filetypes = { "vimdoc" } },
+    xml = {},
+    yaml = { lsp = { yamlls = {} }, }
 })

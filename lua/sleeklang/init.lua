@@ -17,35 +17,39 @@ return {
         local enabled_tools = {}
 
         for filetype, language_config in pairs(config) do
-            local lang_filetypes = {}
-            table.insert(lang_filetypes, filetype)
-            for _, extra_filetype in ipairs(language_config.extra_filetypes or {}) do
-                table.insert(lang_filetypes, extra_filetype)
-            end
-            for _, ft in ipairs(lang_filetypes) do
-                if vim.tbl_contains(all_treesitter_filetypes, ft) then
-                    table.insert(enabled_treesitter_filetypes, ft)
+            if (language_config.enabled == nil or language_config.enabled or (type(language_config.enabled) == "function" and language_config.enabled())) then
+                local lang_filetypes = {}
+                table.insert(lang_filetypes, filetype)
+                for _, extra_filetype in ipairs(language_config.extra_filetypes or {}) do
+                    table.insert(lang_filetypes, extra_filetype)
                 end
-            end
-            local lsp_cfg = language_config.lsp
-            if type(lsp_cfg) == "table" then
-                for lsp_name, lsp_opts in pairs(lsp_cfg) do
-                    -- LOG("lsp_name:", lsp_name, "with lsp_opts:", lsp_opts)
-                    enabled_lsps[lsp_name] = lsp_opts
-                    table.insert(enabled_tools, lsp_name)
-                end
-                for _, lang_filetype in ipairs(lang_filetypes) do
-                    table.insert(enabled_lsp_filetypes, lang_filetype)
-                end
-            end
-            if (language_config.plugins) then
-                table.insert(lazy_specs, vim.tbl_map(function(original_spec)
-                    if vim.tbl_isempty(lang_filetypes) then
-                        return original_spec
-                    else
-                        return MERGE({ ft = lang_filetypes }, original_spec)
+                for _, ft in ipairs(lang_filetypes) do
+                    if vim.tbl_contains(all_treesitter_filetypes, ft) then
+                        table.insert(enabled_treesitter_filetypes, ft)
                     end
-                end, language_config.plugins))
+                end
+                local lsp_cfg = language_config.lsp
+                if type(lsp_cfg) == "table" then
+                    for lsp_name, lsp_opts in pairs(lsp_cfg) do
+                        -- LOG("lsp_name:", lsp_name, "with lsp_opts:", lsp_opts)
+                        enabled_lsps[lsp_name] = lsp_opts
+                        table.insert(enabled_tools, lsp_name)
+                    end
+                    for _, lang_filetype in ipairs(lang_filetypes) do
+                        table.insert(enabled_lsp_filetypes, lang_filetype)
+                    end
+                end
+                if (language_config.plugins) then
+                    table.insert(lazy_specs, vim.tbl_map(function(original_spec)
+                        if vim.tbl_isempty(lang_filetypes) then
+                            return original_spec
+                        else
+                            return MERGE({ ft = lang_filetypes }, original_spec)
+                        end
+                    end, language_config.plugins))
+                end
+            else
+                -- LOG("Sleeklang skipping", filetype)
             end
         end
 

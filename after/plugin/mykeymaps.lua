@@ -50,6 +50,7 @@ set({
             e = c("Neotree"),
             f = gotoWindow(4),
             g = gotoWindow(5),
+            r = ":%s@<c-r><C-w>@@gc<Left><Left><Left>",
             s = gotoWindow(2),
             v = h.win.split.vertical,
             w = c("Neotree reveal"),
