@@ -15,6 +15,12 @@ return PLUG("folke/snacks.nvim", {
             sources = {
                 files = {
                     hidden = true,
+                },
+                smart = {
+                    multi = {
+                        -- "buffers",
+                        "files",
+                    },
                 }
             },
             win = {
@@ -22,6 +28,11 @@ return PLUG("folke/snacks.nvim", {
                     keys = {
                         ["<Esc>"] = { "close", mode = { "n", "i" } },
                         ["<Tab>"] = { "edit_vsplit", mode = { "i", "n" } },
+                    }
+                },
+                preview = {
+                    wo = {
+                        number = false
                     }
                 }
             }

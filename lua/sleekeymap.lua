@@ -3,6 +3,34 @@ local cmd = function(aCommand)
 end
 
 local helpers = {
+    normal = {
+        line = {
+            shift = {
+                down = ":m .+1<CR>==",
+                j = ":m .+1<CR>==",
+                left = "V<<Esc>",
+                h = "V<<Esc>",
+                right = "V><Esc>",
+                l = "V><Esc>",
+                up = ":m .-2<CR>==",
+                k = ":m .-2<CR>==",
+            }
+        },
+    },
+    visual = {
+        line = {
+            shift = {
+                down = ":m '>+1<CR>gv=gv",
+                j = ":m '>+1<CR>gv=gv",
+                left = "<gv",
+                h = "<gv",
+                right = "V><Esc>",
+                l = "V><Esc>",
+                up = ":m '<-2<CR>gv=gv",
+                k = ":m '<-2<CR>gv=gv",
+            }
+        },
+    },
     win = {
         split = {
             vertical = cmd("vsplit"),
@@ -45,8 +73,8 @@ local function set_keymap(mode, lhs, rhs)
     -- LOG("mode:", mode, "lhs:", lhs, "rhs:", rhs)
     -- LOG("=== set_keymap ===  END  =============")
     vim.keymap.set(mode, lhs, rhs, {
-        silent = false,
-        -- noremap = true,
+        silent = true,
+        noremap = true,
     })
 end
 
