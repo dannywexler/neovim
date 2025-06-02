@@ -261,15 +261,6 @@ return PLUG("rebelot/heirline.nvim", {
                 end
             }
         )
-        local wb_disable_filetypes = {
-            "blink-cmp-menu",
-            "lazy",
-            "lazy_backdrop",
-            "mason",
-            "mason_backdrop",
-            "neo-tree-popup",
-            "snacks_picker_preview",
-        }
         require("heirline").setup({
             statusline = statusline,
             winbar = winbar,
@@ -279,10 +270,10 @@ return PLUG("rebelot/heirline.nvim", {
                     if buf == 1 then return true end
                     local bt = vim.bo[buf].buftype
                     local ft = vim.bo[buf].filetype
-                    if #ft == 0 then return true end
-                    local ft_match = vim.tbl_contains(wb_disable_filetypes, ft)
-                    -- LOG("HEIRLINE:", vim.api.nvim_buf_get_name(buf), "buftype:", bt, "filetype:", ft, "ft_match:", ft_match)
-                    if ft_match then return true end
+                    -- LOG("HEIRLINE:", vim.api.nvim_buf_get_name(buf), "buftype:", bt, "filetype:", ft)
+                    if ft == "neo-tree" then return false end
+                    if bt == "help" then return false end
+                    return bt ~= ""
                 end,
             }
         })

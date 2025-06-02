@@ -43,6 +43,7 @@ set({
         n = "nzz",
         N = "Nzz",
         p = "P",
+        P = '"+P',
         q = {
             q = c("qa!"),
             r = c("cq2"),
@@ -69,7 +70,7 @@ set({
         leader = {
             a = gotoWindow(1),
             b = h.win.split.horizontal,
-            c = snack("git_status"),
+            c = ":lua require('snacks').lazygit()<CR>",
             d = gotoWindow(3),
             e = c("Neotree"),
             f = gotoWindow(4),
@@ -84,6 +85,7 @@ set({
     v = {
         m = "gc",
         p = "P",
+        s = ":'<,'>sort<CR>",
         control = {
             h = h.visual.line.shift.h,
             j = h.visual.line.shift.j,

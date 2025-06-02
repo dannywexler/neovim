@@ -10,7 +10,7 @@ end
 -- o.foldmethod = 'indent'
 -- o.iskeyword:append('-')
 o.sessionoptions:append('globals', 'tabpages', 'localoptions')
-o.cmdheight = 1
+o.cmdheight = 0
 o.copyindent = true
 o.cursorline = true
 o.expandtab = true
