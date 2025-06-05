@@ -1,7 +1,7 @@
 local o = vim.opt
 
 local function cwd()
-    return vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+    return vim.fn.fnamemodify(vim.fn.getcwd(), ":~:gs?\\?/?")
 end
 
 -- o.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -16,12 +16,12 @@ o.cursorline = true
 o.expandtab = true
 o.fillchars:append({ eob = " " })
 o.fillchars:append({ horiz = "━" })
-o.fillchars:append({ horizup = "┻" })
 o.fillchars:append({ horizdown = "┳" })
+o.fillchars:append({ horizup = "┻" })
 o.fillchars:append({ vert = "┃" })
+o.fillchars:append({ verthoriz = "╋" })
 o.fillchars:append({ vertleft = "┫" })
 o.fillchars:append({ vertright = "┣" })
-o.fillchars:append({ verthoriz = "╋" })
 o.foldenable = false
 o.laststatus = 3
 o.linebreak = true
@@ -45,5 +45,7 @@ o.termguicolors = true
 o.title = true
 o.undofile = true
 o.updatetime = 1000
+o.winborder = "bold"
 o.writebackup = false
-vim.o.titlestring = "NVIM  in  " .. cwd()
+vim.o.titlestring = "NVIM " .. cwd()
+-- vim.o.winborder = "bold"

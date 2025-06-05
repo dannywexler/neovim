@@ -37,6 +37,10 @@ end
 
 set({
     n = {
+        g = {
+            h = function() vim.lsp.buf.hover() end,
+            n = function() vim.lsp.buf.rename() end,
+        },
         h = scroll("up"),
         l = scroll("down"),
         m = "gcc",
@@ -52,7 +56,7 @@ set({
         s = {
             a = snack("grep"),
             b = snack("buffers"),
-            d = snack("smart"),
+            d = function() require("sleekfiles").find() end,
             h = {
                 f = snack("help"),
                 l = snack("highlights"),
@@ -61,6 +65,7 @@ set({
         },
         v = "V",
         V = "v",
+        Esc = c("nohl"),
         control = {
             h = h.normal.line.shift.h,
             j = h.normal.line.shift.j,
@@ -78,7 +83,7 @@ set({
             r = ":%s@<C-r><C-w>@@gc<Left><Left><Left>",
             s = gotoWindow(2),
             v = h.win.split.vertical,
-            y = '"+y"',
+            y = '"+y',
             w = c("Neotree reveal"),
         }
     },
@@ -93,7 +98,7 @@ set({
             l = h.visual.line.shift.l,
         },
         leader = {
-            y = '"+y"',
+            y = '"+y',
         }
     }
 })
