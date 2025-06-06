@@ -48,4 +48,4 @@ o.updatetime = 1000
 o.winborder = "bold"
 o.writebackup = false
 vim.o.titlestring = "NVIM " .. cwd()
--- vim.o.winborder = "bold"
+if WINDOWS then vim.o.shell = "powershell" end

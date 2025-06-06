@@ -82,6 +82,7 @@ set({
             g = gotoWindow(5),
             r = ":%s@<C-r><C-w>@@gc<Left><Left><Left>",
             s = gotoWindow(2),
+            t = function() require("snacks").terminal() end,
             v = h.win.split.vertical,
             y = '"+y',
             w = c("Neotree reveal"),
