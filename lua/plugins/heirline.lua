@@ -267,10 +267,11 @@ return PLUG("rebelot/heirline.nvim", {
             opts = {
                 disable_winbar_cb = function(args)
                     local buf = args.buf
-                    if buf == 1 then return true end
+                    if buf == 1 then return false end
                     local bt = vim.bo[buf].buftype
                     local ft = vim.bo[buf].filetype
-                    -- LOG("HEIRLINE:", vim.api.nvim_buf_get_name(buf), "buftype:", bt, "filetype:", ft)
+                    -- local name = vim.api.nvim_buf_get_name(buf)
+                    -- LOG("HEIRLINE:", "bufnum:", buf, "bufname:", name, "buftype:", bt, "filetype:", ft)
                     if ft == "neo-tree" then return false end
                     if bt == "help" then return false end
                     return bt ~= ""

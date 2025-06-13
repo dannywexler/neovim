@@ -20,7 +20,6 @@ local function set_highlights(config)
         -- LOG("setting highlight:", hl_name, opts)
         vim.api.nvim_set_hl(0, hl_name, opts)
         for _, dest in ipairs(hl_value.links or {}) do
-            -- LOG("linking highlight", hl_name, "to", dest)
             vim.api.nvim_set_hl(0, dest, { link = hl_name })
         end
     end
@@ -28,6 +27,7 @@ end
 
 local hl_overrides = {
     CursorLine = { bg = c.grey.dim },
+    DiagnosticError = { fg = c.red },
     SnacksInputBorder = { fg = c.green.dark },
     SnacksInputTitle = { fg = c.green.dark },
     Visual = { fg = c.white, bg = c.blue.dark },
