@@ -6,8 +6,12 @@ local terminal_style = {
     width = 0,
 }
 return PLUG("folke/snacks.nvim", {
+    ---@type snacks.Config
     opts = {
         input = {},
+        notifier = {
+            top_down = false
+        },
         picker = {
             formatters = {
                 file = {
@@ -56,6 +60,9 @@ return PLUG("folke/snacks.nvim", {
                 wo = {
                     cursorline = false,
                 }
+            },
+            notification = {
+                border = "bold"
             },
             lazygit = terminal_style,
             terminal = terminal_style,
