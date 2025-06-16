@@ -11,6 +11,7 @@
   "mason_lspconfig": { "branch": "main", "commit": "67da97f8c2fd12d05427bb485ce07ee6418e0a51" },
   "mason_tool_installer": { "branch": "main", "commit": "93a9ff9b34c91c0cb0f7de8d5f7e4abce51d8903" },
   "mini_base16": { "branch": "main", "commit": "2eb2d2b889a8c861d1a66ec651bd0edb417d5c7f" },
+  "mini_comment": { "branch": "main", "commit": "51c173dffa17dc14c81169deaeea430bd394ab51" },
   "mini_icons": { "branch": "main", "commit": "397ed3807e96b59709ef3292f0a3e253d5c1dc0a" },
   "neo_tree": { "branch": "main", "commit": "3f1dd2de5045659e00bfbe27c8aca3b52c1fdbde" },
   "neoscroll": { "branch": "master", "commit": "f957373912e88579e26fdaea4735450ff2ef5c9c" },

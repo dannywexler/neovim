@@ -43,7 +43,6 @@ set({
         },
         h = scroll("up"),
         l = scroll("down"),
-        m = "gcc",
         n = "nzz",
         N = "Nzz",
         p = "P",
@@ -63,6 +62,7 @@ set({
             },
             w = snack("grep_word"),
         },
+        U = "<C-r>",
         v = "V",
         V = "v",
         Esc = c("nohl"),
@@ -89,7 +89,6 @@ set({
         }
     },
     v = {
-        m = "gc",
         p = "P",
         s = ":'<,'>sort<CR>",
         control = {
