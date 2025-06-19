@@ -2,6 +2,8 @@ local formatted_files = {}
 local files_map = {}
 
 local function on_fd_result(fd_res)
+    formatted_files = {}
+    files_map = {}
     local fmodify = vim.fn.fnamemodify
     local longest_filename = 12
     local file_info = {}

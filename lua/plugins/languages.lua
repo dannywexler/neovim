@@ -76,6 +76,6 @@ return require("sleeklang").setup({
         plugins = { require("my.typescript_tools") }
     },
     vim = { extra_filetypes = { "vimdoc" } },
-    xml = {},
+    xml = { lsp = { lemminx = {} } },
     yaml = { lsp = { yamlls = {} }, }
 })

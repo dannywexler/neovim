@@ -6,4 +6,11 @@ require("sleekerrors").setup()
 
 WINDOWS = vim.fn.has("win32") == 1
 
+vim.filetype.add({
+    extension = {
+        wadl = "xml",
+        wsdl = "xml",
+    }
+})
+
 require("lazyConfig")
