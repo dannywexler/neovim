@@ -57,7 +57,7 @@ aucmd("LspProgress", {
 
 aucmd("FileType", {
     pattern = "help",
-    callback = function()
+    callback = vim.schedule_wrap(function()
         vim.cmd.wincmd("L")
-    end,
+    end),
 })

@@ -1,3 +1,5 @@
+local logger = require("utils.log").create_logger("SleekErrors")
+
 local diagnostics_have_changed = false
 local function get_buf_name(bufnr)
     return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr or 0), ":t")
@@ -21,7 +23,7 @@ local diagnostics_map = {}
 
 ---@param changed_diagnostics vim.Diagnostic[]
 local function on_diagnostic_changed(changed_diagnostics)
-    -- LOG("on_diagnostic_changed got", #changed_diagnostics, "total diagnostics")
+    local log = logger("on_diagnostic_changed")
     diagnostics_have_changed = true
     diagnostics_map = {}
     for _, changed_diagnostic in ipairs(changed_diagnostics) do
@@ -33,15 +35,14 @@ local function on_diagnostic_changed(changed_diagnostics)
         buf_diagnostics[line] = line_diagnostics
         diagnostics_map[buf] = buf_diagnostics
     end
-    -- LOG("on_diagnostic_changed got changed_diagnostics:", changed_diagnostics)
-    for bufnr, buffer_diagnostics in pairs(diagnostics_map) do
-        local buf_diagnostics_count = 0
-        for _, line_diagnostics in pairs(buffer_diagnostics) do
-            buf_diagnostics_count = buf_diagnostics_count + #line_diagnostics
-        end
-        -- LOG("on_diagnostic_changed", get_buf_name(bufnr), "has", buf_diagnostics_count, "diagnostics")
-    end
-    -- LOG("on_diagnostic_changed diagnostics_map:", diagnostics_map)
+    -- for bufnr, buffer_diagnostics in pairs(diagnostics_map) do
+    --     local buf_diagnostics_count = 0
+    --     for _, line_diagnostics in pairs(buffer_diagnostics) do
+    --         buf_diagnostics_count = buf_diagnostics_count + #line_diagnostics
+    --     end
+    -- log(get_buf_name(bufnr), "has", buf_diagnostics_count, "diagnostics")
+    -- end
+    log("diagnostics_map:", diagnostics_map)
 end
 
 ---@param line_diagnostics vim.Diagnostic[]
@@ -55,12 +56,13 @@ end
 ---@param wininfo vim.fn.getwininfo.ret.item
 ---@param buf_diagnostics table<number, vim.Diagnostic[]>
 local function update_buf(wininfo, buf_diagnostics)
-    local buf_name = get_buf_name(wininfo.bufnr)
+    -- local log = logger("update_buf")
+    -- local buf_name = get_buf_name(wininfo.bufnr)
     if buf_diagnostics == nil then
-        -- LOG("update_buf", buf_name, "SKIPPED")
+        -- log("update_buf", buf_name, "SKIPPED")
         return
     end
-    -- LOG("update_buf", buf_name, "has diagnostics")
+    -- log("update_buf", buf_name, "has diagnostics")
     for line, line_diagnostics in ipairs(buf_diagnostics) do
         if line < wininfo.topline or line > wininfo.botline then return end
         table.sort(line_diagnostics, function(a, b)
@@ -85,7 +87,12 @@ end
 local function setup()
     vim.api.nvim_create_autocmd("DiagnosticChanged", {
         callback = function(event)
-            on_diagnostic_changed(event.data.diagnostics)
+            local log = logger("setup.DiagnosticChanged")
+            local buf = event.buf
+            local diags = event.data.diagnostics
+            local name = get_buf_name(buf)
+            log("Buf number", buf, "named:", name, "has", #diags, "diagnostics")
+            on_diagnostic_changed(diags)
         end
     })
 

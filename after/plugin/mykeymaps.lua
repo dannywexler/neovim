@@ -38,6 +38,7 @@ end
 set({
     n = {
         g = {
+            a = function() vim.lsp.buf.code_action() end,
             h = function() vim.lsp.buf.hover() end,
             n = function() vim.lsp.buf.rename() end,
         },
@@ -81,6 +82,7 @@ set({
             e = c("Neotree"),
             f = gotoWindow(4),
             g = gotoWindow(5),
+            m = function() require("utils.log").toggle() end,
             p = function() require("utils.format")() end,
             r = ":%s@<C-r><C-w>@@gc<Left><Left><Left>",
             s = gotoWindow(2),

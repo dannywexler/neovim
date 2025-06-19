@@ -35,7 +35,7 @@ return require("sleeklang").setup({
                 settings = {
                     Lua = {
                         diagnostics = {
-                            globals = { "vim", "WINDOWS", "P", "U", "V", "LOG", "PLUG", "MERGE" },
+                            globals = { "vim", "WINDOWS", "P", "U", "V", "PLUG", "MERGE" },
                             -- neededFileStatus = {
                             -- ["no-unknown"] = "Any!"
                             -- }
