@@ -54,3 +54,10 @@ aucmd("LspProgress", {
         })
     end,
 })
+
+aucmd("FileType", {
+    pattern = "help",
+    callback = function()
+        vim.cmd.wincmd("L")
+    end,
+})
