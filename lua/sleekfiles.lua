@@ -35,7 +35,8 @@ end
 
 local function refresh()
     vim.system(
-        { "fd", "--type", "f", "--exclude", "*.{JPG,PNG,doc,docx,gz,jar,jpg,jpeg,pdf,pptx,png,tif,tiff,ttf,xlsx,zip}" },
+        { "fd", "--type", "f", "--exclude", "*.{JPG,PNG,doc,docx,gz,jar,jpg,jpeg,pdf,pptx,png,tif,tiff,ttf,xlsx,zip}",
+            "--exclude", "node_modules/*" },
         {},
         vim.schedule_wrap(on_fd_result))
 end

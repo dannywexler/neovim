@@ -5,7 +5,10 @@ return PLUG("saghen/blink.cmp", {
             kind_icons = require("my.icons").lsp
         },
         completion = {
-            documentation = { window = { border = "rounded" } },
+            documentation = {
+                auto_show = true,
+                window = { border = "rounded" }
+            },
             menu = {
                 border = "rounded",
                 draw = {
@@ -26,6 +29,13 @@ return PLUG("saghen/blink.cmp", {
             }
         },
         keymap = { preset = "super-tab" },
+        signature = {
+            enabled = true,
+            window = {
+                max_width = 999,
+                max_height = 4,
+            }
+        },
         sources = {
             default = { "lazydev", "lsp", "path", "snippets", "buffer" },
             providers = {
