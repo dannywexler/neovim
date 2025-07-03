@@ -1,11 +1,12 @@
 local terminal_style = {
     backdrop = false,
-    border = "bold",
+    border = vim.o.winborder,
     height = 0.99,
     position = "float",
     width = 0,
 }
 return PLUG("folke/snacks.nvim", {
+    ---@module "snacks"
     ---@type snacks.Config
     opts = {
         input = {},
@@ -61,9 +62,9 @@ return PLUG("folke/snacks.nvim", {
                     cursorline = false,
                 }
             },
-            notification = {
-                border = "bold"
-            },
+            -- notification = {
+            --     -- border = "bold"
+            -- },
             lazygit = terminal_style,
             terminal = terminal_style,
         }

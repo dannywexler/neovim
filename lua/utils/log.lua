@@ -13,8 +13,7 @@ local function ensure()
         log_win = require("snacks").win.new({
             buf = log_buf,
             backdrop = false,
-            ---@diagnostic disable-next-line: assign-type-mismatch
-            border = "bold",
+            border = vim.o.winborder,
             height = 0.99,
             position = "float",
             show = false,

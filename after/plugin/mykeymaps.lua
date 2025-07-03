@@ -47,7 +47,8 @@ set({
             s = function()
                 vim.cmd.vsplit()
                 vim.lsp.buf.definition()
-                vim.cmd.zt()
+                vim.wait(50)
+                vim.cmd.norm("zt")
             end,
             h = function() vim.lsp.buf.hover() end,
             n = function() vim.lsp.buf.rename() end,
@@ -83,7 +84,10 @@ set({
         U = "<C-r>",
         v = "V",
         V = "v",
-        Esc = c("nohl"),
+        Esc = function()
+            vim.fn.setreg("/", "wxyz")
+            vim.cmd("nohlsearch")
+        end,
         control = {
             h = h.normal.line.shift.h,
             j = h.normal.line.shift.j,
@@ -97,6 +101,7 @@ set({
             d = gotoWindow(3),
             e = c("Neotree"),
             f = gotoWindow(4),
+            n = c("Navbuddy"),
             g = gotoWindow(5),
             m = function() require("utils.log").toggle() end,
             p = function() require("utils.format")() end,

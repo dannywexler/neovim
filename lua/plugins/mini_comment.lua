@@ -1,5 +1,5 @@
 return PLUG("echasnovski/mini.comment", {
-    keys = { "m" },
+    keys = { { "m", mode = { "n", "v" } } },
     main = "mini.comment",
     opts = {
         mappings = {

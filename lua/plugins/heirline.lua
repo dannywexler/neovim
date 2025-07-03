@@ -1,5 +1,7 @@
 local myColors = require("my.colors")
 
+vim.fn.setreg("/", "wxyz")
+
 local fmodify = vim.fn.fnamemodify
 local getcwd = vim.fn.getcwd
 local expand = vim.fn.expand
@@ -106,6 +108,29 @@ local function comp(component)
     }, component)
 end
 
+local function formatSearchResults()
+    local searchText = vim.fn.getreg("/")
+    if searchText == "wxyz" then
+        -- print("called formatSearchResults, found wxyz, exiting early")
+        return nil
+    end
+    if
+        vim.startswith(searchText, "\\<")
+        and vim.endswith(searchText, "\\>")
+    then
+        searchText = searchText:sub(3, #searchText - 2)
+    end
+    local searchCount = vim.fn.searchcount({ maxcount = 0 })
+    local padding = tostring(searchCount.total):len()
+    -- print("called formatSearchResults, got", searchCount.current, "of", searchCount.total, "for search", searchText)
+
+    return ("%s match %" .. padding .. "s/%s"):format(
+        searchText,
+        searchCount.current,
+        searchCount.total
+    )
+end
+
 
 return PLUG("rebelot/heirline.nvim", {
     opts = function()
@@ -206,7 +231,24 @@ return PLUG("rebelot/heirline.nvim", {
                 end,
                 update = { "ModeChanged", "BufEnter" }
             }),
+            bubble({
+                provider = function()
+                    local navic = require("nvim-navic")
+                    if not navic.is_available() then return end
+                    -- return require("lspsaga.symbol.winbar").get_bar()
+                    return navic.get_location()
+                end,
+                update = { "CursorHold", "CursorMoved", "ModeChanged", "BufEnter", "WinEnter" }
+                -- update = { "CursorMoved" }
+            }),
             { provider = function() return "%=" end, hl = { fg = sl_bg, bg = sl_bg } },
+            bubble({
+                provider = function()
+                    return formatSearchResults()
+                end,
+                -- update = { "CursorHold", "CursorMoved", "ModeChanged", "BufEnter", "WinEnter" }
+                update = { "CursorMoved" }
+            }),
             bubble({ provider = function() return vim.fn.mode() end })
         )
 
@@ -271,7 +313,7 @@ return PLUG("rebelot/heirline.nvim", {
                     local bt = vim.bo[buf].buftype
                     local ft = vim.bo[buf].filetype
                     -- local name = vim.api.nvim_buf_get_name(buf)
-                    -- LOG("HEIRLINE:", "bufnum:", buf, "bufname:", name, "buftype:", bt, "filetype:", ft)
+                    -- print("HEIRLINE:", "bufnum:", buf, "bufname:", name, "buftype:", bt, "filetype:", ft)
                     if ft == "neo-tree" then return false end
                     if bt == "help" then return false end
                     return bt ~= ""

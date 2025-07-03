@@ -1,9 +1,6 @@
 return PLUG("nvimdev/lspsaga.nvim", {
     event = "LspAttach",
     opts = {
-        beacon = {
-            enable = false
-        },
         diagnostic = {
             extend_relatedInformation = true,
             show_code_action = true,
@@ -15,7 +12,7 @@ return PLUG("nvimdev/lspsaga.nvim", {
             enable = false
         },
         ui = {
-            border = "bold"
+            border = vim.o.winborder
         }
     }
 })

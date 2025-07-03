@@ -1,3 +1,4 @@
+vim.o.winborder = "rounded"
 require("utils.log")
 require("utils.merge")
 require("utils.plugin")

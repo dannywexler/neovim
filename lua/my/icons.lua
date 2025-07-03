@@ -47,5 +47,10 @@ return {
         Unit = " ",
         Value = " ",
         Variable = "󰫧 ",
+    },
+    misc = {
+        greater = "",
+        leaf = "󰌪 ",
+        arrow_right = " "
     }
 }
