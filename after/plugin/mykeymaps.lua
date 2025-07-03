@@ -17,6 +17,8 @@ local all_snack_pickers = {
     grep_word = "grep_word",
     help = "highlights",
     highlights = "highlights",
+    lsp_definitions = "lsp_definitions",
+    lsp_references = "lsp_references",
     smart = "smart"
 }
 
@@ -39,10 +41,24 @@ set({
     n = {
         g = {
             a = function() vim.lsp.buf.code_action() end,
+            d = snack("lsp_definitions"),
+            p = c("Lspsaga peek_definition"),
+            r = snack("lsp_references"),
+            s = function()
+                vim.cmd.vsplit()
+                vim.lsp.buf.definition()
+                vim.cmd.zt()
+            end,
             h = function() vim.lsp.buf.hover() end,
             n = function() vim.lsp.buf.rename() end,
         },
         h = scroll("up"),
+        j = {
+            d = c("Lspsaga diagnostic_jump_next"),
+        },
+        k = {
+            d = c("Lspsaga diagnostic_jump_prev"),
+        },
         l = scroll("down"),
         n = "nzz",
         N = "Nzz",
