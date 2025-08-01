@@ -54,6 +54,7 @@ return {
         end
 
         table.insert(lazy_specs, PLUG("nvim-treesitter/nvim-treesitter", {
+            cmd = { "TSInstallSync" },
             main = "nvim-treesitter.configs",
             ft = enabled_treesitter_filetypes,
             opts = {
