@@ -73,7 +73,16 @@ return require("sleeklang").setup({
             "tsx",
             "typescriptreact"
         },
-        plugins = { require("my.typescript_tools") }
+        -- plugins = { require("my.typescript_tools") }
+        lsp = {
+            ts_ls = {
+                settings = {
+                    implicitProjectConfiguration = {
+                        checkJs = true,
+                    },
+                },
+            }
+        }
     },
     vim = { extra_filetypes = { "vimdoc" } },
     xml = { lsp = { lemminx = {} } },
