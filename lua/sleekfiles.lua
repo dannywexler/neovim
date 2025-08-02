@@ -1,5 +1,30 @@
 local formatted_files = {}
 local files_map = {}
+local extensions = {
+    "JPG",
+    "PNG",
+    "class",
+    "doc",
+    "docx",
+    "eot",
+    "gz",
+    "jar",
+    "jpeg",
+    "jpg",
+    "pdf",
+    "png",
+    "pptx",
+    "svg",
+    "tif",
+    "tiff",
+    "ttf",
+    "war",
+    "woff",
+    "woff2",
+    "xlsx",
+    "zip",
+}
+local extensions_to_exclude = "*.{" .. table.concat(extensions, ",") .. "}"
 
 local function on_fd_result(fd_res)
     formatted_files = {}
@@ -35,8 +60,12 @@ end
 
 local function refresh()
     vim.system(
-        { "fd", "--type", "f", "--exclude", "*.{JPG,PNG,doc,docx,gz,jar,jpg,jpeg,pdf,pptx,png,tif,tiff,ttf,xlsx,zip}",
-            "--exclude", "node_modules/*" },
+        { "fd",
+            "--type", "f",
+            "--exclude",
+            extensions_to_exclude,
+            "--exclude", "node_modules/*",
+            "--exclude", "target/*" },
         {},
         vim.schedule_wrap(on_fd_result))
 end
