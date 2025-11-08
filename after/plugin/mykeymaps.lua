@@ -19,6 +19,7 @@ local all_snack_pickers = {
     highlights = "highlights",
     lsp_definitions = "lsp_definitions",
     lsp_references = "lsp_references",
+    lsp_symbols = "lsp_symbols",
     smart = "smart"
 }
 
@@ -74,6 +75,7 @@ set({
             a = snack("grep"),
             b = snack("buffers"),
             d = function() require("sleekfiles").find() end,
+            f = snack("lsp_symbols"),
             h = {
                 f = snack("help"),
                 l = snack("highlights"),

@@ -1,5 +1,5 @@
 return {
-	black = "#000000",
+    black = "#000000",
     blue = {
         light = "#7aa2f7",
         medium = "#0091f8",
@@ -17,6 +17,7 @@ return {
         dark = "#1abc9c",
     },
     orange = "#e0af68",
+    pink = "#ff73bd",
     purple = "#c678dd",
     red = "#e06c75",
     teal = "#00e5ff",

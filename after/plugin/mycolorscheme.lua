@@ -5,6 +5,9 @@ local c = require("my.colors")
 ---@field bg? string
 ---@field bold? boolean
 ---@field italic? boolean
+---@field underline? boolean
+---@field undercurl? boolean
+---@field sp? string
 ---@field links? string[]
 
 
@@ -17,6 +20,9 @@ local function set_highlights(config)
         opts.bg = hl_value.bg or "NONE"
         opts.bold = hl_value.bold
         opts.italic = hl_value.italic
+        opts.underline = hl_value.underline
+        opts.undercurl = hl_value.undercurl
+        opts.sp = hl_value.sp
         -- LOG("setting highlight:", hl_name, opts)
         vim.api.nvim_set_hl(0, hl_name, opts)
         for _, dest in ipairs(hl_value.links or {}) do
@@ -25,15 +31,28 @@ local function set_highlights(config)
     end
 end
 
+---@type table<string, HighlightConfig>
 local hl_overrides = {
     CursorLine = { bg = c.grey.dim },
     DiagnosticError = { fg = c.red },
+    DiagnosticUnderlineError = { fg = c.red, sp = c.red, undercurl = true },
+    DiagnosticUnderlineWarn = { fg = c.yellow, sp = c.yellow, undercurl = true },
+    DiagnosticUnderlineInfo = { fg = c.yellow, sp = c.yellow, undercurl = true },
+    DiagnosticUnderlineHint = { fg = c.yellow, sp = c.yellow, undercurl = true },
+    SleekErrorsError = { fg = c.black, bg = c.red, bold = true },
+    SleekErrorsWarn = { fg = c.black, bg = c.yellow },
+    SleekErrorsInfo = { fg = c.black, bg = c.yellow },
+    SleekErrorsHint = { fg = c.black, bg = c.yellow },
     SnacksInputBorder = { fg = c.green.dark },
     SnacksInputTitle = { fg = c.green.dark },
     Visual = { fg = c.white, bg = c.blue.dark },
     WinBar = { fg = c.black, bg = c.green.light },
     WinBarNC = { fg = c.black, bg = c.blue.light },
     WinSeparator = { fg = c.blue.light },
+    ["@variable.parameter"] = { fg = c.pink },
+    ["@variable.member"] = { fg = c.green.dark },
+    ["@keyword.return"] = { fg = c.purple },
+    DiffDelete = { fg = c.red },
 }
 
 set_highlights(hl_overrides)
