@@ -2,10 +2,12 @@ local formatted_files = {}
 local files_map = {}
 local extensions = {
     "JPG",
+    "7z",
     "PNG",
     "class",
     "doc",
     "docx",
+    "eap",
     "eot",
     "gz",
     "jar",
@@ -25,6 +27,13 @@ local extensions = {
     "zip",
 }
 local extensions_to_exclude = "*.{" .. table.concat(extensions, ",") .. "}"
+
+local folders = {
+    "dist",
+    "node_modules",
+    "target",
+}
+local folders_to_exclude = "**/{" .. table.concat(folders, ",") .. "}/**"
 
 local function on_fd_result(fd_res)
     formatted_files = {}
@@ -60,12 +69,12 @@ end
 
 local function refresh()
     vim.system(
-        { "fd",
+        {
+            "fd",
             "--type", "f",
-            "--exclude",
-            extensions_to_exclude,
-            "--exclude", "node_modules/*",
-            "--exclude", "target/*" },
+            "--exclude", extensions_to_exclude,
+            "--exclude", folders_to_exclude,
+        },
         {},
         vim.schedule_wrap(on_fd_result))
 end
@@ -79,7 +88,7 @@ end
 local function find()
     vim.ui.select(formatted_files, { prompt = "Choose File" }, vim.schedule_wrap(function(choice)
         if not choice then
-            return vim.notify("No file chosen.", vim.log.levels.WARN)
+            return vim.notify("No file chosen.", vim.log.levels.WARN, { title = "SleekFiles" })
         end
         local full_path = files_map[choice]
         assert(full_path, "Missing full path for formatted path:" .. choice)

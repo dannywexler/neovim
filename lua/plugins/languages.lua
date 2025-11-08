@@ -1,7 +1,5 @@
 vim.diagnostic.config({
-    virtual_lines = {
-        enabled = true
-    },
+    -- virtual_lines = false,
     signs = false,
 })
 
