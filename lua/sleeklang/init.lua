@@ -17,7 +17,9 @@ return {
         local enabled_tools = {}
 
         for filetype, language_config in pairs(config) do
-            if (language_config.enabled == nil or language_config.enabled or (type(language_config.enabled) == "function" and language_config.enabled())) then
+            if (language_config.enabled == nil or
+                    language_config.enabled or
+                    (type(language_config.enabled) == "function" and language_config.enabled())) then
                 local lang_filetypes = {}
                 table.insert(lang_filetypes, filetype)
                 for _, extra_filetype in ipairs(language_config.extra_filetypes or {}) do
@@ -54,17 +56,17 @@ return {
         end
 
         table.insert(lazy_specs, PLUG("nvim-treesitter/nvim-treesitter", {
-            cmd = { "TSInstallSync" },
+            -- cmd = { "TSInstallSync" },
             main = "nvim-treesitter.configs",
             ft = enabled_treesitter_filetypes,
             opts = {
                 additional_vim_regex_highlighting = false,
                 ensure_installed = enabled_treesitter_filetypes,
                 highlight = {
-                    enabled = true,
+                    enable = true,
                 },
                 indent = {
-                    enabled = true,
+                    enable = true,
                 },
                 sync_install = true,
             }
@@ -110,6 +112,7 @@ return {
 
         table.insert(lazy_specs, PLUG(
             "neovim/nvim-lspconfig", {
+                cmd = { "LspInfo" },
                 ft = enabled_lsp_filetypes,
                 config = function()
                     for lsp_name, lsp_opts in pairs(enabled_lsps) do

@@ -8,6 +8,23 @@ local function gotoWindow(windowNumber)
     return tostring(windowNumber) .. "<C-w>w"
 end
 
+---@enum (key) HopTo
+local hopto_map = {
+    w = "forward_start",
+    e = "forward_end",
+    b = "backward_end",
+}
+
+---@param action HopTo
+local function hop(action)
+    return function()
+        local matching_action = hopto_map[action]
+        local words = require("neowords")
+        local hopper = words.get_word_hops(words.pattern_presets.any_word)
+        hopper[matching_action]()
+    end
+end
+
 ---@enum (key) SnackPicker
 local all_snack_pickers = {
     buffers = "buffers",
@@ -40,6 +57,8 @@ end
 
 set({
     n = {
+        b = hop("b"),
+        e = hop("e"),
         g = {
             a = function() vim.lsp.buf.code_action() end,
             d = snack("lsp_definitions"),
@@ -86,6 +105,7 @@ set({
         U = "<C-r>",
         v = "V",
         V = "v",
+        w = hop("w"),
         Esc = function()
             vim.fn.setreg("/", "wxyz")
             vim.cmd("nohlsearch")
