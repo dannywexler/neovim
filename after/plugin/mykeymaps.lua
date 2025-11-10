@@ -64,6 +64,7 @@ set({
             d = snack("lsp_definitions"),
             p = c("Lspsaga peek_definition"),
             r = snack("lsp_references"),
+            R = c("Lspsaga finder"),
             s = function()
                 vim.cmd.vsplit()
                 vim.lsp.buf.definition()
