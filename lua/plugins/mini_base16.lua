@@ -10,7 +10,7 @@ return PLUG("echasnovski/mini.base16", {
             base05 = c.white,
             base06 = c.white,
             base07 = c.grey.light,
-            base08 = c.green.dark,
+            base08 = c.red,
             base09 = c.orange,
             base0A = c.teal,
             base0B = c.green.light,

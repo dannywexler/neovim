@@ -24,8 +24,8 @@ local helpers = {
                 j = ":m '>+1<CR>gv=gv",
                 left = "<gv",
                 h = "<gv",
-                right = "V><Esc>",
-                l = "V><Esc>",
+                right = ">gv",
+                l = ">gv",
                 up = ":m '<-2<CR>gv=gv",
                 k = ":m '<-2<CR>gv=gv",
             }
