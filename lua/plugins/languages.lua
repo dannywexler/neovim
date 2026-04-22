@@ -4,7 +4,7 @@ vim.diagnostic.config({
 })
 
 return require("sleeklang").setup({
-    bash = { lsp = { bashls = {} } },
+    bash = { extra_filetypes = { "sh" }, lsp = { bashls = {} } },
     c = {},
     comment = {},
     cpp = {},
@@ -49,6 +49,7 @@ return require("sleeklang").setup({
     markdown = { extra_filetypes = { "markdown_inline" }, lsp = { marksman = {} } },
     powershell = {
         enabled = WINDOWS,
+        extra_filetypes = { "ps1" },
         lsp = {
             powershell_es = {
                 shell = "powershell.exe",

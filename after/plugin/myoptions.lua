@@ -1,7 +1,15 @@
 local o = vim.opt
 
+local prefixes = { "C:/nn/code/", "C:/OneDrive/OneDrive - GDIT/" }
+
 local function cwd()
-    return vim.fn.fnamemodify(vim.fn.getcwd(), ":~:gs?\\?/?")
+    local path = vim.fn.fnamemodify(vim.fn.getcwd(), ":~:gs?\\?/?")
+    for _, prefix in ipairs(prefixes) do
+        if vim.startswith(path, prefix) then
+            return string.sub(path, #prefix + 1)
+        end
+    end
+    return "NVIM " .. path
 end
 
 -- o.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -47,5 +55,5 @@ o.undofile = true
 o.updatetime = 1000
 o.winborder = "bold"
 o.writebackup = false
-vim.o.titlestring = "NVIM " .. cwd()
+vim.o.titlestring = cwd()
 if WINDOWS then vim.o.shell = "powershell" end

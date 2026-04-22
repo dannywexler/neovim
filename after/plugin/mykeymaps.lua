@@ -111,6 +111,8 @@ set({
             vim.fn.setreg("/", "wxyz")
             vim.cmd("nohlsearch")
         end,
+        Up = "gk",
+        Down = "gj",
         control = {
             h = h.normal.line.shift.h,
             j = h.normal.line.shift.j,

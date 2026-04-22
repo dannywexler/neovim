@@ -98,7 +98,7 @@ local function render_line(ctx)
     for _, diagnostic in ipairs(ctx.diagnostics) do
         local highlight = highlight_groups[diagnostic.severity]
         -- if two diagnostics overlap, skip them
-        if diagnostic.col > endColOfLastPiece then
+        if diagnostic.col == 0 or diagnostic.col > endColOfLastPiece then
             -- first line pieces
             local paddingWidth = diagnostic.col - endColOfLastPiece
             table.insert(first_line_pieces, { spaces(paddingWidth), "Normal", })
