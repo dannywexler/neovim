@@ -47,6 +47,7 @@ return require("sleeklang").setup({
         plugins = { PLUG("folke/lazydev.nvim") }
     },
     markdown = { extra_filetypes = { "markdown_inline" }, lsp = { marksman = {} } },
+    nu = { lsp = { nushell = {} } },
     powershell = {
         enabled = WINDOWS,
         extra_filetypes = { "ps1" },
