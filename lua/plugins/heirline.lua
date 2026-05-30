@@ -62,7 +62,7 @@ local sl_bg = myColors.grey.dim
 local wb_active_bg = myColors.green.light
 local wb_other_bg = myColors.blue.light
 
-local scrollbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
+-- local scrollbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
 
 ---@param component Component
 ---@param count integer?
@@ -295,13 +295,28 @@ return PLUG("rebelot/heirline.nvim", {
                     local currentLine = cursor[1]
                     local currentCol = cursor[2]
                     local totalLines = vim.api.nvim_buf_line_count(0)
+                    if totalLines == 0 then return end
                     local totalLinesWidth = #tostring(totalLines)
-                    local index = math.floor((currentLine - 1) / totalLines * #scrollbar) + 1
-                    local progress = (scrollbar[index]):rep(2)
-                    return ("%s %" .. totalLinesWidth .. "s/%s | %3s "):format(progress, currentLine, totalLines,
+                    return ("%" .. totalLinesWidth .. "s/%s | %3s "):format(currentLine, totalLines,
                         currentCol)
                 end
             }
+        -- {
+        --     provider = function()
+        --         local ft = vim.bo.filetype
+        --         if (ft == "neo-tree") then return end
+        --         local cursor = vim.api.nvim_win_get_cursor(0)
+        --         local currentLine = cursor[1]
+        --         local currentCol = cursor[2]
+        --         local totalLines = vim.api.nvim_buf_line_count(0)
+        --         if totalLines == 0 then return end
+        --         local totalLinesWidth = #tostring(totalLines)
+        --         local index = math.floor((currentLine - 1) / totalLines * #scrollbar) + 1
+        --         local progress = (scrollbar[index]):rep(2)
+        --         return ("%s %" .. totalLinesWidth .. "s/%s | %3s "):format(progress, currentLine, totalLines,
+        --             currentCol)
+        --     end
+        -- }
         )
         require("heirline").setup({
             statusline = statusline,

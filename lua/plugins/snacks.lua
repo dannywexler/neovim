@@ -16,10 +16,57 @@ return PLUG("folke/snacks.nvim", {
         picker = {
             formatters = {
                 file = {
-                    filename_first = true
+                    filename_first = true,
+                    truncate = 240,
+                },
+            },
+            layouts = {
+                default = {
+                    layout = {
+                        box = "horizontal",
+                        width = 0,
+                        height = 0.99,
+                        {
+                            box = "vertical",
+                            border = "rounded",
+                            title = "{title} {live} {flags}",
+                            {
+                                win = "input",
+                                height = 1,
+                                border = "bottom"
+                            },
+                            {
+                                win = "list",
+                                border = "none"
+                            },
+                        },
+                        { win = "preview", title = "{preview}", width = 80, border = "rounded" }
+                    }
+                },
+                small = {
+                    layout = {
+                        box = "vertical",
+                        width = 0.5,
+                        height = 0.8,
+                        {
+                            box = "vertical",
+                            border = "rounded",
+                            title = "{title} {live} {flags}",
+                            {
+                                win = "input",
+                                height = 1,
+                                border = "bottom"
+                            },
+                            {
+                                win = "list",
+                                border = "none"
+                            },
+                        },
+                    }
                 }
             },
             matcher = {
+                sort_empty = true,
                 frecency = true,
                 history_bonus = true,
             },
@@ -33,6 +80,7 @@ return PLUG("folke/snacks.nvim", {
                         -- "buffers",
                         "files",
                     },
+                    layout = "small"
                 }
             },
             win = {

@@ -1,4 +1,6 @@
-local logger = require("utils.log").create_logger("SleekErrors")
+local function getLogger(name)
+    return require("utils.log").create_logger("SleekErrors")(name)
+end
 
 -- local example_diagnostic = {
 --     bufnr = 33,
@@ -66,7 +68,7 @@ end
 ---@param buf number
 ---@param changed_diagnostics vim.Diagnostic[]
 local function on_diagnostic_changed(buf, changed_diagnostics)
-    local log = logger("on_diagnostic_changed")
+    local log = getLogger("on_diagnostic_changed")
     local diagnostics_count = #changed_diagnostics
     local bufname = get_buf_name(buf)
     if diagnostics_count > 0 then

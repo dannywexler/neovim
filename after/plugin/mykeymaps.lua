@@ -28,6 +28,7 @@ end
 ---@enum (key) SnackPicker
 local all_snack_pickers = {
     buffers = "buffers",
+    diagnostics_buffer = "diagnostics_buffer",
     files = "files",
     git_status = "git_status",
     grep = "grep",
@@ -53,6 +54,10 @@ local function scroll(direction)
     else
         return function() require("neoscroll").ctrl_d(opts) end
     end
+end
+
+local function toggle_lazygit()
+    require("snacks").terminal.toggle("lazygit")
 end
 
 set({
@@ -94,7 +99,8 @@ set({
         s = {
             a = snack("grep"),
             b = snack("buffers"),
-            d = function() require("sleekfiles").find() end,
+            d = snack("smart"),
+            e = snack("diagnostics_buffer"),
             f = snack("lsp_symbols"),
             h = {
                 f = snack("help"),
@@ -114,15 +120,16 @@ set({
         Up = "gk",
         Down = "gj",
         control = {
+            g = toggle_lazygit,
             h = h.normal.line.shift.h,
             j = h.normal.line.shift.j,
             k = h.normal.line.shift.k,
             l = h.normal.line.shift.l,
+            t = function() require("snacks").terminal() end,
         },
         leader = {
             a = gotoWindow(1),
             b = h.win.split.horizontal,
-            c = ":lua require('snacks').lazygit()<CR>",
             d = gotoWindow(3),
             e = c("Neotree"),
             f = gotoWindow(4),
@@ -132,11 +139,17 @@ set({
             p = function() require("utils.format")() end,
             r = ":%s@<C-r><C-w>@@gc<Left><Left><Left>",
             s = gotoWindow(2),
-            t = function() require("snacks").terminal() end,
             v = h.win.split.vertical,
             y = '"+y',
             w = c("Neotree reveal"),
         }
+    },
+    t = {
+        control = {
+            g = toggle_lazygit,
+            t = function() require("snacks").terminal() end,
+        },
+        Esc = "<C-\\><C-n>",
     },
     v = {
         p = "P",
@@ -146,6 +159,7 @@ set({
             j = h.visual.line.shift.j,
             k = h.visual.line.shift.k,
             l = h.visual.line.shift.l,
+            t = function() require("snacks").terminal() end,
         },
         leader = {
             y = '"+y',

@@ -1,6 +1,6 @@
 local o = vim.opt
 
-local prefixes = { "C:/nn/code/", "C:/OneDrive/OneDrive - GDIT/" }
+local prefixes = { "C:/nn/shared/code/", "C:/OneDrive/OneDrive - GDIT/" }
 
 local function cwd()
     local path = vim.fn.fnamemodify(vim.fn.getcwd(), ":~:gs?\\?/?")
@@ -56,4 +56,8 @@ o.updatetime = 1000
 o.winborder = "bold"
 o.writebackup = false
 vim.o.titlestring = cwd()
-if WINDOWS then vim.o.shell = "powershell" end
+if WINDOWS then
+    vim.o.shell = "powershell"
+    vim.o.shellcmdflag = "-nologo -noprofile -ExecutionPolicy RemoteSigned -command"
+    vim.o.shellxquote = ""
+end

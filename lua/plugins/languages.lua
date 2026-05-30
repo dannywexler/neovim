@@ -47,16 +47,10 @@ return require("sleeklang").setup({
         plugins = { PLUG("folke/lazydev.nvim") }
     },
     markdown = { extra_filetypes = { "markdown_inline" }, lsp = { marksman = {} } },
-    nu = { lsp = { nushell = {} } },
+    nu = { enabled = vim.fn.executable("nu") == 1, lsp = { nushell = {} } },
     powershell = {
         enabled = WINDOWS,
         extra_filetypes = { "ps1" },
-        lsp = {
-            powershell_es = {
-                shell = "powershell.exe",
-                bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
-            },
-        },
     },
     properties = {},
     python = {},

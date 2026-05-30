@@ -8,6 +8,7 @@ local function ensure()
         log_buf = vim.api.nvim_create_buf(false, true)
         print("log.ensure.initialize_buf", log_buf)
     end
+    vim.api.nvim_buf_set_option(log_buf, "modifiable", true)
     if not log_win then
         print("log.ensure.initialize_win")
         log_win = require("snacks").win.new({
@@ -38,7 +39,7 @@ local function append(scope, text)
             return (" "):rep(#scope) .. item
         end)
         :totable()
-    vim.api.nvim_buf_set_lines(buf, -1, -1, false, lines)
+    local set_ok = pcall(vim.api.nvim_buf_set_lines, buf, -1, -1, false, lines)
 end
 
 local function toggle()

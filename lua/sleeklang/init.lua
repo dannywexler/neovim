@@ -110,17 +110,16 @@ return {
             }
         }))
 
-        table.insert(lazy_specs, PLUG(
-            "neovim/nvim-lspconfig", {
-                cmd = { "LspInfo" },
-                ft = enabled_lsp_filetypes,
-                config = function()
-                    for lsp_name, lsp_opts in pairs(enabled_lsps) do
-                        vim.lsp.enable(lsp_name)
-                        vim.lsp.config(lsp_name, lsp_opts)
-                    end
-                end,
-            }))
+        table.insert(lazy_specs, PLUG("neovim/nvim-lspconfig", {
+            cmd = { "LspInfo" },
+            ft = enabled_lsp_filetypes,
+            config = function()
+                for lsp_name, lsp_opts in pairs(enabled_lsps) do
+                    vim.lsp.enable(lsp_name)
+                    vim.lsp.config(lsp_name, lsp_opts)
+                end
+            end,
+        }))
 
         return lazy_specs
     end

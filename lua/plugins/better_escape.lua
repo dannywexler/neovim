@@ -8,11 +8,6 @@ return PLUG("max397574/better-escape.nvim", {
                     k = "<Esc><Right>"
                 }
             },
-            t = {
-                j = {
-                    k = "<C-\\><C-n>",
-                },
-            },
         }
     }
 })
