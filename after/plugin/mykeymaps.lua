@@ -107,6 +107,7 @@ set({
             h = {
                 f = snack("help"),
                 l = snack("highlights"),
+                s = function() require("snacks").notifier.show_history() end,
             },
             s = function() require("sleekfiles").refresh() end,
             w = snack("grep_word"),

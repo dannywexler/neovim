@@ -56,8 +56,9 @@ return {
         end
 
         table.insert(lazy_specs, PLUG("nvim-treesitter/nvim-treesitter", {
-            -- cmd = { "TSInstallSync" },
+            cmd = { "TSInstallSync", "TSUpdateSync" },
             main = "nvim-treesitter.configs",
+            branch = "master",
             ft = enabled_treesitter_filetypes,
             opts = {
                 additional_vim_regex_highlighting = false,
@@ -79,26 +80,36 @@ return {
                 "MasonToolsClean"
             },
             dependencies = {
-                PLUG("mason-org/mason.nvim", {
-                    cmd = "Mason",
+                PLUG("mason-org/mason-lspconfig.nvim", {
                     dependencies = {
-                        PLUG("mason-org/mason-lspconfig.nvim", {
-                            opts = { automatic_enable = false },
+                        PLUG("mason-org/mason.nvim", {
+                            cmd = "Mason",
+                            opts = {
+                                max_concurrent_installers = 1,
+                                ui = {
+                                    border = "rounded",
+                                    height = 0.95,
+                                    icons = {
+                                        package_installed = "✓",
+                                        package_pending = "➜",
+                                        package_uninstalled = "✗",
+                                    },
+                                    width = 0.95
+                                },
+                            }
+                        }),
+                        PLUG("neovim/nvim-lspconfig", {
+                            cmd = { "LspInfo" },
+                            config = function()
+                                for lsp_name, lsp_opts in pairs(enabled_lsps) do
+                                    vim.lsp.enable(lsp_name)
+                                    vim.lsp.config(lsp_name, lsp_opts)
+                                end
+                            end,
                         })
                     },
-                    opts = {
-                        max_concurrent_installers = 1,
-                        ui = {
-                            border = "rounded",
-                            height = 0.95,
-                            icons = {
-                                package_installed = "✓",
-                                package_pending = "➜",
-                                package_uninstalled = "✗",
-                            },
-                            width = 0.95
-                        },
-                    }
+                    opts = { automatic_enable = false },
+                    ft = enabled_lsp_filetypes,
                 }),
             },
             opts = {
@@ -108,17 +119,6 @@ return {
                 debounce_hours = 24,
                 ensure_installed = enabled_tools,
             }
-        }))
-
-        table.insert(lazy_specs, PLUG("neovim/nvim-lspconfig", {
-            cmd = { "LspInfo" },
-            ft = enabled_lsp_filetypes,
-            config = function()
-                for lsp_name, lsp_opts in pairs(enabled_lsps) do
-                    vim.lsp.enable(lsp_name)
-                    vim.lsp.config(lsp_name, lsp_opts)
-                end
-            end,
         }))
 
         return lazy_specs

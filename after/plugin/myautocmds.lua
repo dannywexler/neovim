@@ -61,3 +61,17 @@ aucmd("FileType", {
         vim.cmd.wincmd("L")
     end),
 })
+
+aucmd("User", {
+    pattern = "MasonToolsStartingInstall",
+    callback = function()
+        print("MasonToolInstaller is starting...")
+    end
+})
+
+aucmd("User", {
+    pattern = "MasonToolsUpdateCompleted",
+    callback = function(evt)
+        print("MasonToolInstaller completed installing tools:", vim.inspect(evt.data))
+    end
+})

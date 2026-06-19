@@ -11,7 +11,8 @@ return PLUG("folke/snacks.nvim", {
     opts = {
         input = {},
         notifier = {
-            top_down = false
+            top_down = false,
+            width = { min = 40, max = 0.7 },
         },
         picker = {
             formatters = {
@@ -113,6 +114,10 @@ return PLUG("folke/snacks.nvim", {
             -- notification = {
             --     -- border = "bold"
             -- },
+            notification_history = {
+                width = 0.95,
+                height = 0.95,
+            },
             lazygit = terminal_style,
             terminal = terminal_style,
         }

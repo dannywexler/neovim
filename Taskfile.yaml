@@ -3,13 +3,14 @@ version: "3"
 silent: true
 
 tasks:
+
   bootstrap:
     aliases: [bs]
     cmds:
       - "echo [SleekVim] Bootstrapping"
       - task: clean_paths_linux
-      - task: clean_paths_windows
-      - task: clone_lazy
+      # - task: clean_paths_windows
+      # - task: clone_lazy
       - task: install_all
 
   clean_paths_linux:
@@ -21,23 +22,24 @@ tasks:
       - rm -rf ~/.local/share/nvim
       - rm -rf ~/.local/state/nvim
 
-  clean_paths_windows:
-    aliases: [cpw]
-    platforms: [windows]
-    silent: false
-    cmds:
-      - "echo [SleekVim] {{.TASK}}"
-      - powershell rm {{toSlash .TMP}}/nvim -r -Force
-      - powershell rm {{toSlash .LOCALAPPDATA}}/nvim-data -r -Force
+  # clean_paths_windows:
+  #   aliases: [cpw]
+  #   platforms: [windows]
+  #   silent: false
+  #   cmds:
+  #     - "echo [SleekVim] {{.TASK}}"
+  #     - powershell rm {{toSlash .TMP}}/nvim -r -Force
+  #     - powershell rm {{toSlash .LOCALAPPDATA}}/nvim-data -r -Force
 
   clone_lazy:
     aliases: [cl]
     cmds:
       - "echo [SleekVim] {{.TASK}}"
-      - cmd: git clone --filter=blob:none --single-branch https://github.com/folke/lazy.nvim ~/.local/share/nvim/lazy/lazy.nvim
+      - cmd: git clone --filter=blob:none --single-branch
+          https://github.com/folke/lazy.nvim ~/.local/share/nvim/lazy/lazy.nvim
         platforms: [linux]
-      - cmd: git clone --filter=blob:none --single-branch https://github.com/folke/lazy.nvim {{toSlash .LOCALAPPDATA}}/nvim-data/lazy/lazy.nvim
-        platforms: [windows]
+      # - cmd: git clone --filter=blob:none --single-branch https://github.com/folke/lazy.nvim {{toSlash .LOCALAPPDATA}}/nvim-data/lazy/lazy.nvim
+      #   platforms: [windows]
 
   install_all:
     aliases: [ia]
@@ -52,21 +54,21 @@ tasks:
     cmds:
       - "echo [SleekVim] {{.TASK}}"
       - task: nvim_cmd
-        vars: { CMD: "Lazy! install" }
+        vars: {CMD: "Lazy! install"}
 
   install_treesitter:
     aliases: [its]
     cmds:
       - "echo [SleekVim] {{.TASK}}"
       - task: nvim_cmd
-        vars: { CMD: "TSInstallSync" }
+        vars: {CMD: "TSInstallSync"}
 
   install_tools:
     aliases: [it]
     cmds:
       - "echo [SleekVim] {{.TASK}}"
       - task: nvim_cmd
-        vars: { CMD: "MasonToolsInstallSync" }
+        vars: {CMD: "MasonToolsUpdateSync"}
 
   update_all:
     aliases: [ua]
@@ -81,21 +83,21 @@ tasks:
     cmds:
       - "echo [SleekVim] {{.TASK}}"
       - task: nvim_cmd
-        vars: { CMD: "Lazy! sync" }
+        vars: {CMD: "Lazy! sync"}
 
   update_treesitter:
     aliases: [uts]
     cmds:
       - "echo [SleekVim] {{.TASK}}"
       - task: nvim_cmd
-        vars: { CMD: "TSUpdateSync" }
+        vars: {CMD: "TSUpdateSync"}
 
   update_tools:
     aliases: [ut]
     cmds:
       - "echo [SleekVim] {{.TASK}}"
       - task: nvim_cmd
-        vars: { CMD: "MasonToolsUpdateSync" }
+        vars: {CMD: "MasonToolsUpdateSync"}
 
   nvim_cmd:
     silent: true
