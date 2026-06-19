@@ -56,7 +56,11 @@ o.updatetime = 1000
 o.winborder = "bold"
 o.writebackup = false
 vim.o.titlestring = cwd()
-if WINDOWS then
+
+
+if vim.fn.executable("nu") == 1 then
+    vim.o.shell = "nu"
+elseif WINDOWS then
     vim.o.shell = "powershell"
     vim.o.shellcmdflag = "-nologo -noprofile -ExecutionPolicy RemoteSigned -command"
     vim.o.shellxquote = ""
