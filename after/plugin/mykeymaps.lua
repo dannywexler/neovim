@@ -28,6 +28,7 @@ end
 ---@enum (key) SnackPicker
 local all_snack_pickers = {
     buffers = "buffers",
+    diagnostics = "diagnostics",
     diagnostics_buffer = "diagnostics_buffer",
     files = "files",
     git_status = "git_status",
@@ -99,6 +100,7 @@ set({
         s = {
             a = snack("grep"),
             b = snack("buffers"),
+            c = snack("diagnostics"),
             d = snack("smart"),
             e = snack("diagnostics_buffer"),
             f = snack("lsp_symbols"),
