@@ -51,16 +51,16 @@ end
 
 
 local vim_mode_colors = {
-    i = myColors.green.dark,
+    i = myColors.greenDark,
     n = myColors.purple,
-    v = myColors.blue.medium,
-    V = myColors.blue.medium,
+    v = myColors.blueMedium,
+    V = myColors.blueMedium,
 }
 
-local sl_bg = myColors.grey.dim
+local sl_bg = myColors.greyDim
 
-local wb_active_bg = myColors.green.light
-local wb_other_bg = myColors.blue.light
+local wb_active_bg = myColors.greenLight
+local wb_other_bg = myColors.blueLight
 
 -- local scrollbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
 

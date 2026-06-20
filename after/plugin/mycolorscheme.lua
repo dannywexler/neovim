@@ -33,24 +33,24 @@ end
 
 ---@type table<string, HighlightConfig>
 local hl_overrides = {
-    CursorLine = { bg = c.grey.dim },
+    CursorLine = { bg = c.greyDim },
     DiagnosticUnderlineError = { fg = c.red, sp = c.red, undercurl = true },
     DiagnosticUnderlineHint = { fg = c.yellow, sp = c.yellow, undercurl = true },
     DiagnosticUnderlineInfo = { fg = c.yellow, sp = c.yellow, undercurl = true },
     DiagnosticUnderlineWarn = { fg = c.yellow, sp = c.yellow, undercurl = true },
-    Identifier = { fg = c.green.dark },
+    Identifier = { fg = c.greenDark },
     SleekErrorsError = { fg = c.black, bg = c.red, bold = true },
     SleekErrorsHint = { fg = c.black, bg = c.yellow },
     SleekErrorsInfo = { fg = c.black, bg = c.yellow },
     SleekErrorsWarn = { fg = c.black, bg = c.yellow },
-    SnacksInputBorder = { fg = c.green.dark },
-    SnacksInputTitle = { fg = c.green.dark },
-    Visual = { fg = c.white, bg = c.blue.dark },
-    WinBar = { fg = c.black, bg = c.green.light },
-    WinBarNC = { fg = c.black, bg = c.blue.light },
-    WinSeparator = { fg = c.blue.light },
+    SnacksInputBorder = { fg = c.greenDark },
+    SnacksInputTitle = { fg = c.greenDark },
+    Visual = { fg = c.white, bg = c.blueDark },
+    WinBar = { fg = c.black, bg = c.greenLight },
+    WinBarNC = { fg = c.black, bg = c.blueLight },
+    WinSeparator = { fg = c.blueLight },
     ["@keyword.return"] = { fg = c.purple },
-    ["@variable.member"] = { fg = c.green.dark },
+    ["@variable.member"] = { fg = c.greenDark },
     ["@variable.parameter"] = { fg = c.pink },
 }
 
