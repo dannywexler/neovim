@@ -18,7 +18,7 @@ return {
     black = env_color("black", nil, "#000000"),
     blueDark = env_color("blue", "dark", "#004fc7"),
     blueLight = env_color("blue", "light", "#7aa2f7"),
-    blueMedium = env_color("blue", "medium", "0091f8"),
+    blueMedium = env_color("blue", "medium", "#0091f8"),
     cyan = env_color("cyan", nil, "#0db9d7"),
     greenDark = env_color("green", "dark", "#1abc9c"),
     greenLight = env_color("green", "Light", "#00fa9a"),
