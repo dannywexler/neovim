@@ -1,4 +1,5 @@
 local myColors = require("my.colors")
+local myIcons = require("my.icons")
 
 vim.fn.setreg("/", "wxyz")
 
@@ -131,6 +132,42 @@ local function formatSearchResults()
     )
 end
 
+local diagnostic_colors = {
+    myColors.red,
+    myColors.yellow,
+    myColors.orange,
+    myColors.purple
+}
+
+local diagnostic_icons = {
+    myIcons.diagnostic.error,
+    myIcons.diagnostic.warn,
+    myIcons.diagnostic.hint,
+    myIcons.diagnostic.info
+}
+
+---@param severity vim.diagnostic.SeverityInt
+local function diagnosticComponent(severity)
+    local bg = diagnostic_colors[severity]
+    local icon = diagnostic_icons[severity]
+    return {
+        provider = function()
+            local err_count = vim.diagnostic.count(0, {
+                severity = severity
+            })[severity]
+            if err_count == nil then
+                return nil
+            end
+            return " " .. err_count .. " " .. icon .. " "
+        end,
+        hl = {
+            fg = myColors.black,
+            bg = bg,
+            bold = true
+        },
+    }
+end
+
 
 return PLUG("rebelot/heirline.nvim", {
     opts = function()
@@ -193,9 +230,6 @@ return PLUG("rebelot/heirline.nvim", {
                     bold = true,
                 }
             end,
-            update = {
-                "ModeChanged"
-            }
         }
 
         local statusline = comps(
@@ -277,8 +311,8 @@ return PLUG("rebelot/heirline.nvim", {
                     local ft = vim.bo.filetype
                     if (ft == "checkhealth") then return "Health Check" end
                     if (ft == "neo-tree") then return "󰙅 File Tree " end
-                    -- LOG("Winbar name:", name, "ft:", ft)
-                    return name
+                    local icon = require("mini.icons").get("file", name)
+                    return icon .. " " .. name
                 end,
                 update = { "BufEnter", "WinEnter" }
             },
@@ -287,6 +321,10 @@ return PLUG("rebelot/heirline.nvim", {
                 update = { "BufEnter", "WinEnter" }
             },
             { provider = function() return "%=" end, },
+            diagnosticComponent(vim.diagnostic.severity.ERROR),
+            diagnosticComponent(vim.diagnostic.severity.WARN),
+            diagnosticComponent(vim.diagnostic.severity.INFO),
+            diagnosticComponent(vim.diagnostic.severity.HINT),
             {
                 provider = function()
                     local ft = vim.bo.filetype
