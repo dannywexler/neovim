@@ -23,7 +23,7 @@ return require("sleeklang").setup({
     groovy = {},
     html = { lsp = { html = {} } },
     ini = {},
-    java = { extra_filetypes = { "javadoc" } },
+    java = { extra_filetypes = { "javadoc" }, lsp = { jdtls = {} } },
     jsdoc = {},
     json = { extra_filetypes = { "jsonc" }, lsp = { jsonls = {} } },
     lua = {
