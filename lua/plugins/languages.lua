@@ -34,9 +34,9 @@ return require("sleeklang").setup({
                     Lua = {
                         diagnostics = {
                             globals = { "vim", "WINDOWS", "P", "U", "V", "PLUG", "MERGE" },
-                            -- neededFileStatus = {
-                            -- ["no-unknown"] = "Any!"
-                            -- }
+                            neededFileStatus = {
+                                ["no-unknown"] = "Any!"
+                            }
                         },
                         telemetry = { enable = false },
                         workspace = { checkThirdParty = false },
@@ -63,17 +63,53 @@ return require("sleeklang").setup({
         extra_filetypes = {
             "javascript",
             "javascriptreact",
-            "jsx",
-            "tsx",
             "typescriptreact"
         },
-        -- plugins = { require("my.typescript_tools") }
         lsp = {
-            ts_ls = {
+            -- ---@type vim.lsp.Config
+            -- ts7 = {
+            --     cmd = function(dispatchers)
+            --         local cmd = 'tsc'
+            --         -- Dont really want to use local tsc for projects that arent using ts7
+            --         -- if (config or {}).root_dir then
+            --         --     local local_cmd = vim.fs.joinpath(config.root_dir, 'node_modules/.bin', cmd)
+            --         --     if vim.fn.executable(local_cmd) == 1 then
+            --         --         cmd = local_cmd
+            --         --     end
+            --         -- end
+            --         return vim.lsp.rpc.start({ cmd, '--lsp', '--stdio' }, dispatchers)
+            --     end,
+            --     filetypes = {
+            --         'javascript',
+            --         'javascriptreact',
+            --         'typescript',
+            --         'typescriptreact',
+            --     },
+            --     root_dir = function(bufnr, on_dir)
+            --         local markers = { 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'bun.lockb', 'bun.lock',
+            --             'package.json' }
+            --         local project_root = vim.fs.root(bufnr, markers)
+            --         if not project_root then
+            --             vim.notify("TS7 could not find project root " .. vim.inspect(markers), vim.log.levels.WARN)
+            --             return
+            --         end
+            --         on_dir(project_root)
+            --     end,
+            -- }
+            vtsls = {
                 settings = {
-                    implicitProjectConfiguration = {
-                        checkJs = true,
+                    ["js/ts"] = {
+                        implicitProjectConfig = {
+                            checkJs = true
+                        },
                     },
+                    vtsls = {
+                        experimental = {
+                            completion = {
+                                enableServerSideFuzzyMatch = true
+                            }
+                        }
+                    }
                 },
             }
         }
