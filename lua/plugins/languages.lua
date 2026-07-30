@@ -1,3 +1,5 @@
+---@module "sleeklang.lsp-types"
+
 vim.diagnostic.config({
     -- virtual_lines = false,
     signs = false,
@@ -30,6 +32,7 @@ return require("sleeklang").setup({
         extra_filetypes = { "luadoc" },
         lsp = {
             lua_ls = {
+                ---@type lsptypes.settings.lua_ls
                 settings = {
                     Lua = {
                         diagnostics = {
@@ -97,6 +100,7 @@ return require("sleeklang").setup({
             --     end,
             -- }
             vtsls = {
+                ---@type lsptypes.settings.vtsls
                 settings = {
                     ["js/ts"] = {
                         implicitProjectConfig = {

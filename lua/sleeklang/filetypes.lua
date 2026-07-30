@@ -1,7 +1,7 @@
 ---@enum sleeklang.FileType
 local all_filetypes = {
     ['8th']                 = "8th",
-    ['javascript.glimmer']  = "javascript.glimmer']",
+    ['javascript.glimmer']  = "javascript.glimmer",
     ['terraform-vars']      = "terraform-vars",
     ['typescript.glimmer']  = "typescript.glimmer",
     ['yaml.ansible']        = "yaml.ansible",
