@@ -142,8 +142,8 @@ local diagnostic_colors = {
 local diagnostic_icons = {
     myIcons.diagnostic.error,
     myIcons.diagnostic.warn,
+    myIcons.diagnostic.info,
     myIcons.diagnostic.hint,
-    myIcons.diagnostic.info
 }
 
 ---@param severity vim.diagnostic.SeverityInt

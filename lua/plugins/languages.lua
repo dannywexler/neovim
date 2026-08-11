@@ -58,7 +58,7 @@ return require("sleeklang").setup({
     properties = {},
     python = {},
     regex = {},
-    rust = {},
+    rust = { lsp = { rust_analyzer = {} } },
     sql = {},
     svelte = { lsp = { svelte = {} } },
     toml = { lsp = { taplo = {} } },
