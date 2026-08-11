@@ -57,9 +57,26 @@ local function scroll(direction)
     end
 end
 
-local function toggle_lazygit()
-    require("snacks").terminal.toggle("lazygit")
+---@param is_closing boolean
+local function toggle_lazygit(is_closing)
+    return function()
+        require("snacks").terminal.toggle("lazygit")
+        if is_closing then
+            vim.cmd.checktime()
+        end
+    end
 end
+
+---@param is_closing boolean
+local function toggle_terminal(is_closing)
+    return function()
+        require("snacks").terminal()
+        if is_closing then
+            vim.cmd.checktime()
+        end
+    end
+end
+
 
 set({
     n = {
@@ -123,14 +140,15 @@ set({
         Up = "gk",
         Down = "gj",
         control = {
-            g = toggle_lazygit,
+            g = toggle_lazygit(false),
             h = h.normal.line.shift.h,
             j = h.normal.line.shift.j,
             k = h.normal.line.shift.k,
             l = h.normal.line.shift.l,
-            t = function() require("snacks").terminal() end,
+            t = toggle_terminal(false),
         },
         leader = {
+            leader = ":silent write<Enter>",
             a = gotoWindow(1),
             b = h.win.split.horizontal,
             d = gotoWindow(3),
@@ -149,8 +167,8 @@ set({
     },
     t = {
         control = {
-            g = toggle_lazygit,
-            t = function() require("snacks").terminal() end,
+            g = toggle_lazygit(true),
+            t = toggle_terminal(true),
         },
         Esc = "<C-\\><C-n>",
     },
@@ -162,7 +180,7 @@ set({
             j = h.visual.line.shift.j,
             k = h.visual.line.shift.k,
             l = h.visual.line.shift.l,
-            t = function() require("snacks").terminal() end,
+            t = toggle_terminal(false),
         },
         leader = {
             y = '"+y',
